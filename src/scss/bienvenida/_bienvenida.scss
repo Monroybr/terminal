@@ -1,0 +1,65 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.bienvenida{
+    @include m.bgImage('../img/header.jpg',v.$blackOpacity);
+    position: relative;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: v.$white;
+
+    &__cont{
+        position: relative;
+        max-width: 90rem;
+        padding: 0 2rem;
+    }
+
+    &__titulo{
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+    }
+
+    &__texto{
+        font-size: 2rem;
+        margin-bottom: 40px;
+        color: v.$white;
+    }
+}
+
+.botones{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    &__btn{
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-size: 2rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    &__btn--azul{
+        background-color: v.$primary;
+         color: v.$white;
+        &:hover{
+            background-color: v.$secondary;
+        }
+    }
+
+    &__btn--trans{
+        border: 2px solid v.$white;
+        color:v.$white;
+        &:hover{
+            background-color: v.$white;
+            color: v.$black;
+        }
+    }
+}

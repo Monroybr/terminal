@@ -1,0 +1,60 @@
+@use 'variables' as v; 
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+  
+body {
+    font-family: v.$main_source;
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+p {
+    color: v.$black;
+    font-size: 2rem;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+   text-decoration: none;
+    
+}
+
+.separacion{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    
+}
+
+[class$="__heading"]{
+    color:v.$primary;
+    text-align: center;
+    margin: 5rem;
+}
+
+
+[class$="__texto"]{
+    text-align:justify;
+}
+
+[class$="__contenido"]{
+    background-color: var(--white);
+        box-shadow: 0px 0px 15px 3px rgb(0 0 0 /.15);
+        padding: 2rem;
+        margin-bottom: 5rem;
+        transition-property: transform;
+        transition-duration: .4s;
+
+        &:hover{
+            transform: scale(1.1);
+        }
+}
