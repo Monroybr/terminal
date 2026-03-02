@@ -35,6 +35,180 @@
       </div>
     </header>
 
+    <!--seccion horarios-->
+    <main class="horarios">
+      <section class="horarios__encabezado">
+        <div class="horarios__contenedor">
+          <h1 class="horarios__titulo">Horarios de Salida</h1>
+          <p class="horarios__descripcion">
+            Consulta los horarios actualizados de todas nuestras rutas.
+          </p>
+
+          <div class="horarios__buscador">
+            <div class="horarios__campo-busqueda">
+              <span class="horarios__icono-busqueda">🔍</span>
+              <input type="text" class="horarios__input"placeholder="Buscar por destino o empresa...">
+            </div>
+
+            <div class="horarios__filtro">
+              <button class="horarios__select" type="button">Todos los destinos<span class="horarios__select-icono">▾</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="horarios__tabla-seccion">
+        <div class="horarios__contenedor">
+          <div class="horarios__tabla-wrap">
+          <table class="horarios__tabla">
+            <thead class="horarios__cabecera">
+              <tr class="horarios__fila horarios__fila--cabecera">
+                <th class="horarios__columna">Destino</th>
+                <th class="horarios__columna">Salida</th>
+                <th class="horarios__columna">Llegada</th>
+                <th class="horarios__columna">Empresa</th>
+                <th class="horarios__columna">Plataforma</th>
+                <th class="horarios__columna">Estado</th>
+              </tr>
+            </thead>
+            <tbody class="horarios__cuerpo">
+              <tr class="horarios__fila">
+                <td class="horarios__columna horarios__columna--destino">
+                  <span class="horarios__destino-icono">📍</span>
+                  <span class="horarios__destino-nombre">Neiva</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__hora-icono">⏱</span>
+                  <span class="horarios__hora">06:00</span>
+                </td>
+                <td class="horarios__columna">10:15</td>
+                <td class="horarios__columna">Express Huila</td>
+                <td class="horarios__columna">
+                  <span class="horarios__plataforma">A12</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__estado horarios__estado--tiempo">A tiempo</span>
+                </td>
+              </tr>
+
+              <tr class="horarios__fila">
+                <td class="horarios__columna horarios__columna--destino">
+                  <span class="horarios__destino-icono">📍</span>
+                  <span class="horarios__destino-nombre">Cali</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__hora-icono">⏱</span>
+                  <span class="horarios__hora">07:15</span>
+                </td>
+                <td class="horarios__columna">13:40</td>
+                <td class="horarios__columna">Rápido Sur</td>
+                <td class="horarios__columna">
+                  <span class="horarios__plataforma">B05</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__estado horarios__estado--tiempo">A tiempo</span>
+                </td>
+              </tr>
+
+              <tr class="horarios__fila">
+                <td class="horarios__columna horarios__columna--destino">
+                  <span class="horarios__destino-icono">📍</span>
+                  <span class="horarios__destino-nombre">Medellín</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__hora-icono">⏱</span>
+                  <span class="horarios__hora">08:00</span>
+                </td>
+                <td class="horarios__columna">14:45</td>
+                <td class="horarios__columna">Confort Plus</td>
+                <td class="horarios__columna">
+                  <span class="horarios__plataforma">C08</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__estado horarios__estado--tiempo">A tiempo</span>
+                </td>
+              </tr>
+
+              <tr class="horarios__fila">
+                <td class="horarios__columna horarios__columna--destino">
+                  <span class="horarios__destino-icono">📍</span>
+                  <span class="horarios__destino-nombre">Bogotá</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__hora-icono">⏱</span>
+                  <span class="horarios__hora">09:30</span>
+                </td>
+                <td class="horarios__columna">15:50</td>
+                <td class="horarios__columna">Central Express</td>
+                <td class="horarios__columna">
+                  <span class="horarios__plataforma">A15</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__estado horarios__estado--retraso">Retrasado 15 min</span>
+                </td>
+              </tr>
+
+              <tr class="horarios__fila">
+                <td class="horarios__columna horarios__columna--destino">
+                  <span class="horarios__destino-icono">📍</span>
+                  <span class="horarios__destino-nombre">Pereira</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__hora-icono">⏱</span>
+                  <span class="horarios__hora">11:00</span>
+                </td>
+                <td class="horarios__columna">17:20</td>
+                <td class="horarios__columna">Café Tours</td>
+                <td class="horarios__columna">
+                  <span class="horarios__plataforma">D02</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__estado horarios__estado--tiempo">A tiempo</span>
+                </td>
+              </tr>
+
+              <tr class="horarios__fila">
+                <td class="horarios__columna horarios__columna--destino">
+                  <span class="horarios__destino-icono">📍</span>
+                  <span class="horarios__destino-nombre">Barranquilla</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__hora-icono">⏱</span>
+                  <span class="horarios__hora">13:30</span>
+                </td>
+                <td class="horarios__columna">21:10</td>
+                <td class="horarios__columna">Costa Caribe</td>
+                <td class="horarios__columna">
+                  <span class="horarios__plataforma">E01</span>
+                </td>
+                <td class="horarios__columna">
+                  <span class="horarios__estado horarios__estado--tiempo">A tiempo</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+
+          <section class="horarios__nota">
+            <h2 class="horarios__nota-titulo">Nota importante:</h2>
+            <ul class="horarios__nota-lista">
+              <li class="horarios__nota-item">
+                Los horarios están sujetos a cambios sin previo aviso.
+              </li>
+              <li class="horarios__nota-item">
+                Se recomienda llegar 30 minutos antes de la hora de salida.
+              </li>
+              <li class="horarios__nota-item">
+                Consulta con el personal para información sobre retrasos.
+              </li>
+              <li class="horarios__nota-item">
+                Los horarios mostrados son para el día de hoy.
+              </li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
 
     <!--seccion footer-->
     <footer class="footer">
