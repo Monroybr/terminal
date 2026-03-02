@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300,400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="build/css/app.css">
+  </head>
+
+  <body>
+
+    <!--seccion header-->
+    <header>
+      <div class="header">
+        <div class="header__contenedor">
+          <div class="header__barra">
+            <div class="header__logo">
+              <img src="build/img/logo.svg" alt="logo terminal">
+              <h1 class="header__titulo">Terminal</h1>
+            </div>
+            <nav class="navegacion">
+              <a href="index.html" class="navegacion__link activo">Inicio</a>
+              <a href="horarios.html" class="navegacion__link">Horarios</a>
+              <a href="#" class="navegacion__link ">Servicios</a>
+              <a href="#" class="navegacion__link">Vehículos</a>
+              <a href="#" class="navegacion__link">Empresas</a>
+              <a href="#" class="navegacion__link">Cotizaciones</a>
+              <a href="#" class="navegacion__link">Tiquetes</a>
+              <a href="contacto.html" class="navegacion__link activo">Contacto</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!--seccion contacto-->
+    <main class="contacto">
+      <section class="contacto__encabezado">
+        <div class="contacto__contenedor">
+          <h1 class="contacto__titulo">Contacto</h1>
+          <p class="contacto__descripcion">Estamos aquí para ayudarte.</p>
+        </div>
+      </section>
+
+      <section class="contacto__contenido">
+        <div class="contacto__contenedor contacto__contenedor--grid">
+          <div class="contacto__col contacto__col--info">
+            <h2 class="contacto__subtitulo">Información de Contacto</h2>
+            <p class="contacto__texto">Si tienes alguna pregunta, comentario o necesitas asistencia, no dudes en contactarnos.
+            Nuestro equipo está disponible para ayudarte.
+            </p>
+
+            <ul class="contacto__lista">
+              <li class="contacto__item">
+                <span class="contacto__icono">📍</span>
+                <div class="contacto__item-detalle">
+                  <h3 class="contacto__item-titulo">Dirección</h3>
+                  <p class="contacto__item-texto">Avenida Principal 123<br>78001, Colombia</p>
+                </div>
+              </li>
+
+              <li class="contacto__item">
+                <span class="contacto__icono">📞</span>
+                <div class="contacto__item-detalle">
+                  <h3 class="contacto__item-titulo">Teléfono</h3>
+                  <p class="contacto__item-texto">General: +57 322 786 12 15<br>Atención al Cliente: +57 300 123 75 89</p>
+                </div>
+              </li>
+
+              <li class="contacto__item">
+                <span class="contacto__icono">✉️</span>
+                <div class="contacto__item-detalle">
+                  <h3 class="contacto__item-titulo">Correo Electrónico</h3>
+                  <p class="contacto__item-texto">General: contacto@terminal.com.co<br>Soporte: soporte@terminal.com.co
+                  </p>
+                </div>
+              </li>
+
+              <li class="contacto__item">
+                <span class="contacto__icono">⏰</span>
+                <div class="contacto__item-detalle">
+                  <h3 class="contacto__item-titulo">Horario de Atención</h3>
+                  <p class="contacto__item-texto">Terminal: Abierto 24/7, todo el año.<br>Atención al Cliente: Lun - Dom: 6:00 - 22:00
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <figure class="contacto__imagen">
+              <img src="build/img/header.jpg" alt="Punto de información">
+            </figure>
+          </div>
+
+          <div class="contacto__col contacto__col--formulario">
+            <div class="contacto__tarjeta">
+              <h2 class="contacto__subtitulo contacto__subtitulo--formulario">Envíanos un Mensaje</h2>
+              <p class="contacto__texto contacto__texto--formulario">Responderemos tu solicitud lo antes posible.</p>
+              <form class="contacto__formulario">
+                <div class="contacto__campo">
+                  <label for="nombre" class="contacto__label">Nombre Completo *</label>
+                  <input id="nombre" type="text" class="contacto__input" placeholder="Tu nombre" required maxlength="30">
+                </div>
+
+                <div class="contacto__campo">
+                  <label for="email" class="contacto__label">Correo Electrónico *</label>
+                  <input id="email" type="email" class="contacto__input" placeholder="tucorreo@ejemplo.com" required maxlength="30">
+                </div>
+
+                <div class="contacto__campo">
+                  <label for="telefono" class="contacto__label">Teléfono *</label>
+                  <input id="telefono" type="number" class="contacto__input" placeholder="+57 300 000 0000" required maxlength="10">
+                </div>
+
+                <div class="contacto__campo">
+                  <label for="asunto" class="contacto__label">Asunto *</label>
+                  <input id="asunto" type="text" class="contacto__input" placeholder="Motivo de tu mensaje" required maxlength="30">
+                </div>
+
+                <div class="contacto__campo">
+                  <label for="mensaje" class="contacto__label">Mensaje *</label>
+                  <textarea id="mensaje" class="contacto__input contacto__input--textarea" rows="4" placeholder="Escribe tu mensaje aquí" required maxlength="200"></textarea>
+                </div>
+
+                <button type="submit" class="contacto__boton">
+                  Enviar Mensaje
+                </button>
+
+                <p class="contacto__nota-campos">* Campos obligatorios</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!--seccion footer-->
+    <footer class="footer">
+      <div class="footer__contenedor">
+        <div class="footer__grid">
+          <div class="footer__col">
+            <h3 class="footer__heading">Terminal</h3>
+            <p class="footer__texto">
+              Tu terminal de confianza con más de 30 años sirviendo a la comunidad.
+            </p>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Contacto</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">📞</span>
+                <span>+57 322 786 12 15<br>+57 300 123 75 89</span>
+              </li>
+              <li class="footer__item">
+                <span class="footer__icono">✉️</span>
+                <span>contacto@terminal.com.co</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Ubicación</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">📍</span>
+                <span>Avenida Principal 123<br>78001, Colombia</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Horario</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">⏰</span>
+                <span><strong>Abierto 24/7</strong></span>
+              </li>
+              <li class="footer__item">
+                <span class="footer__icono"></span>
+                <span>Atención al cliente:<br>Lun - Dom: 6:00 - 22:00</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__copy">
+          <p class="footer__derechos">Todos los derechos reservados © 2026 Terminal - Liseth Monroy - UNAD</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="src/js/contacto.js"></script>
+  </body>
+</html>

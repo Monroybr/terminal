@@ -1,0 +1,231 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.contacto{
+    background-color: v.$lightGray;
+
+    &__contenedor{
+        max-width: 120rem;
+        margin: 0 auto;
+        padding: 0 1.6rem;
+    }
+
+    &__encabezado{
+        background-color: v.$primary;
+        color: v.$white;
+        padding: 3rem 0 5rem 0;
+    }
+
+    &__titulo{
+        margin: 0 0 0.5rem 0;
+        font-size: 2.4rem;
+        font-weight: 700;
+
+        @include m.tablet{
+            font-size: 3.2rem;
+        }
+    }
+
+    &__descripcion{
+        margin: 0;
+        font-size: 1.5rem;
+        opacity: 0.9;
+
+        @include m.tablet{
+            font-size: 1.7rem;
+        }
+    }
+
+    &__contenido{
+        padding: 3rem 0 5rem 0;
+    }
+
+    &__contenedor--grid{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+
+        @include m.tablet{
+            flex-direction: row;
+            align-items: flex-start;
+        }
+    }
+
+    &__col{
+        flex: 1;
+    }
+
+    &__col--info{
+        max-width: 60rem;
+    }
+
+    &__col--formulario{
+        @include m.tablet{
+            max-width: 40rem;
+            margin-left: auto;
+        }
+    }
+
+    &__subtitulo{
+        margin: 0 0 1.4rem 0;
+        font-size: 2rem;
+        font-weight: 700;
+        color: v.$darkBlue;
+    }
+
+    &__subtitulo--formulario{
+        margin-bottom: 0.8rem;
+    }
+
+    &__texto{
+        margin: 0 0 1.8rem 0;
+        font-size: 1.5rem;
+        color: v.$darkGray;
+        opacity: 0.95;
+        line-height: 1.6;
+    }
+
+    &__texto--formulario{
+        margin-bottom: 2rem;
+    }
+
+    &__lista{
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2.4rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+    }
+
+    &__item{
+        display: flex;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+
+    &__icono{
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 999px;
+        background-color: rgba(37, 99, 235, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: v.$primary;
+        flex-shrink: 0;
+    }
+
+    &__item-detalle{
+        flex: 1;
+    }
+
+    &__item-titulo{
+        margin: 0 0 0.2rem 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: v.$darkBlue;
+    }
+
+    &__item-texto{
+        margin: 0;
+        font-size: 1.4rem;
+        color: v.$darkGray;
+        line-height: 1.5;
+    }
+
+    &__imagen{
+        margin: 0;
+        margin-top: 1.6rem;
+        border-radius: 1.6rem;
+        overflow: hidden;
+        box-shadow: v.$shadow;
+
+        img{
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+    }
+
+    &__tarjeta{
+        background-color: v.$white;
+        border-radius: 1.8rem;
+        box-shadow: v.$shadow;
+        padding: 2.4rem 2.6rem 2.8rem 2.6rem;
+    }
+
+    &__formulario{
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+    }
+
+    &__campo{
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    &__label{
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: v.$darkBlue;
+    }
+
+    &__input{
+        border-radius: 0.8rem;
+        border: 1px solid v.$border;
+        padding: 0.9rem 1.1rem;
+        font-family: v.$main_source;
+        font-size: 1.4rem;
+        color: v.$darkGray;
+        outline: none;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+        &:focus{
+            border-color: v.$primary;
+            box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+        }
+    }
+
+    &__input--textarea{
+        resize: vertical;
+        min-height: 9rem;
+    }
+
+    &__boton{
+        margin-top: 0.6rem;
+        width: 100%;
+        border: none;
+        border-radius: 999px;
+        background-color: v.$primary;
+        color: v.$white;
+        font-weight: 600;
+        font-size: 1.5rem;
+        padding: 1rem 1.6rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover{
+            background-color: v.$secondary;
+            transform: translateY(-1px);
+            box-shadow: 0 14px 28px rgba(37, 99, 235, 0.55);
+        }
+    }
+
+    &__nota-campos{
+        margin: 0.8rem 0 0 0;
+        font-size: 1.2rem;
+        color: v.$darkGray;
+        opacity: 0.7;
+        text-align: center;
+    }
+}
+
