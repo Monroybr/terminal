@@ -7,48 +7,241 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300,400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="build/css/app.css">
-</head>
+  </head>
 
-<body>
+  <body>
 
-  <!--seccion header-->
-<header>
-  <div class="header">
-    <div class="header__contenedor">
-      <div class="header__barra">
-        <div class="header__logo">
-          <img src="build/img/logo.svg" alt="logo terminal">
-          <h1 class="header__titulo">Terminal</h1>
+    <!--seccion header-->
+    <header>
+      <div class="header">
+        <div class="header__contenedor">
+          <div class="header__barra">
+            <div class="header__logo">
+              <img src="build/img/logo.svg" alt="logo terminal">
+              <h1 class="header__titulo">Terminal</h1>
+            </div>
+            <nav class="navegacion">
+              <a href="index.html" class="navegacion__link activo">Inicio</a>
+              <a href="#" class="navegacion__link">Horarios</a>
+              <a href="#" class="navegacion__link">Servicios</a>
+              <a href="#" class="navegacion__link">Vehículos</a>
+              <a href="#" class="navegacion__link">Empresas</a>
+              <a href="#" class="navegacion__link">Cotizaciones</a>
+              <a href="#" class="navegacion__link">Tiquetes</a>
+              <a href="#" class="navegacion__link">Contacto</a>
+            </nav>
+          </div>
         </div>
-        <nav class="navegacion">
-          <a href="index.html" class="navegacion__link activo">Inicio</a>
-          <a href="#" class="navegacion__link">Horarios</a>
-          <a href="#" class="navegacion__link">Servicios</a>
-          <a href="#" class="navegacion__link">Vehículos</a>
-          <a href="#" class="navegacion__link">Empresas</a>
-          <a href="#" class="navegacion__link">Cotizaciones</a>
-          <a href="#" class="navegacion__link">Tiquetes</a>
-          <a href="#" class="navegacion__link">Contacto</a>
-        </nav>
+      </div>
+    </header>
+
+    <!--seccion de bienvenida-->
+    <section class="bienvenida">
+      <div class="bienvenida__cont">
+        <h2 class="bienvenida__titulo">Bienvenido a la Terminal</h2>
+        <p class="bienvenida__texto">Tu viaje comienza aquí. Conectamos destinos, acercamos personas.</p>
+
+        <div class="botones">
+          <a href="#" class="botones__btn botones__btn--azul">Comprar Tíquetes</a>
+          <a href="#" class="botones__btn botones__btn--trans">Ver Horarios</a>
+      
+        </div>
+      </div> 
+    </section>
+
+    <!--Seccion por qué elegirnos?-->
+    <section class="elegirnos">
+      <h2 class="elegirnos__titulo">¿Por qué elegirnos?</h2>
+      <div class="elegirnos__grid">
+        <div class="items">
+          <img src="build/img/puntualidad.svg" class="items__icono" alt="icono puntualidad">
+          <h3 class="items__titulo">Puntualidad garantizada</h3>
+          <p class="items__texto">Salidas y llegadas a tiempo. Monitoreamos cada viaje.</p>
+        </div> <!--Fin item 1-->
+        <div class="items">
+          <img src="build/img/cobertura.svg" class="items__icono" alt="icono cobertura">
+          <h3 class="items__titulo">Cobertura Nacional</h3>
+          <p class="items__texto">Conectamos más de 150 destinos en todo el país.</p>
+        </div> <!--Fin item 2-->
+        <div class="items">
+          <img src="build/img/viajesSeguros.svg" class="items__icono" alt="icono viajes">
+          <h3 class="items__titulo">Viajes seguros</h3>
+          <p class="items__texto">Unidades modernas con todas las medidas de seguridad.</p>
+        </div> <!--Fin item 3-->
+        <div class="items">
+          <img src="build/img/wifi.svg" class="items__icono" alt="icono wifi">
+          <h3 class="items__titulo">Servicios premium</h3>
+          <p class="items__texto">WiFi gratis, asientos reclinables y entretenimiento.</p>
+        </div> <!--Fin item 4-->
+      </div>
+    </section>
+
+    <!--seccion destinos-->
+    <section class="destinos">
+      <div class="destinos__contenedor">
+        <h2 class="destinos__titulo">Destinos Populares</h2>
+
+        <div class="destinos__grid">
+          <article class="destino">
+            <div class="destino__header">
+              <h3 class="destino__ciudad">Neiva</h3>
+              <p class="destino__precio">$18</p>
+            </div>
+            <div class="destino__detalle">
+              <div class="destino__tiempo">
+                <img src="build/img/calendar.svg" alt="Duración viaje Neiva" class="destino__icono">
+                <span>4h 15min</span>
+              </div>
+            </div>
+            <a href="#" class="destino__boton">Comprar Ahora</a>
+          </article> <!--Fin destino 2-->
+
+          <article class="destino">
+            <div class="destino__header">
+              <h3 class="destino__ciudad">Bogotá</h3>
+              <p class="destino__precio">$18</p>
+            </div>
+            <div class="destino__detalle">
+              <div class="destino__tiempo">
+                <img src="build/img/calendar.svg" alt="Duración viaje Bogota" class="destino__icono">
+                <span>4h 15min</span>
+              </div>
+            </div>
+            <a href="#" class="destino__boton">Comprar Ahora</a>
+          </article> <!--Fin destino 2-->
+
+          <article class="destino">
+            <div class="destino__header">
+              <h3 class="destino__ciudad">Cali</h3>
+              <p class="destino__precio">$32</p>
+            </div>
+            <div class="destino__detalle">
+              <div class="destino__tiempo">
+                <img src="build/img/calendar.svg" alt="Duración viaje Cali" class="destino__icono">
+                <span>6h 45min</span>
+              </div>
+            </div>
+            <a href="#" class="destino__boton">Comprar Ahora</a>
+          </article> <!--Fin destino 3-->
+
+          <article class="destino">
+            <div class="destino__header">
+              <h3 class="destino__ciudad">Barranquilla</h3>
+              <p class="destino__precio">$32</p>
+            </div>
+            <div class="destino__detalle">
+              <div class="destino__tiempo">
+                <img src="build/img/calendar.svg" alt="Duración viaje Barranquilla" class="destino__icono">
+                <span>6h 45min</span>
+              </div>
+            </div>
+            <a href="#" class="destino__boton">Comprar Ahora</a>
+          </article> <!--Fin destino 4-->
+
+          <article class="destino">
+            <div class="destino__header">
+              <h3 class="destino__ciudad">Pereira</h3>
+              <p class="destino__precio">$32</p>
+            </div>
+            <div class="destino__detalle">
+              <div class="destino__tiempo">
+                <img src="build/img/calendar.svg" alt="Duración viaje Pereira" class="destino__icono">
+                <span>6h 45min</span>
+              </div>
+            </div>
+            <a href="#" class="destino__boton">Comprar Ahora</a>
+          </article> <!--Fin destino 5-->
+
+          <article class="destino">
+            <div class="destino__header">
+              <h3 class="destino__ciudad">Medellín</h3>
+              <p class="destino__precio">$32</p>
+            </div>
+            <div class="destino__detalle">
+              <div class="destino__tiempo">
+                <img src="build/img/calendar.svg" alt="Duración viaje Medellin" class="destino__icono">
+                <span>6h 45min</span>
+              </div>
+            </div>
+            <a href="#" class="destino__boton">Comprar Ahora</a>
+          </article> <!--Fin destino 6-->
+        </div>
+      </div>
+    </section>
+
+    <!--seccion viajar-->
+    <div class="viajar">
+      <div class="viajar__grid">
+        <div class="viajar__contenido">
+          <h3 class="viajar__titulo">Viajar Nunca Fue Tan Fácil</h3>
+          <p class="viajar__texto">Con Terminal, tienes acceso a los mejores servicios de transporte terrestre. 
+          Compra tiquetes en línea, consulta horarios en tiempo real y disfruta de un viaje cómodo y seguro.</p>
+          <ul class="viajar__lista">
+            <li>Compra en línea sin comisiones</li>
+            <li>Cambios y devoluciones flexibles</li>
+            <li>Atención al cliente 24/7</li>
+            <li>Unidades modernas y confortables</li>
+          </ul>
+        </div>
+        <div class="viajar__imagen">
+          <img src="build/img/header2.jpg">
+        </div>
       </div>
     </div>
-  </div>
-</header>
+    <!--seccion footer-->
+    <footer class="footer">
+      <div class="footer__contenedor">
+        <div class="footer__grid">
+          <div class="footer__col">
+            <h3 class="footer__heading">Terminal</h3>
+            <p class="footer__texto">
+              Tu terminal de confianza con más de 30 años sirviendo a la comunidad.
+            </p>
+          </div>
 
-<!--seccion de bienvenida-->
-<section class="bienvenida">
-  <div class="bienvenida__cont">
-    <h2 class="bienvenida__titulo">Bienvenido a la Terminal</h2>
-    <p class="bienvenida__texto">Tu viaje comienza aquí. Conectamos destinos, acercamos personas.</p>
+          <div class="footer__col">
+            <h3 class="footer__heading">Contacto</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">📞</span>
+                <span>+57 322 786 12 15<br>+57 300 123 75 89</span>
+              </li>
+              <li class="footer__item">
+                <span class="footer__icono">✉️</span>
+                <span>contacto@terminal.com.co</span>
+              </li>
+            </ul>
+          </div>
 
-    <div class="botones">
-      <a href="#" class="botones__btn botones__btn--azul">Comprar Tíquetes</a>
-      <a href="#" class="botones__btn botones__btn--trans">Ver Horarios</a>
-  
-    </div>
-  </div> 
-</section>
+          <div class="footer__col">
+            <h3 class="footer__heading">Ubicación</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">📍</span>
+                <span>Avenida Principal 123<br>78001, Colombia</span>
+              </li>
+            </ul>
+          </div>
 
-</body>
+          <div class="footer__col">
+            <h3 class="footer__heading">Horario</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">⏰</span>
+                <span><strong>Abierto 24/7</strong></span>
+              </li>
+              <li class="footer__item">
+                <span class="footer__icono"></span>
+                <span>Atención al cliente:<br>Lun - Dom: 6:00 - 22:00</span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
+        <div class="footer__copy">
+          <p class="footer__derechos">Todos los derechos reservados © 2026 Terminal - Liseth Monroy - UNAD</p>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

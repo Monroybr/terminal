@@ -1,0 +1,97 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.destinos {
+    padding: 6rem 2rem;
+    background-color: v.$lightGray;
+
+    &__contenedor {
+        max-width: 120rem;
+        margin: 0 auto;
+    }
+
+    &__titulo {
+        color: v.$darkBlue;
+        font-size: 3.2rem;
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    &__grid {
+        @include m.grid(1, 2.4rem);
+
+        @include m.tablet {
+            @include m.grid(3, 2.4rem);
+        }
+    }
+}
+
+.destino {
+    background-color: v.$white;
+    border: 1px solid v.$border;
+    border-radius: v.$radius;
+    box-shadow: v.$shadow;
+    padding: 2rem 2.4rem 2.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.5rem;
+    }
+
+    &__ciudad {
+        font-size: 2rem;
+        color: v.$darkBlue;
+        margin: 0;
+    }
+
+    &__precio {
+        font-size: 2rem;
+        font-weight: 700;
+        color: v.$primary;
+        margin: 0;
+    }
+
+    &__detalle {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__tiempo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        color: v.$darkGray;
+        font-size: 1.4rem;
+    }
+
+    &__icono {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    &__boton {
+        margin-top: 1.2rem;
+        display: inline-block;
+        text-align: center;
+        padding: 1.2rem 2rem;
+        border-radius: 999px;
+        background-color: v.$primary;
+        color: v.$white;
+        font-weight: 600;
+        font-size: 1.6rem;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+
+        &:hover {
+            background-color: v.$secondary;
+            transform: translateY(-1px);
+            box-shadow: 0 14px 28px rgba(37, 99, 235, 0.3);
+        }
+    }
+}
+
