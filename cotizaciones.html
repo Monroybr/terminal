@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Cotizaciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300,400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="build/css/app.css">
+  </head>
+
+  <body>
+
+    <!--seccion header-->
+    <header>
+      <div class="header">
+        <div class="header__contenedor">
+          <div class="header__barra">
+            <div class="header__logo">
+              <img src="build/img/logo.svg" alt="logo terminal">
+              <h1 class="header__titulo">Terminal</h1>
+            </div>
+            <nav class="navegacion">
+              <a href="index.html" class="navegacion__link">Inicio</a>
+              <a href="horarios.html" class="navegacion__link">Horarios</a>
+              <a href="#" class="navegacion__link ">Servicios</a>
+              <a href="#" class="navegacion__link">Vehículos</a>
+              <a href="#" class="navegacion__link">Empresas</a>
+              <a href="cotizaciones.html" class="navegacion__link activo">Cotizaciones</a>
+              <a href="#" class="navegacion__link">Tiquetes</a>
+              <a href="contacto.html" class="navegacion__link">Contacto</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!--seccion cotizaciones-->
+    <main class="cotizaciones">
+      <section class="cotizaciones__encabezado">
+        <div class="cotizaciones__contenedor">
+          <h1 class="cotizaciones__titulo">Cotiza tu Viaje</h1>
+          <p class="cotizaciones__descripcion">Calcula el valor estimado de tu trayecto entre ciudades de Colombia.
+          </p>
+        </div>
+      </section>
+
+      <section class="cotizaciones__contenido">
+        <div class="cotizaciones__contenedor">
+          <div class="cotizaciones__tarjeta">
+            <h2 class="cotizaciones__subtitulo">Datos del viaje</h2>
+            <p class="cotizaciones__texto">
+              Selecciona el punto de origen y destino, la fecha de viaje y el número de pasajeros.
+            </p>
+
+            <form class="cotizaciones__formulario">
+              <div class="cotizaciones__grupo">
+                <div class="cotizaciones__campo">
+                  <label for="origen" class="cotizaciones__label">Punto de origen</label>
+                  <select id="origen" class="cotizaciones__input cotizaciones__input--select">
+                    <option value="">Selecciona ciudad de origen</option>
+                  </select>
+                </div>
+
+                <div class="cotizaciones__campo">
+                  <label for="destino" class="cotizaciones__label">Punto de destino</label>
+                  <select id="destino" class="cotizaciones__input cotizaciones__input--select">
+                    <option value="">Selecciona ciudad de destino</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="cotizaciones__grupo">
+                <div class="cotizaciones__campo">
+                  <label for="fecha-ida" class="cotizaciones__label">Fecha de salida</label>
+                  <input id="fecha-ida" type="date" class="cotizaciones__input">
+                </div>
+
+                <div class="cotizaciones__campo">
+                  <label for="fecha-regreso" class="cotizaciones__label">Fecha de regreso (opcional)</label>
+                  <input id="fecha-regreso" type="date" class="cotizaciones__input">
+                </div>
+              </div>
+
+              <div class="cotizaciones__grupo">
+                <div class="cotizaciones__campo">
+                  <label for="pasajeros" class="cotizaciones__label">Número de pasajeros (máx. 30)</label>
+                  <input id="pasajeros" type="number" min="1" max="30" class="cotizaciones__input" placeholder="Ej: 1">
+                </div>
+
+                <div class="cotizaciones__campo">
+                  <label for="servicio" class="cotizaciones__label">Tipo de servicio</label>
+                  <select id="servicio" class="cotizaciones__input cotizaciones__input--select">
+                    <option value="">Selecciona una opción</option>
+                    <option value="economico">Económico</option>
+                    <option value="ejecutivo">Ejecutivo</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="button" class="cotizaciones__boton">
+                Calcular cotización
+              </button>
+            </form>
+
+            <div class="cotizaciones__resultado">
+              <p class="cotizaciones__resultado-texto">
+                Completa los datos y haz clic en <strong>Calcular cotización</strong> para ver un valor estimado de tu viaje.
+              </p>
+            </div>
+          </div>
+          <!--seccion beneficios-->
+          <section class="cotizaciones__beneficios">
+            <div class="cotizaciones__beneficios-grid">
+              <article class="cotizaciones__beneficio">
+                <div class="cotizaciones__beneficio-icono">↻</div>
+                <h3 class="cotizaciones__beneficio-titulo">Gratis y Rápido</h3>
+                <p class="cotizaciones__beneficio-texto">
+                  Obtén tu cotización en segundos sin ningún costo.
+                </p>
+              </article>
+
+              <article class="cotizaciones__beneficio">
+                <div class="cotizaciones__beneficio-icono">✓</div>
+                <h3 class="cotizaciones__beneficio-titulo">Sin Compromiso</h3>
+                <p class="cotizaciones__beneficio-texto">
+                  Compara precios y opciones antes de confirmar tu compra.
+                </p>
+              </article>
+
+              <article class="cotizaciones__beneficio">
+                <div class="cotizaciones__beneficio-icono">★</div>
+                <h3 class="cotizaciones__beneficio-titulo">Mejor Precio</h3>
+                <p class="cotizaciones__beneficio-texto">
+                  Encuentra las tarifas más competitivas del mercado.
+                </p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <!--seccion footer-->
+    <footer class="footer">
+      <div class="footer__contenedor">
+        <div class="footer__grid">
+          <div class="footer__col">
+            <h3 class="footer__heading">Terminal</h3>
+            <p class="footer__texto">
+              Tu terminal de confianza con más de 30 años sirviendo a la comunidad.
+            </p>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Contacto</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">📞</span>
+                <span>+57 322 786 12 15<br>+57 300 123 75 89</span>
+              </li>
+              <li class="footer__item">
+                <span class="footer__icono">✉️</span>
+                <span>contacto@terminal.com.co</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Ubicación</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">📍</span>
+                <span>Avenida Principal 123<br>78001, Colombia</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Horario</h3>
+            <ul class="footer__lista">
+              <li class="footer__item">
+                <span class="footer__icono">⏰</span>
+                <span><strong>Abierto 24/7</strong></span>
+              </li>
+              <li class="footer__item">
+                <span class="footer__icono"></span>
+                <span>Atención al cliente:<br>Lun - Dom: 6:00 - 22:00</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__copy">
+          <p class="footer__derechos">Todos los derechos reservados © 2026 Terminal - Liseth Monroy - UNAD</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="src/js/cotizaciones.js"></script>
+  </body>
+</html>

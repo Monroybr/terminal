@@ -1,0 +1,16 @@
+[
+  { "id": "bogota", "nombre": "Bogotá" },
+  { "id": "medellin", "nombre": "Medellín" },
+  { "id": "cali", "nombre": "Cali" },
+  { "id": "barranquilla", "nombre": "Barranquilla" },
+  { "id": "cartagena", "nombre": "Cartagena" },
+  { "id": "bucaramanga", "nombre": "Bucaramanga" },
+  { "id": "pereira", "nombre": "Pereira" },
+  { "id": "manizales", "nombre": "Manizales" },
+  { "id": "neiva", "nombre": "Neiva" },
+  { "id": "pasto", "nombre": "Pasto" },
+  { "id": "ibague", "nombre": "Ibagué" },
+  { "id": "santamarta", "nombre": "Santa Marta" },
+  { "id": "villavicencio", "nombre": "Villavicencio" }
+]
+
