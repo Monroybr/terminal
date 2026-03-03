@@ -1,0 +1,150 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+.vehiculos{
+    background-color: v.$primary;
+    color: v.$white;
+    padding: 2rem;
+}
+
+.vehiculo{
+    @include m.tablet { 
+        &__grid{
+            @include m.grid(4, 2rem);
+            max-width: 120rem;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+    }
+}
+
+.vehiculo-card{
+
+  padding: 5rem 2rem;
+  background-color: v.$lightGray;
+
+  &__container {
+    max-width: 120rem;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    background-color: v.$white;
+    border-radius: v.$radius;
+    box-shadow: v.$shadow;
+    border: 1px solid v.$border;
+    overflow: hidden;
+
+    @include m.desktop {
+      @include m.grid(2,2rem);
+    }
+  }
+
+  &__media {
+    margin: 0;
+    height: 100%;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    padding: 3rem;
+    color: v.$darkGray;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 800;
+    color: v.$darkBlue;
+  }
+
+  &__badge {
+    padding: .6rem 1.4rem;
+    border-radius: 999px;
+    font-size: 1.4rem;
+    font-weight: 600;
+
+    background-color: rgba(37, 99, 235, 0.15);
+    color: v.$primary;
+  }
+
+  &__subtitle {
+    margin: 0 0 1rem 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: v.$darkGray;
+  }
+
+  
+  &__text {
+    margin: 0 0 2rem 0;
+    font-size: 1.6rem; 
+    line-height: 1.7;
+    color: v.$darkGray;
+  }
+
+  &__label {
+    margin: 0 0 1.2rem 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: v.$darkBlue;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    gap: 1rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: .8rem;
+    font-size: 1.6rem;
+    line-height: 1.6;
+
+    &::before {
+      content: "";
+      width: .6rem;
+      height: .6rem;
+      margin-top: .7rem;
+      border-radius: 50%;
+      background-color: v.$primary;
+      flex: 0 0 .6rem;
+    }
+  }
+//Intercala las imagenes y el texto
+  &__container:nth-child(even) {
+        @include m.desktop {
+        grid-template-columns: 1fr 1.3fr;
+        }
+
+        .vehiculo-card__media {
+        @include m.desktop {
+            order: 2;
+        }
+        }
+
+        .vehiculo-card__content {
+        @include m.desktop {
+            order: 1;
+            }
+        }
+    }
+}
+

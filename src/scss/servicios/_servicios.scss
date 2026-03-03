@@ -6,10 +6,6 @@
     color: v.$white;
     padding: 2rem;
 
-    &__descripcion{
-        color:v.$white;
-        text-align: center;
-    }
     &__nota-titulo{
         text-align: center;
     }
@@ -18,8 +14,9 @@
 
        @include m.tablet { 
          @include m.grid(4,2rem);
-         max-width: 120rem;
-         margin: 0 auto;
+            max-width: 120rem;
+            margin: 0 auto;
+            align-items: stretch;
         }
     }
     &__nota-grid{
@@ -27,6 +24,7 @@
             @include m.grid(3, 2rem);
             max-width: 120rem;
             margin: 0 auto;
+            align-items: stretch;
         }
     }
 }
