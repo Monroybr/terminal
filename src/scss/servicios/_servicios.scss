@@ -1,0 +1,45 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.servicios{
+    background-color: v.$primary;
+    color: v.$white;
+    padding: 2rem;
+
+    &__descripcion{
+        color:v.$white;
+        text-align: center;
+    }
+    &__nota-titulo{
+        text-align: center;
+    }
+    &__grid{
+       @include m.grid(2, 2rem);
+
+       @include m.tablet { 
+         @include m.grid(4,2rem);
+         max-width: 120rem;
+         margin: 0 auto;
+        }
+    }
+    &__nota-grid{
+        @include m.tablet { 
+            @include m.grid(3, 2rem);
+            max-width: 120rem;
+            margin: 0 auto;
+        }
+    }
+}
+
+.servicio{
+    margin-top: 2.4rem;
+    padding: 2.4rem 2.8rem;
+    background-color: #eff6ff;
+    border-radius: 1.6rem;
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    margin-bottom: 5rem;
+    
+    &__modificador--rose{
+        border: 1px solid rgba(240, 49, 218, 0.15);
+    }
+}

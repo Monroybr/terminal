@@ -31,6 +31,8 @@
         margin: 0;
         font-size: 1.5rem;
         opacity: 0.9;
+        text-align: center;
+        color: v.$white;
 
         @include m.tablet{
             font-size: 1.7rem;

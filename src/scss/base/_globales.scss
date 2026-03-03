@@ -30,21 +30,26 @@ a {
 }
 
 .separacion{
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
     
 }
 
-[class$="__heading"]{
-    color:v.$primary;
-    text-align: center;
-    margin: 5rem;
-}
 [class$="__titulo"]{
     text-align: center;
 }
 
+[class$="__nota-lista"]{
+    margin: 0;
+    padding-left: 1.8rem;
+    font-size: 1.4rem;
+    color: v.$darkGray;
+    line-height: 1.6;
+}
 
-[class$="__texto"]{
-    text-align:center;
+[class$="__nota-titulo"]{
+    margin: 0 0 1rem 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: v.$darkBlue;
 }
