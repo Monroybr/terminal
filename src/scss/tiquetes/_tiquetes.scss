@@ -115,4 +115,40 @@
         height: 2rem;
       }
     }
+}
+
+.viajes{
+
+  background-color: v.$lightGray;
+  padding: 8rem 0;
+  text-align: center;
+
+  &__contenido{
+      max-width: 60rem;
+      margin: 0 auto;
   }
+
+  &__icono{
+      color: v.$darkGray;
+      opacity: .5;
+      margin-bottom: 2rem;
+
+      svg{
+          width: 6rem;
+          height: 6rem;
+      }
+  }
+
+  &__titulo{
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: v.$darkBlue;
+      margin-bottom: 1rem;
+  }
+
+  &__texto{
+      font-size: 1.5rem;
+      color: v.$darkGray;
+  }
+
+}
