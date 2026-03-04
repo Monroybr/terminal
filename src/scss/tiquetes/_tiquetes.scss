@@ -1,0 +1,118 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.tiquetes {
+    padding: 5rem 0 8rem;
+  
+    &__contenedor{
+      width: min(120rem, 92%);
+      margin: 0 auto;
+    }
+      // centra y controla el ancho 
+      &__card{
+        width: 100%;
+        max-width: 110rem;
+        margin: 0 auto;
+      }
+    
+      &__grid{
+        background: v.$white;
+        border-radius: v.$radius;
+        box-shadow: v.$shadow;
+        padding: 2.2rem;
+        display: grid;
+        gap: 1.6rem;
+        align-items: end;
+    
+        grid-template-columns: 1fr;
+    
+        @include m.tablet{
+          grid-template-columns: repeat(2, 1fr);
+        }
+    
+        @include m.desktop{
+          grid-template-columns: repeat(4, 1fr) 22rem;
+        }
+      }
+    
+      &__boton{
+        height: 4.8rem;
+        border: none;
+        border-radius: 1.2rem;
+        background: v.$primary;
+        color: v.$white;
+        font-weight: 700;
+        cursor: pointer;
+    
+        &:hover{ background: v.$secondary; }
+    
+        @include m.tablet { grid-column: 1 / -1; }
+        @include m.desktop { grid-column: auto; }
+      }
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  
+    &__label{
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: v.$darkBlue;
+    }
+  
+    &__control{
+      height: 4.8rem;
+      border-radius: 1.2rem;
+      border: 1px solid v.$border;
+      background: v.$lightGray;
+      padding: 0 1.2rem;
+  
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+  
+    &__select,
+    &__input{
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 1.4rem;
+      color: v.$darkBlue;
+    }
+  
+    // modifica los estilos del select
+    &__select{
+      appearance: none;
+      padding-right: 2.6rem;
+    }
+  
+    &__chevron{
+      position: absolute;
+      right: 1.2rem;
+      font-size: 1.4rem;
+      color: v.$darkGray;
+      pointer-events: none;
+    }
+  
+    &__control--icono{
+      .campo__input{
+        padding: 0;
+      }
+    }
+  
+    &__icono{
+      display: flex;
+      align-items: center;
+      color: v.$darkGray;
+  
+      svg{
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }

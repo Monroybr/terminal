@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
             <th>Pasajeros</th>
             <th>Precio por pasajero</th>
             <th>Total estimado</th>
+            <th>Empresa</th>
           </tr>
         </thead>
         <tbody>

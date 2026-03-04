@@ -2,11 +2,7 @@
 @use 'base/mixins' as m;
 
 
-.vehiculos{
-    background-color: v.$primary;
-    color: v.$white;
-    padding: 2rem;
-}
+
 
 .vehiculo{
     @include m.tablet { 

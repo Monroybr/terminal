@@ -36,8 +36,70 @@
     </header>
 
     <!--seccion tiquetes-->
+    <section class="fondo tiquetes">
+      <div class="tiquetes__contenedor">
+        <h1 class="tiquetes__heading">Compra de Boletos</h1>
+        <p class="tiquetes__descripcion">Encuentra y reserva tu viaje en minutos</p>
     
-
+        <form class="tiquetes__formulario">
+          <div class="tiquetes__card">
+            <div class="tiquetes__grid">
+              <!-- campo 1 -->
+              <div class="campo">
+                <label class="campo__titulo" for="origen">Origen</label>
+                <div class="campo__control">
+                  <select class="campo__select" id="origen">
+                    <option selected disabled>Selecciona ciudad</option>
+                  </select>
+                  <span class="campo__chevron" aria-hidden="true">▾</span>
+                </div>
+              </div>
+    
+              <!-- campo 2 -->
+              <div class="campo">
+                <label class="campo__titulo" for="destino">Destino</label>
+                <div class="campo__control">
+                  <select class="campo__select" id="destino">
+                    <option selected disabled>Selecciona ciudad</option>
+                  </select>
+                  <span class="campo__chevron" aria-hidden="true">▾</span>
+                </div>
+              </div>
+    
+              <!-- campo 3 -->
+              <div class="campo">
+                <label class="campo__titulo" for="fecha">Fecha de viaje</label>
+                <div class="campo__control campo__control--icono">
+                  <span class="campo__icono" aria-hidden="true">
+                    <!-- icono calendario (SVG) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                      <path d="M16 2v4M8 2v4M3 10h18"></path>
+                    </svg>
+                  </span>
+                  <input class="campo__input" type="date" id="fecha">
+                </div>
+              </div>
+    
+              <!-- campo 4 -->
+              <div class="campo">
+                <label class="campo__titulo" for="pasajeros">Pasajeros</label>
+                <div class="campo__control">
+                  <select class="campo__select" id="pasajeros">
+                    <option>1 Pasajero</option>
+                  </select>
+                  <span class="campo__chevron" aria-hidden="true">▾</span>
+                </div>
+              </div>
+    
+              <button class="tiquetes__boton" type="submit">Buscar Viajes</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    
+  
     <!--seccion footer-->
     <footer class="footer">
       <div class="footer__contenedor">
@@ -93,7 +155,5 @@
         </div>
       </div>
     </footer>
-
-    <script src="src/js/cotizaciones.js"></script>
   </body>
 </html>

@@ -2,10 +2,6 @@
 @use 'base/mixins' as m;
 
 .servicios{
-    background-color: v.$primary;
-    color: v.$white;
-    padding: 2rem;
-
     &__nota-titulo{
         text-align: center;
     }

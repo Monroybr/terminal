@@ -35,6 +35,13 @@ a {
     margin-bottom: 5rem;
     
 }
+
+//Fondo azul para el heading
+.fondo{
+    background-color: v.$primary;
+    color: v.$white;
+    padding: 2rem;
+}
 [class$="__descripcion"]{
     margin: 1rem;
     font-size: 1.5rem;
