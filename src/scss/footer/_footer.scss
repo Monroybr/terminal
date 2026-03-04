@@ -32,7 +32,9 @@
         font-size: 1.6rem;
         font-weight: 700;
         color: v.$white;
+        text-align: left;
     }
+    
 
     &__texto{
         margin: 0;
@@ -117,7 +119,7 @@
         background-color: v.$secondary;
     }
 
-    // Modifier BEM
+    // modificador
     &--visible{
         opacity: 1;
         visibility: visible;

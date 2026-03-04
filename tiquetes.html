@@ -44,7 +44,7 @@
         <form class="tiquetes__formulario">
           <div class="tiquetes__card">
             <div class="tiquetes__grid">
-              <!-- campo 1 -->
+              <!----------------------------------------->
               <div class="campo">
                 <label class="campo__titulo" for="origen">Origen</label>
                 <div class="campo__control">
@@ -53,9 +53,8 @@
                   </select>
                   <span class="campo__chevron" aria-hidden="true">▾</span>
                 </div>
-              </div>
-    
-              <!-- campo 2 -->
+              </div> <!-- fin campo 1 -->
+  
               <div class="campo">
                 <label class="campo__titulo" for="destino">Destino</label>
                 <div class="campo__control">
@@ -64,9 +63,8 @@
                   </select>
                   <span class="campo__chevron" aria-hidden="true">▾</span>
                 </div>
-              </div>
+              </div>    <!-- fin campo 2 -->
     
-              <!-- campo 3 -->
               <div class="campo">
                 <label class="campo__titulo" for="fecha">Fecha de viaje</label>
                 <div class="campo__control campo__control--icono">
@@ -79,18 +77,25 @@
                   </span>
                   <input class="campo__input" type="date" id="fecha">
                 </div>
-              </div>
-    
-              <!-- campo 4 -->
+              </div>  <!-- fin campo 3 -->
+              
               <div class="campo">
-                <label class="campo__titulo" for="pasajeros">Pasajeros</label>
+                <label class="campo__titulo" for="destino">Tipo de Servicio</label>
                 <div class="campo__control">
-                  <select class="campo__select" id="pasajeros">
-                    <option>1 Pasajero</option>
+                  <select class="campo__select" id="destino">
+                    <option selected disabled>Selecciona servicio</option>
+                    <option selected >Económico</option>
+                    <option selected >Ejecutivo</option>
+                    <option selected >Premium</option>
                   </select>
                   <span class="campo__chevron" aria-hidden="true">▾</span>
                 </div>
-              </div>
+              </div><!-- fin campo 4 -->
+
+              <div class="campo">
+                <label class="campo__titulo" for="pasajeros">Número de pasajeros </label>
+                <input  class="campo__control" id="pasajeros" type="number" min="1" max="30" class="cotizaciones__input" placeholder="Ej: 1">
+              </div>  <!-- fin campo 5 -->
     
               <button class="tiquetes__boton" type="submit">Buscar Viajes</button>
             </div>
