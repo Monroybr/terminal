@@ -1,0 +1,214 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.resultados {
+    padding: 5rem 0 8rem;
+    background-color: v.$lightGray;
+
+    &--oculto {
+        display: none;
+    }
+
+    &__contenedor {
+        width: min(120rem, 92%);
+        margin: 0 auto;
+    }
+
+    &__pasos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 4rem;
+        flex-wrap: wrap;
+    }
+
+    &__paso {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .6rem;
+
+        &--activo {
+            .resultados__circulo {
+                background-color: v.$primary;
+                color: v.$white;
+            }
+
+            .resultados__texto-paso {
+                color: v.$primary;
+            }
+        }
+    }
+
+    &__circulo {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 50%;
+        background-color: #d1d5db;
+        color: v.$darkBlue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    &__texto-paso {
+        font-size: 1.1rem;
+        color: v.$darkGray;
+    }
+
+    &__linea {
+        width: 5rem;
+        height: .3rem;
+        background-color: #d1d5db;
+        border-radius: 2rem;
+    }
+
+    &__encabezado {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+
+        @include m.tablet {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    &__titulo-seccion {
+        margin: 0 0 .5rem 0;
+        font-size: 3rem;
+        color: v.$darkBlue;
+    }
+
+    &__subtexto {
+        margin: 0;
+        font-size: 1.4rem;
+        color: v.$darkGray;
+    }
+
+    &__boton-volver {
+        border: 1px solid v.$border;
+        background-color: v.$white;
+        color: v.$darkBlue;
+        border-radius: 1rem;
+        padding: 1rem 1.6rem;
+        cursor: pointer;
+        font-weight: 600;
+
+        &:hover {
+            background-color: #f9fafb;
+        }
+    }
+
+    &__tabla-contenedor {
+        overflow-x: auto;
+        background-color: v.$white;
+        border-radius: v.$radius;
+        box-shadow: v.$shadow;
+        margin-bottom: 2.5rem;
+    }
+
+    &__tabla {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 110rem;
+    }
+
+    &__thead {
+        background-color: v.$primary;
+    }
+
+    &__th {
+        color: v.$white;
+        text-align: left;
+        padding: 1.6rem 1.4rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    &__td {
+        padding: 1.6rem 1.4rem;
+        font-size: 1.4rem;
+        color: v.$darkBlue;
+        border-bottom: 1px solid v.$border;
+        vertical-align: middle;
+    }
+
+    &__horario {
+        font-weight: 700;
+        display: block;
+        margin-bottom: .4rem;
+    }
+
+    &__duracion {
+        font-size: 1.2rem;
+        color: v.$darkGray;
+    }
+
+    &__accion {
+        background-color: v.$primary;
+        color: v.$white;
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem 1.6rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        cursor: pointer;
+
+        &:hover {
+            background-color: v.$secondary;
+        }
+    }
+
+    &__notas {
+        display: grid;
+        gap: 1.6rem;
+
+        @include m.tablet {
+            @include m.grid(3, 1.6rem);
+            align-items: stretch;
+        }
+    }
+
+    &__nota {
+        border-radius: 1.2rem;
+        padding: 1.6rem;
+        border: 1px solid v.$border;
+        background-color: v.$white;
+    }
+
+    &__nota--azul {
+        background-color: #eff6ff;
+        border-color: #bfdbfe;
+    }
+
+    &__nota--verde {
+        background-color: #ecfdf5;
+        border-color: #a7f3d0;
+    }
+
+    &__nota--amarillo {
+        background-color: #fefce8;
+        border-color: #fde68a;
+    }
+
+    &__nota-titulo {
+        margin: 0 0 .8rem 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: v.$darkBlue;
+        text-align: left;
+    }
+
+    &__nota-texto {
+        margin: 0;
+        font-size: 1.3rem;
+        color: v.$darkGray;
+        text-align: left;
+    }
+}
