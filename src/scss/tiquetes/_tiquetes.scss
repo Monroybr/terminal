@@ -3,152 +3,228 @@
 
 .tiquetes {
     padding: 5rem 0 8rem;
-  
-    &__contenedor{
-      width: min(120rem, 92%);
-      margin: 0 auto;
+
+    &__contenedor {
+        width: min(120rem, 92%);
+        margin: 0 auto;
     }
-      // centra y controla el ancho 
-      &__card{
+
+    &__heading {
+        margin: 0 0 1rem 0;
+        text-align: center;
+        color: v.$white;
+        font-size: 3.2rem;
+
+        @include m.tablet {
+            font-size: 4rem;
+        }
+    }
+
+    &__descripcion {
+        margin: 0 0 2.5rem 0;
+        text-align: center;
+        color: v.$white;
+        font-size: 1.8rem;
+    }
+
+    &__formulario {
+        width: 100%;
+    }
+
+    &__card {
         width: 100%;
         max-width: 110rem;
         margin: 0 auto;
-      }
-    
-      &__grid{
-        background: v.$white;
+    }
+
+    &__grid {
+        background-color: v.$white;
         border-radius: v.$radius;
         box-shadow: v.$shadow;
         padding: 2.2rem;
         display: grid;
         gap: 1.6rem;
         align-items: end;
-    
         grid-template-columns: 1fr;
-    
-        @include m.tablet{
-          grid-template-columns: repeat(2, 1fr);
+
+        @include m.tablet {
+            grid-template-columns: repeat(2, 1fr);
         }
-    
-        @include m.desktop{
-          grid-template-columns: repeat(5, 1fr) 22rem;
+
+        @include m.desktop {
+            grid-template-columns: repeat(5, 1fr) 22rem;
         }
-      }
-    
-      &__boton{
+    }
+
+    &__boton {
         height: 4.8rem;
         border: none;
         border-radius: 1.2rem;
-        background: v.$primary;
+        background-color: v.$primary;
         color: v.$white;
+        font-size: 1.5rem;
         font-weight: 700;
         cursor: pointer;
-    
-        &:hover{ background: v.$secondary; }
-    
-        @include m.tablet { grid-column: 1 / -1; }
-        @include m.desktop { grid-column: auto; }
-      }
+        transition: background-color .3s ease, transform .2s ease;
+
+        &:hover {
+            background-color: v.$secondary;
+        }
+
+        &:active {
+            transform: scale(.98);
+        }
+
+        @include m.tablet {
+            grid-column: 1 / -1;
+        }
+
+        @include m.desktop {
+            grid-column: auto;
+        }
+    }
 }
 
-.campo{
+.campo {
     display: flex;
     flex-direction: column;
     gap: .8rem;
-  
-    &__label{
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: v.$darkBlue;
+
+    &__titulo {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: v.$darkBlue;
     }
-  
-    &__control{
-      height: 4.8rem;
-      border-radius: 1.2rem;
-      border: 1px solid v.$border;
-      background: v.$lightGray;
-      padding: 0 1.2rem;
-  
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      position: relative;
+
+    &__control {
+        height: 4.8rem;
+        border: 1px solid v.$border;
+        border-radius: 1.2rem;
+        background-color: v.$lightGray;
+        padding: 0 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+        transition: border-color .3s ease, box-shadow .3s ease;
+
+        &:focus-within {
+            border-color: v.$primary;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+        }
     }
-  
+
     &__select,
-    &__input{
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      font-size: 1.4rem;
-      color: v.$darkBlue;
+    &__input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        font-size: 1.4rem;
+        color: v.$darkBlue;
+        font-family: inherit;
     }
-  
-    // modifica los estilos del select
-    &__select{
-      appearance: none;
-      padding-right: 2.6rem;
+
+    &__select {
+        appearance: none;
+        padding-right: 2.6rem;
+        cursor: pointer;
     }
-  
-    &__chevron{
-      position: absolute;
-      right: 1.2rem;
-      font-size: 1.4rem;
-      color: v.$darkGray;
-      pointer-events: none;
+
+    &__input {
+        border: 1px solid v.$border;
+        border-radius: 1.2rem;
+        background-color: v.$lightGray;
+        padding: 0 1.2rem;
+        transition: border-color .3s ease, box-shadow .3s ease;
+
+        &:focus {
+            border-color: v.$primary;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+        }
+
+        &::placeholder {
+            color: v.$darkGray;
+            opacity: .8;
+        }
     }
-  
-    &__control--icono{
-      .campo__input{
-        padding: 0;
-      }
+
+    &__input--pasajeros {
+        appearance: textfield;
+        -moz-appearance: textfield;
     }
-  
-    &__icono{
-      display: flex;
-      align-items: center;
-      color: v.$darkGray;
-  
-      svg{
-        width: 2rem;
-        height: 2rem;
-      }
+
+    &__input--pasajeros::-webkit-outer-spin-button,
+    &__input--pasajeros::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    &__chevron {
+        position: absolute;
+        right: 1.2rem;
+        font-size: 1.4rem;
+        color: v.$darkGray;
+        pointer-events: none;
+    }
+
+    &__control--icono {
+        .campo__input {
+            border: none;
+            border-radius: 0;
+            background-color: transparent;
+            padding: 0;
+            box-shadow: none;
+        }
+    }
+
+    &__icono {
+        display: flex;
+        align-items: center;
+        color: v.$darkGray;
+        flex-shrink: 0;
+
+        svg {
+            width: 2rem;
+            height: 2rem;
+        }
     }
 }
 
-.viajes{
+.viajes {
+    background-color: v.$lightGray;
+    padding: 8rem 0;
+    text-align: center;
 
-  background-color: v.$lightGray;
-  padding: 8rem 0;
-  text-align: center;
+    &__contenido {
+        max-width: 60rem;
+        margin: 0 auto;
+        width: min(90%, 60rem);
+    }
 
-  &__contenido{
-      max-width: 60rem;
-      margin: 0 auto;
-  }
+    &__icono {
+        color: v.$darkGray;
+        opacity: .5;
+        margin-bottom: 2rem;
 
-  &__icono{
-      color: v.$darkGray;
-      opacity: .5;
-      margin-bottom: 2rem;
+        svg {
+            width: 6rem;
+            height: 6rem;
+        }
+    }
 
-      svg{
-          width: 6rem;
-          height: 6rem;
-      }
-  }
+    &__titulo {
+        margin: 0 0 1rem 0;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: v.$darkBlue;
+    }
 
-  &__titulo{
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: v.$darkBlue;
-      margin-bottom: 1rem;
-  }
-
-  &__texto{
-      font-size: 1.5rem;
-      color: v.$darkGray;
-  }
-
+    &__texto {
+        margin: 0;
+        font-size: 1.5rem;
+        color: v.$darkGray;
+        line-height: 1.6;
+    }
 }

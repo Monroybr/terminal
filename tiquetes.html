@@ -23,7 +23,7 @@
             <nav class="navegacion">
               <a href="index.html" class="navegacion__link">Inicio</a>
               <a href="horarios.html" class="navegacion__link">Horarios</a>
-              <a href="servicios.html" class="navegacion__link ">Servicios</a>
+              <a href="servicios.html" class="navegacion__link">Servicios</a>
               <a href="vehiculos.html" class="navegacion__link">Vehículos</a>
               <a href="empresas.html" class="navegacion__link">Empresas</a>
               <a href="cotizaciones.html" class="navegacion__link">Cotizaciones</a>
@@ -41,95 +41,104 @@
         <h1 class="tiquetes__heading">Compra de Boletos</h1>
         <p class="tiquetes__descripcion">Encuentra y reserva tu viaje en minutos</p>
     
-        <form class="tiquetes__formulario">
+        <form class="tiquetes__formulario" id="tiquetesForm">
           <div class="tiquetes__card">
             <div class="tiquetes__grid">
-              <!----------------------------------------->
+
+              <!-- campo 1 -->
               <div class="campo">
                 <label class="campo__titulo" for="origen">Origen</label>
                 <div class="campo__control">
-                  <select class="campo__select" id="origen">
-                    <option selected disabled>Selecciona ciudad</option>
+                  <select class="campo__select" id="origen" name="origen">
+                    <option value="" selected disabled>Selecciona ciudad de origen</option>
                   </select>
                   <span class="campo__chevron" aria-hidden="true">▾</span>
                 </div>
-              </div> <!-- fin campo 1 -->
-  
+              </div>
+
+              <!-- campo 2 -->
               <div class="campo">
                 <label class="campo__titulo" for="destino">Destino</label>
                 <div class="campo__control">
-                  <select class="campo__select" id="destino">
-                    <option selected disabled>Selecciona ciudad</option>
+                  <select class="campo__select" id="destino" name="destino">
+                    <option value="" selected disabled>Selecciona ciudad de destino</option>
                   </select>
                   <span class="campo__chevron" aria-hidden="true">▾</span>
                 </div>
-              </div>    <!-- fin campo 2 -->
-    
+              </div>
+
+              <!-- campo 3 -->
               <div class="campo">
                 <label class="campo__titulo" for="fecha">Fecha de viaje</label>
                 <div class="campo__control campo__control--icono">
                   <span class="campo__icono" aria-hidden="true">
-                    <!-- icono calendario (SVG) -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <rect x="3" y="4" width="18" height="18" rx="2"></rect>
                       <path d="M16 2v4M8 2v4M3 10h18"></path>
                     </svg>
                   </span>
-                  <input class="campo__input" type="date" id="fecha">
+                  <input class="campo__input" type="date" id="fecha" name="fecha">
                 </div>
-              </div>  <!-- fin campo 3 -->
-              
+              </div>
+
+              <!-- campo 4 -->
               <div class="campo">
-                <label class="campo__titulo" for="destino">Tipo de Servicio</label>
+                <label class="campo__titulo" for="servicio">Tipo de Servicio</label>
                 <div class="campo__control">
-                  <select class="campo__select" id="destino">
-                    <option selected disabled>Selecciona servicio</option>
-                    <option selected >Económico</option>
-                    <option selected >Ejecutivo</option>
-                    <option selected >Premium</option>
+                  <select class="campo__select" id="servicio" name="servicio">
+                    <option value="" selected disabled>Selecciona servicio</option>
+                    <option value="economico">Económico</option>
+                    <option value="ejecutivo">Ejecutivo</option>
+                    <option value="premium">Premium</option>
                   </select>
                   <span class="campo__chevron" aria-hidden="true">▾</span>
                 </div>
-              </div><!-- fin campo 4 -->
+              </div>
 
+              <!-- campo 5 -->
               <div class="campo">
-                <label class="campo__titulo" for="pasajeros">Número de pasajeros </label>
-                <input  class="campo__control" id="pasajeros" type="number" min="1" max="30" class="cotizaciones__input" placeholder="Ej: 1">
-              </div>  <!-- fin campo 5 -->
-    
+                <label class="campo__titulo" for="pasajeros">Número de pasajeros</label>
+                <div class="campo__control">
+                  <input
+                    class="campo__input campo__input--pasajeros"
+                    id="pasajeros"
+                    name="pasajeros"
+                    type="number"
+                    min="1"
+                    max="30"
+                    placeholder="Ej: 1"
+                  >
+                </div>
+              </div>
+
               <button class="tiquetes__boton" type="submit">Buscar Viajes</button>
             </div>
           </div>
         </form>
       </div>
     </section>
+
+    <!-- seccion viajes -->
     <section class="viajes">
       <div class="viajes__contenido">
-  
-          <div class="viajes__icono">
-              <!-- icono SVG -->
-              <svg xmlns="http://www.w3.org/2000/svg" 
-                   viewBox="0 0 24 24" 
-                   fill="none" 
-                   stroke="currentColor" 
-                   stroke-width="2">
-  
-                  <path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/>
-                  <circle cx="12" cy="11" r="2"/>
-  
-              </svg>
-          </div>
-  
-          <h2 class="viajes__titulo">
-              Busca tu próximo viaje
-          </h2>
-  
-          <p class="viajes__texto">
-              Selecciona tu origen, destino y fecha para ver los viajes disponibles
-          </p>
-  
+        <div class="viajes__icono">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               viewBox="0 0 24 24" 
+               fill="none" 
+               stroke="currentColor" 
+               stroke-width="2">
+            <path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/>
+            <circle cx="12" cy="11" r="2"/>
+          </svg>
+        </div>
+
+        <h2 class="viajes__titulo">Busca tu próximo viaje</h2>
+
+        <p class="viajes__texto">
+          Selecciona tu origen, destino y fecha para ver los viajes disponibles
+        </p>
       </div>
-  </section>
+    </section>
     
     <!--seccion footer-->
     <footer class="footer">
@@ -186,7 +195,10 @@
         </div>
       </div>
     </footer>
+
     <button class="scroll-top" id="scrollTop" type="button" aria-label="Subir al inicio">↑</button>
+
     <script src="src/js/scroll.js"></script>
+    <script src="src/js/tiquetes.js"></script>
   </body>
 </html>
