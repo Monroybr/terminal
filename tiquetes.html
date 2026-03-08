@@ -209,6 +209,507 @@
       </div>
     </section>
 
+    <!--Seccion para ingresar datos de compra-->
+
+    <section class="pasajero pasajero--oculto" id="pasajero">
+      <div class="pasajero__contenedor">
+    
+        <div class="pasajero__pasos">
+          <div class="pasajero__paso pasajero__paso--activo">
+            <span class="pasajero__circulo">✓</span>
+            <span class="pasajero__texto-paso">Buscar</span>
+          </div>
+    
+          <span class="pasajero__linea"></span>
+    
+          <div class="pasajero__paso pasajero__paso--activo">
+            <span class="pasajero__circulo">✓</span>
+            <span class="pasajero__texto-paso">Seleccionar</span>
+          </div>
+    
+          <span class="pasajero__linea"></span>
+    
+          <div class="pasajero__paso pasajero__paso--activo">
+            <span class="pasajero__circulo">3</span>
+            <span class="pasajero__texto-paso">Datos</span>
+          </div>
+    
+          <span class="pasajero__linea"></span>
+    
+          <div class="pasajero__paso">
+            <span class="pasajero__circulo">4</span>
+            <span class="pasajero__texto-paso">Resumen</span>
+          </div>
+    
+          <span class="pasajero__linea"></span>
+    
+          <div class="pasajero__paso">
+            <span class="pasajero__circulo">5</span>
+            <span class="pasajero__texto-paso">Confirmación</span>
+          </div>
+        </div>
+    
+        <div class="pasajero__encabezado">
+          <h2 class="pasajero__heading">Datos del Pasajero</h2>
+          <button class="pasajero__volver" id="volverResultados" type="button">← Volver</button>
+        </div>
+    
+        <div class="pasajero__grid">
+          <div class="pasajero__form-card">
+            <h3 class="pasajero__subheading">Información del Pasajero Principal</h3>
+    
+            <form class="pasajero__formulario" id="pasajeroForm">
+              <div class="pasajero__campo pasajero__campo--completo">
+                <label class="pasajero__label" for="nombreCompleto">Nombre Completo *</label>
+                <input class="pasajero__input" id="nombreCompleto" type="text" placeholder="Ingrese su nombre completo">
+              </div>
+    
+              <div class="pasajero__fila">
+                <div class="pasajero__campo">
+                  <label class="pasajero__label" for="tipoDocumento">Tipo de Documento *</label>
+                  <select class="pasajero__input pasajero__input--select" id="tipoDocumento">
+                    <option value="dni">DNI</option>
+                    <option value="cedula">Cédula</option>
+                    <option value="pasaporte">Pasaporte</option>
+                  </select>
+                </div>
+    
+                <div class="pasajero__campo">
+                  <label class="pasajero__label" for="numeroDocumento">Número de Documento *</label>
+                  <input class="pasajero__input" id="numeroDocumento" type="text" placeholder="Ingrese su documento">
+                </div>
+              </div>
+    
+              <div class="pasajero__fila">
+                <div class="pasajero__campo">
+                  <label class="pasajero__label" for="correoElectronico">Correo Electrónico *</label>
+                  <input class="pasajero__input" id="correoElectronico" type="email" placeholder="ejemplo@correo.com">
+                </div>
+    
+                <div class="pasajero__campo">
+                  <label class="pasajero__label" for="telefonoCelular">Teléfono / Celular *</label>
+                  <input class="pasajero__input" id="telefonoCelular" type="tel" placeholder="+57 300 123 4567">
+                </div>
+              </div>
+    
+              <div class="pasajero__campo pasajero__campo--completo">
+                <label class="pasajero__label" for="direccionPasajero">Dirección</label>
+                <input class="pasajero__input" id="direccionPasajero" type="text" placeholder="Ingrese su dirección">
+              </div>
+    
+              <div class="pasajero__acciones">
+                <button class="pasajero__boton" type="submit">Continuar al Resumen</button>
+              </div>
+            </form>
+          </div>
+    
+          <aside class="pasajero__resumen">
+            <h3 class="pasajero__subheading">Resumen del Viaje</h3>
+    
+            <div class="pasajero__info">
+              <p class="pasajero__dato-label">Empresa</p>
+              <p class="pasajero__dato-valor" id="resumenEmpresa">-</p>
+            </div>
+    
+            <div class="pasajero__info">
+              <p class="pasajero__dato-label">Ruta</p>
+              <p class="pasajero__dato-valor" id="resumenRuta">-</p>
+            </div>
+    
+            <div class="pasajero__info">
+              <p class="pasajero__dato-label">Fecha</p>
+              <p class="pasajero__dato-valor" id="resumenFecha">-</p>
+            </div>
+    
+            <div class="pasajero__info">
+              <p class="pasajero__dato-label">Horario</p>
+              <p class="pasajero__dato-valor" id="resumenHorario">-</p>
+            </div>
+    
+            <div class="pasajero__info">
+              <p class="pasajero__dato-label">Pasajeros</p>
+              <p class="pasajero__dato-valor" id="resumenPasajeros">-</p>
+            </div>
+    
+            <div class="pasajero__info">
+              <p class="pasajero__dato-label">Clase</p>
+              <p class="pasajero__dato-valor" id="resumenClase">-</p>
+            </div>
+    
+            <div class="pasajero__separador"></div>
+    
+            <div class="pasajero__total">
+              <p class="pasajero__dato-label">Total</p>
+              <p class="pasajero__precio" id="resumenTotal">$ 0</p>
+            </div>
+          </aside>
+        </div>
+    
+      </div>
+    </section>
+
+    <!--Seccion resumen de la compra-->
+
+    <section class="resumen resumen--oculto" id="resumen">
+      <div class="resumen__contenedor">
+    
+        <div class="resumen__pasos">
+          <div class="resumen__paso resumen__paso--activo">
+            <span class="resumen__circulo">✓</span>
+            <span class="resumen__texto-paso">Buscar</span>
+          </div>
+    
+          <span class="resumen__linea"></span>
+    
+          <div class="resumen__paso resumen__paso--activo">
+            <span class="resumen__circulo">✓</span>
+            <span class="resumen__texto-paso">Seleccionar</span>
+          </div>
+    
+          <span class="resumen__linea"></span>
+    
+          <div class="resumen__paso resumen__paso--activo">
+            <span class="resumen__circulo">✓</span>
+            <span class="resumen__texto-paso">Datos</span>
+          </div>
+    
+          <span class="resumen__linea"></span>
+    
+          <div class="resumen__paso resumen__paso--activo">
+            <span class="resumen__circulo">4</span>
+            <span class="resumen__texto-paso">Resumen</span>
+          </div>
+    
+          <span class="resumen__linea"></span>
+    
+          <div class="resumen__paso">
+            <span class="resumen__circulo">5</span>
+            <span class="resumen__texto-paso">Confirmación</span>
+          </div>
+        </div>
+    
+        <div class="resumen__encabezado">
+          <div>
+            <h2 class="resumen__heading">Resumen de Compra</h2>
+            <p class="resumen__descripcion-seccion">
+              Verifica que todos los datos sean correctos antes de proceder al pago
+            </p>
+          </div>
+    
+          <button class="resumen__volver" id="modificarDatos" type="button">
+            ← Modificar datos
+          </button>
+        </div>
+    
+        <div class="resumen__grid">
+          <div class="resumen__principal">
+    
+            <article class="resumen__card resumen__card--viaje">
+              <h3 class="resumen__subheading">Detalles del Viaje</h3>
+    
+              <div class="resumen__lista">
+                <div class="resumen__item">
+                  <span class="resumen__label">Empresa:</span>
+                  <span class="resumen__valor" id="detalleEmpresa">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Ruta:</span>
+                  <span class="resumen__valor" id="detalleRuta">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Fecha de viaje:</span>
+                  <span class="resumen__valor" id="detalleFecha">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Hora de salida:</span>
+                  <span class="resumen__valor" id="detalleSalida">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Hora de llegada:</span>
+                  <span class="resumen__valor" id="detalleLlegada">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Duración:</span>
+                  <span class="resumen__valor" id="detalleDuracion">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Clase:</span>
+                  <span class="resumen__valor resumen__valor--badge" id="detalleClase">-</span>
+                </div>
+              </div>
+            </article>
+    
+            <article class="resumen__card resumen__card--pasajero">
+              <h3 class="resumen__subheading">Datos del Pasajero</h3>
+    
+              <div class="resumen__lista">
+                <div class="resumen__item">
+                  <span class="resumen__label">Nombre completo:</span>
+                  <span class="resumen__valor" id="detalleNombre">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Tipo de documento:</span>
+                  <span class="resumen__valor" id="detalleTipoDocumento">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Número de documento:</span>
+                  <span class="resumen__valor" id="detalleNumeroDocumento">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Correo electrónico:</span>
+                  <span class="resumen__valor" id="detalleCorreo">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Teléfono:</span>
+                  <span class="resumen__valor" id="detalleTelefono">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Número de pasajeros:</span>
+                  <span class="resumen__valor" id="detallePasajeros">-</span>
+                </div>
+    
+                <div class="resumen__item">
+                  <span class="resumen__label">Dirección:</span>
+                  <span class="resumen__valor" id="detalleDireccion">-</span>
+                </div>
+              </div>
+            </article>
+    
+            <article class="resumen__terminos">
+              <label class="resumen__check-label">
+                <input class="resumen__checkbox" id="aceptaTerminos" type="checkbox">
+                Acepto los términos y condiciones
+              </label>
+    
+              <p class="resumen__terminos-texto">
+                He revisado toda la información y confirmo que los datos son correctos.
+                Acepto las políticas de cancelación y las condiciones del servicio de transporte.
+              </p>
+            </article>
+    
+          </div>
+    
+          <aside class="resumen__pago">
+            <h3 class="resumen__subheading resumen__subheading--blanco">Resumen de Pago</h3>
+    
+            <div class="resumen__pago-item">
+              <span>Precio por tiquete</span>
+              <span id="pagoPrecioUnitario">$ 0</span>
+            </div>
+    
+            <div class="resumen__pago-item">
+              <span>Cantidad de pasajeros</span>
+              <span id="pagoCantidad">0</span>
+            </div>
+    
+            <div class="resumen__pago-item">
+              <span>Subtotal</span>
+              <span id="pagoSubtotal">$ 0</span>
+            </div>
+    
+            <div class="resumen__total-box">
+              <span>Total a Pagar:</span>
+              <strong id="pagoTotal">$ 0</strong>
+            </div>
+    
+            <button class="resumen__boton-pagar" id="confirmarPago" type="button">
+              Confirmar y Pagar
+            </button>
+    
+            <ul class="resumen__beneficios">
+              <li class="resumen__beneficio">✓ Pago 100% seguro</li>
+              <li class="resumen__beneficio">✓ Encriptación SSL</li>
+              <li class="resumen__beneficio">✓ Tiquete electrónico instantáneo</li>
+            </ul>
+          </aside>
+        </div>
+    
+      </div>
+    </section>
+
+    <!--Seccion confirmacion-->
+
+    <section class="confirmacion confirmacion--oculto" id="confirmacion">
+      <div class="confirmacion__contenedor">
+    
+        <div class="confirmacion__pasos">
+          <div class="confirmacion__paso confirmacion__paso--activo">
+            <span class="confirmacion__circulo">✓</span>
+            <span class="confirmacion__texto-paso">Buscar</span>
+          </div>
+    
+          <span class="confirmacion__linea"></span>
+    
+          <div class="confirmacion__paso confirmacion__paso--activo">
+            <span class="confirmacion__circulo">✓</span>
+            <span class="confirmacion__texto-paso">Seleccionar</span>
+          </div>
+    
+          <span class="confirmacion__linea"></span>
+    
+          <div class="confirmacion__paso confirmacion__paso--activo">
+            <span class="confirmacion__circulo">✓</span>
+            <span class="confirmacion__texto-paso">Datos</span>
+          </div>
+    
+          <span class="confirmacion__linea"></span>
+    
+          <div class="confirmacion__paso confirmacion__paso--activo">
+            <span class="confirmacion__circulo">✓</span>
+            <span class="confirmacion__texto-paso">Resumen</span>
+          </div>
+    
+          <span class="confirmacion__linea"></span>
+    
+          <div class="confirmacion__paso confirmacion__paso--activo">
+            <span class="confirmacion__circulo">5</span>
+            <span class="confirmacion__texto-paso">Confirmación</span>
+          </div>
+        </div>
+    
+        <div class="confirmacion__exito">
+          <div class="confirmacion__icono">✓</div>
+          <h2 class="confirmacion__heading">¡Compra Exitosa!</h2>
+          <p class="confirmacion__descripcion-seccion">
+            Tu tiquete ha sido emitido correctamente
+          </p>
+    
+          <div class="confirmacion__codigo-box">
+            <span class="confirmacion__codigo-label">Número de tiquete electrónico</span>
+            <strong class="confirmacion__codigo" id="ticketNumero">-</strong>
+          </div>
+        </div>
+    
+        <article class="confirmacion__tiquete" id="ticketImprimible">
+          <div class="confirmacion__tiquete-header">
+            <div>
+              <h3 class="confirmacion__tiquete-titulo">Tiquete Electrónico</h3>
+              <p class="confirmacion__tiquete-subtitulo">Terminal Central</p>
+            </div>
+            <div class="confirmacion__tiquete-icono">📄</div>
+          </div>
+    
+          <div class="confirmacion__tiquete-body">
+            <div class="confirmacion__bloque">
+              <h4 class="confirmacion__bloque-titulo">Información del Viaje</h4>
+    
+              <div class="confirmacion__fila-info">
+                <span>Empresa:</span>
+                <strong id="confEmpresa">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>Origen:</span>
+                <strong id="confOrigen">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>Destino:</span>
+                <strong id="confDestino">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>Fecha:</span>
+                <strong id="confFecha">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>Salida:</span>
+                <strong id="confSalida">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>Clase:</span>
+                <strong id="confClase">-</strong>
+              </div>
+            </div>
+    
+            <div class="confirmacion__bloque">
+              <h4 class="confirmacion__bloque-titulo">Información del Pasajero</h4>
+    
+              <div class="confirmacion__fila-info">
+                <span>Nombre:</span>
+                <strong id="confNombre">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>Documento:</span>
+                <strong id="confDocumento">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>Email:</span>
+                <strong id="confCorreo">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>Teléfono:</span>
+                <strong id="confTelefono">-</strong>
+              </div>
+    
+              <div class="confirmacion__fila-info">
+                <span>N° Pasajeros:</span>
+                <strong id="confPasajeros">-</strong>
+              </div>
+            </div>
+          </div>
+    
+          <div class="confirmacion__tiquete-footer">
+            <div>
+              <p class="confirmacion__footer-label">Total Pagado</p>
+              <p class="confirmacion__footer-precio" id="confTotal">$ 0</p>
+            </div>
+    
+            <div>
+              <p class="confirmacion__footer-label">Fecha de Emisión</p>
+              <p class="confirmacion__footer-fecha" id="confEmision">-</p>
+            </div>
+          </div>
+    
+          <div class="confirmacion__mensaje">
+            Presenta este tiquete en el terminal 30 minutos antes de la salida<br>
+            Número de tiquete: <span id="ticketNumeroDuplicado">-</span>
+          </div>
+        </article>
+    
+        <div class="confirmacion__acciones">
+          <button class="confirmacion__boton confirmacion__boton--primario" id="imprimirTiquete" type="button">
+            Descargar / Imprimir Tiquete
+          </button>
+    
+          <button class="confirmacion__boton" type="button">
+            Enviar por Email
+          </button>
+    
+          <button class="confirmacion__boton" id="nuevaCompra" type="button">
+            Realizar Nueva Compra
+          </button>
+        </div>
+    
+        <div class="confirmacion__alerta">
+          <h4 class="confirmacion__alerta-titulo">Información Importante:</h4>
+          <ul class="confirmacion__alerta-lista">
+            <li>Debes presentarte en el terminal 30 minutos antes de la hora de salida.</li>
+            <li>Lleva tu documento de identidad original y este tiquete electrónico.</li>
+            <li>El tiquete ha sido enviado a tu correo electrónico.</li>
+            <li>Puedes modificar o cancelar hasta 24 horas antes del viaje.</li>
+          </ul>
+        </div>
+    
+      </div>
+    </section>
+
     <!-- seccion viajes -->
     <section class="viajes">
       <div class="viajes__contenido">

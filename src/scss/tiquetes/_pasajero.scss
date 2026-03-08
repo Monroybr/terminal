@@ -1,0 +1,218 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.pasajero {
+    padding: 5rem 0 8rem;
+    background-color: v.$lightGray;
+
+    &--oculto {
+        display: none;
+    }
+
+    &__contenedor {
+        width: min(120rem, 92%);
+        margin: 0 auto;
+    }
+
+    &__pasos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 4rem;
+    }
+
+    &__paso {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .6rem;
+
+        &--activo {
+            .pasajero__circulo {
+                background-color: v.$primary;
+                color: v.$white;
+            }
+
+            .pasajero__texto-paso {
+                color: v.$primary;
+            }
+        }
+    }
+
+    &__circulo {
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 50%;
+        background-color: #d1d5db;
+        color: v.$darkBlue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+
+    &__texto-paso {
+        font-size: 1.2rem;
+        color: v.$darkGray;
+    }
+
+    &__linea {
+        width: 7rem;
+        height: .3rem;
+        border-radius: 2rem;
+        background-color: #d1d5db;
+    }
+
+    &__encabezado {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2.5rem;
+        gap: 2rem;
+    }
+
+    &__heading {
+        margin: 0;
+        font-size: 2.4rem;
+        color: v.$darkBlue;
+        text-align: left;
+    }
+
+    &__volver {
+        border: 1px solid v.$border;
+        background-color: v.$white;
+        color: v.$darkBlue;
+        border-radius: 1rem;
+        padding: 1rem 1.6rem;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    &__grid {
+        display: grid;
+        gap: 2rem;
+
+        @include m.desktop {
+            grid-template-columns: 2fr 1fr;
+            align-items: start;
+        }
+    }
+
+    &__form-card,
+    &__resumen {
+        background-color: v.$white;
+        border: 1px solid v.$border;
+        border-radius: v.$radius;
+        box-shadow: v.$shadow;
+        padding: 2.4rem;
+    }
+
+    &__subheading {
+        margin: 0 0 2rem 0;
+        font-size: 2rem;
+        color: v.$darkBlue;
+        text-align: left;
+    }
+
+    &__formulario {
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+    }
+
+    &__fila {
+        display: grid;
+        gap: 1.6rem;
+
+        @include m.tablet {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    &__campo {
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+    }
+
+    &__campo--completo {
+        width: 100%;
+    }
+
+    &__label {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: v.$darkBlue;
+    }
+
+    &__input {
+        width: 100%;
+        height: 4.8rem;
+        border: 1px solid v.$border;
+        border-radius: 1rem;
+        background-color: v.$lightGray;
+        padding: 0 1.4rem;
+        font-size: 1.4rem;
+        font-family: inherit;
+        outline: none;
+
+        &:focus {
+            border-color: v.$primary;
+        }
+    }
+
+    &__acciones {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+    }
+
+    &__boton {
+        background-color: v.$primary;
+        color: v.$white;
+        border: none;
+        border-radius: 1rem;
+        padding: 1.4rem 2.4rem;
+        font-weight: 700;
+        cursor: pointer;
+
+        &:hover {
+            background-color: v.$secondary;
+        }
+    }
+
+    &__info {
+        margin-bottom: 1.8rem;
+    }
+
+    &__dato-label {
+        margin: 0 0 .4rem 0;
+        font-size: 1.4rem;
+        color: v.$darkGray;
+        text-align: left;
+    }
+
+    &__dato-valor {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: v.$darkBlue;
+        text-align: left;
+    }
+
+    &__separador {
+        height: 1px;
+        background-color: v.$border;
+        margin: 2rem 0;
+    }
+
+    &__precio {
+        margin: 0;
+        font-size: 3rem;
+        font-weight: 700;
+        color: v.$primary;
+        text-align: left;
+    }
+}
