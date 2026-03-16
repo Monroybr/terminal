@@ -1,4 +1,7 @@
+//Carga todo el contenido HTML antes de que se ejecute el script 
 document.addEventListener('DOMContentLoaded', function initCotizaciones() {
+
+  //Elementos del formulario 
   const formulario = document.querySelector('.cotizaciones__formulario');
   const botonCalcular = document.querySelector('.cotizaciones__boton');
   const resultadoContenedor = document.querySelector('.cotizaciones__resultado');
@@ -6,8 +9,10 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
   const selectDestino = document.getElementById('destino');
   const fechaIdaInput = document.getElementById('fecha-ida');
 
+  //si no existe el elemento, detiene la ejecucion para evitar errores 
   if (!formulario || !botonCalcular || !resultadoContenedor || !selectOrigen || !selectDestino) return;
 
+  //Empresas disponibles de la terminal
   const empresas = [
     {
       nombre: 'Cootranshuila',
@@ -61,11 +66,13 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     premium: 68000
   };
 
+  //mensaje inicial antes de la cotización
   function renderMensajeInicial() {
     resultadoContenedor.innerHTML =
       '<p class="cotizaciones__resultado-texto">Completa los datos y haz clic en <strong>Cotizar ahora</strong> para ver un valor estimado de tu viaje.</p>';
   }
 
+  //Trae los select de origen y destino con las ciudades del JSON
   function poblarCiudades(ciudades) {
     ciudades.forEach((ciudad) => {
       const optionOrigen = document.createElement('option');
@@ -80,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     });
   }
 
+  // Convierte la fecha seleccionada mas legible
   function formatearFecha(fecha) {
     if (!fecha) return 'Sin definir';
 
@@ -92,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     });
   }
 
+  //Genera el item de cada empresa con sus detalles
   function generarTarjetas(origenTexto, destinoTexto, fechaTexto, pasajeros, servicio) {
     const precioBase = preciosPorServicio[servicio];
 
@@ -103,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
         .map((item) => `<span>ⓘ ${item}</span>`)
         .join('');
 
+      //items generados al dar "cotizar"
       return `
         <article class="cotizaciones__opcion">
           <div class="cotizaciones__empresa">
@@ -146,12 +156,16 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     }).join('');
   }
 
+  //Carga las ciudades disponibles
   fetch('src/data/ciudades-colombia.json')
     .then((response) => response.json())
     .then((ciudades) => poblarCiudades(ciudades))
     .catch(() => {});
 
+    //Evento que se ejecuta al hacer clic en el botón de cotizar
   botonCalcular.addEventListener('click', function () {
+
+    //obtiene los valores utilizados por el usuario
     const origen = formulario.querySelector('#origen').value;
     const destino = formulario.querySelector('#destino').value;
     const pasajerosInput = formulario.querySelector('#pasajeros');
@@ -159,26 +173,31 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     const servicio = formulario.querySelector('#servicio').value;
     const fechaIda = fechaIdaInput.value;
 
+    //verifica que los campos esten completos
     if (!origen || !destino || !servicio || pasajeros <= 0 || !fechaIda) {
       resultadoContenedor.innerHTML = '<p class="cotizaciones__resultado-texto">Por favor completa origen, destino, fecha de salida, tipo de servicio y número de pasajeros para calcular la cotización.</p>';
       return;
     }
 
+    //no permite el ingreso mayor a 30 pasajeros
     if (pasajeros > 30) {
       resultadoContenedor.innerHTML = '<p class="cotizaciones__resultado-texto">El número máximo permitido es de 30 pasajeros.</p>';
       pasajerosInput.value = 30;
       return;
     }
 
+    //valida que el origen y destino no sean iguales
     if (origen === destino) {
       resultadoContenedor.innerHTML = '<p class="cotizaciones__resultado-texto">El punto de origen y destino deben ser diferentes.</p>';
       return;
     }
 
+    //Obtiene el texto visible de las opciones seleccionadas
     const origenTexto = formulario.querySelector('#origen option:checked').textContent;
     const destinoTexto = formulario.querySelector('#destino option:checked').textContent;
     const fechaTexto = formatearFecha(fechaIda);
 
+    // Muestra el resumen del viaje
     resultadoContenedor.innerHTML = `
       <div class="cotizaciones__resumen">
         <h3 class="cotizaciones__resumen-titulo">Resumen de tu Viaje</h3>

@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    //Ciudades disponibles
     const ciudades = [
         'Bogotá',
         'Medellín',
@@ -15,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Villavicencio'
     ];
 
+    //Elementos del formulario principal
     const formulario = document.getElementById('tiquetesForm');
     const origenSelect = document.getElementById('origen');
     const destinoSelect = document.getElementById('destino');
@@ -22,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const servicioSelect = document.getElementById('servicio');
     const pasajerosInput = document.getElementById('pasajeros');
 
+    //proceso de compra
     const seccionViajes = document.querySelector('.viajes');
     const seccionResultados = document.getElementById('resultados');
     const resultadosBody = document.getElementById('resultadosBody');
@@ -39,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const botonImprimirTiquete = document.getElementById('imprimirTiquete');
     const botonNuevaCompra = document.getElementById('nuevaCompra');
 
+    //resumen de la compra
     const resumenEmpresa = document.getElementById('resumenEmpresa');
     const resumenRuta = document.getElementById('resumenRuta');
     const resumenFecha = document.getElementById('resumenFecha');
@@ -47,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resumenClase = document.getElementById('resumenClase');
     const resumenTotal = document.getElementById('resumenTotal');
 
+    //detalle del viaje
     const detalleEmpresa = document.getElementById('detalleEmpresa');
     const detalleRuta = document.getElementById('detalleRuta');
     const detalleFecha = document.getElementById('detalleFecha');
@@ -55,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const detalleDuracion = document.getElementById('detalleDuracion');
     const detalleClase = document.getElementById('detalleClase');
 
+    //detalle pasajero
     const detalleNombre = document.getElementById('detalleNombre');
     const detalleTipoDocumento = document.getElementById('detalleTipoDocumento');
     const detalleNumeroDocumento = document.getElementById('detalleNumeroDocumento');
@@ -63,11 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const detallePasajeros = document.getElementById('detallePasajeros');
     const detalleDireccion = document.getElementById('detalleDireccion');
 
+    //elemento del pago
     const pagoPrecioUnitario = document.getElementById('pagoPrecioUnitario');
     const pagoCantidad = document.getElementById('pagoCantidad');
     const pagoSubtotal = document.getElementById('pagoSubtotal');
     const pagoTotal = document.getElementById('pagoTotal');
 
+    //formulario del pasajero
     const nombreCompleto = document.getElementById('nombreCompleto');
     const tipoDocumento = document.getElementById('tipoDocumento');
     const numeroDocumento = document.getElementById('numeroDocumento');
@@ -77,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const aceptaTerminos = document.getElementById('aceptaTerminos');
 
+    //confirmacion final
     const ticketNumero = document.getElementById('ticketNumero');
     const ticketNumeroDuplicado = document.getElementById('ticketNumeroDuplicado');
     const confEmpresa = document.getElementById('confEmpresa');
@@ -93,11 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const confTotal = document.getElementById('confTotal');
     const confEmision = document.getElementById('confEmision');
 
+    //guarda información actual del proceso de compra
     let datosBusquedaActual = null;
     let viajeSeleccionadoActual = null;
     let datosPasajeroActual = null;
     let totalCompraActual = 0;
 
+    //simulacion de base de datos disponibles
     const datosEmpresas = [
         {
             empresa: 'Cootranshuila',
@@ -141,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    //trae ciudades disponibles
     function llenarCiudades(select, textoDefault) {
         select.innerHTML = '';
 
@@ -159,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    //combierte el formato de fecha 
     function formatearFecha(fecha) {
         const [anio, mes, dia] = fecha.split('-');
         return `${dia}/${mes}/${anio}`;
@@ -173,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    //obtiene la fecha actual de emisión del tiquete
     function formatearFechaEmision() {
         return new Date().toLocaleDateString('es-CO', {
             day: 'numeric',
@@ -181,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    //Convierte el valor interno del servicio a un texto más legible
     function formatearServicio(servicio) {
         const servicios = {
             economico: 'Económico',
@@ -211,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `TKT-${aleatorio1}-${aleatorio2}`;
     }
 
+    //Renderiza la tabla de resultados con las empresas disponibles
     function renderizarResultados(datos) {
         resultadosBody.innerHTML = '';
 
@@ -242,6 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
         agregarEventosComprar();
     }
 
+    //Agrega el evento click a cada botón de comprar
     function agregarEventosComprar() {
         const botonesComprar = document.querySelectorAll('.resultados__accion');
 
@@ -272,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    //Llena el resumen final de compra con la información
     function llenarResumenCompra(datosPasajero) {
         if (!datosBusquedaActual || !viajeSeleccionadoActual) return;
 
@@ -303,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pagoTotal.textContent = formatearPrecio(subtotal);
     }
 
+    //Llena la sección de confirmación final del tiquete
     function llenarConfirmacion() {
         if (!datosBusquedaActual || !viajeSeleccionadoActual || !datosPasajeroActual) return;
 
@@ -329,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
         confEmision.textContent = formatearFechaEmision();
     }
 
+    // Reinicia todo el proceso de compra y devuelve al formulario inicial
     function reiniciarProceso() {
         formulario.reset();
         pasajeroForm.reset();
@@ -355,12 +376,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+     // Inicializa los selects de ciudades
     llenarCiudades(origenSelect, 'Selecciona ciudad de origen');
     llenarCiudades(destinoSelect, 'Selecciona ciudad de destino');
 
+    // Define que la fecha mínima permitida sea la fecha actual
     const hoy = new Date().toISOString().split('T')[0];
     fechaInput.min = hoy;
 
+    // Restringe el número de pasajeros a máximo dos dígitos y 30 personas
     pasajerosInput.addEventListener('input', (e) => {
         let valor = e.target.value.replace(/\D/g, '');
 
@@ -375,6 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.value = valor;
     });
 
+    // Ajusta el valor mínimo y máximo permitido al salir del campo
     pasajerosInput.addEventListener('blur', (e) => {
         const valor = Number(e.target.value);
 
@@ -387,6 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Procesa la búsqueda de viajes al enviar el formulario principal
     formulario.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -433,6 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Permite volver desde resultados al formulario de búsqueda
     if (botonModificar) {
         botonModificar.addEventListener('click', () => {
             if (seccionResultados) {
@@ -449,6 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Permite volver desde el formulario de pasajero a los resultados
     if (botonVolverResultados) {
         botonVolverResultados.addEventListener('click', () => {
             seccionPasajero.classList.add('pasajero--oculto');
@@ -460,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Procesa el formulario de datos del pasajero
     if (pasajeroForm) {
         pasajeroForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -497,6 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Permite regresar desde el resumen al formulario del pasajero
     if (botonModificarDatos) {
         botonModificarDatos.addEventListener('click', () => {
             seccionResumen.classList.add('resumen--oculto');
@@ -508,6 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Confirma la compra si el usuario acepta los términos
     if (botonConfirmarPago) {
         botonConfirmarPago.addEventListener('click', () => {
             if (!aceptaTerminos.checked) {
@@ -526,12 +557,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Imprime el tiquete generado
     if (botonImprimirTiquete) {
         botonImprimirTiquete.addEventListener('click', () => {
             window.print();
         });
     }
 
+    // Reinicia todo el proceso para hacer una nueva compra
     if (botonNuevaCompra) {
         botonNuevaCompra.addEventListener('click', () => {
             reiniciarProceso();
