@@ -2,31 +2,40 @@
 @use 'base/mixins' as m;
 
 .header{
+    padding: 1.5rem 3rem;
 
     &__barra{
         @include m.desktop { 
             display: flex;
             justify-content: space-between;  
-            
+            align-items: center;
         }
     }
+
     &__logo{
-        width: 10rem;
-        margin: 0 auto 3rem auto;
+        margin: 0 auto 2rem auto;
+
         @include m.desktop { 
-            display:flex;
+            display: flex;
             align-items: center;
             margin: 0;
-            gap: 2rem;
+            gap: 1.5rem;
         }
     }
+
+    &__img{
+        width: 8rem;
+    }
+
     &__titulo{
-        margin:0;
+        margin: 0;
         font-size: 2rem;
         color: v.$darkBlue;
         text-align: center;
+
         @include m.desktop { 
-            font-size:2.5rem;
+            font-size: 2.5rem;
+            text-align: left;
         }
     }
 }
@@ -35,25 +44,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:1rem;
+    gap: 1rem;
+
     @include m.desktop { 
         flex-direction: row; 
-        align-items:right;
+        align-items: center;
         gap: 2rem;
     }
 
     &__link{
         color: v.$darkGray;
         font-weight: 700;
+        padding: .5rem 0;
+
         &:hover{
             color: v.$primary;
         }
+
         &.activo{
-            color:v.$primary;
+            color: v.$primary;
         }
     }
 }
-
-
-    
-
