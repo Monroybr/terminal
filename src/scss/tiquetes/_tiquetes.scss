@@ -132,23 +132,7 @@
         cursor: pointer;
     }
 
-    &__input {
-        border: 1px solid v.$border;
-        border-radius: 1.2rem;
-        background-color: v.$lightGray;
-        padding: 0 1.2rem;
-        transition: border-color .3s ease, box-shadow .3s ease;
-
-        &:focus {
-            border-color: v.$primary;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
-        }
-
-        &::placeholder {
-            color: v.$darkGray;
-            opacity: .8;
-        }
-    }
+    
 
     &__input--pasajeros {
         appearance: textfield;

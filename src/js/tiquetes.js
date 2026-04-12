@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    //Ciudades disponibles
-    const ciudades = [
+    const ciudadesRespaldo = [
         'Bogotá',
         'Medellín',
         'Cali',
@@ -16,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'Santa Marta',
         'Villavicencio'
     ];
+
+    let ciudades = ciudadesRespaldo.slice();
 
     //Elementos del formulario principal
     const formulario = document.getElementById('tiquetesForm');
@@ -109,49 +110,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let datosPasajeroActual = null;
     let totalCompraActual = 0;
 
-    //simulacion de base de datos disponibles
-    const datosEmpresas = [
-        {
-            empresa: 'Cootranshuila',
-            horario: '06:00 - 13:30',
-            salida: '06:00',
-            llegada: '13:30',
-            duracion: '7h 30min',
-            precio: 180000
-        },
-        {
-            empresa: 'Coomotor Huila',
-            horario: '09:00 - 16:00',
-            salida: '09:00',
-            llegada: '16:00',
-            duracion: '7h 00min',
-            precio: 52000
-        },
-        {
-            empresa: 'Empresa Bolivariano',
-            horario: '13:00 - 20:30',
-            salida: '13:00',
-            llegada: '20:30',
-            duracion: '7h 30min',
-            precio: 44000
-        },
-        {
-            empresa: 'Velotax',
-            horario: '15:30 - 22:15',
-            salida: '15:30',
-            llegada: '22:15',
-            duracion: '6h 45min',
-            precio: 40000
-        },
-        {
-            empresa: 'Expreso Palmira',
-            horario: '18:00 - 01:15',
-            salida: '18:00',
-            llegada: '01:15',
-            duracion: '7h 15min',
-            precio: 48000
+    /** Catálogo desde MySQL (api/empresas_viaje.php); vacío hasta cargar */
+    let datosEmpresas = [];
+
+    async function cargarEmpresasDesdeApi() {
+        const res = await fetch('api/empresas_viaje.php');
+        const j = await res.json();
+        if (!j.ok || !Array.isArray(j.data)) {
+            throw new Error(j.error || 'No se pudieron cargar empresas');
         }
-    ];
+        datosEmpresas = j.data.map((e) => ({
+            id: e.id,
+            empresa: e.nombre,
+            horario: e.horario,
+            salida: e.salida,
+            llegada: e.llegada,
+            duracion: e.duracion,
+            precio: Number(e.precio_unitario)
+        }));
+    }
 
     //trae ciudades disponibles
     function llenarCiudades(select, textoDefault) {
@@ -277,7 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 resumenPasajeros.textContent = datosBusquedaActual.pasajeros;
                 resumenClase.textContent = formatearServicio(datosBusquedaActual.servicio);
 
-                const totalInicial = viajeSeleccionadoActual.precio * Number(datosBusquedaActual.pasajeros);
+                const totalInicial =
+                    viajeSeleccionadoActual.precio * Number(datosBusquedaActual.pasajeros);
                 resumenTotal.textContent = formatearPrecio(totalInicial);
 
                 seccionResultados.classList.add('resultados--oculto');
@@ -323,10 +301,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Llena la sección de confirmación final del tiquete
-    function llenarConfirmacion() {
+    function llenarConfirmacion(numeroTiqueteServidor, totalServidor) {
         if (!datosBusquedaActual || !viajeSeleccionadoActual || !datosPasajeroActual) return;
 
-        const numeroTiqueteGenerado = generarNumeroTiquete();
+        const numeroTiqueteGenerado = numeroTiqueteServidor || generarNumeroTiquete();
+        const totalMostrar = totalServidor != null ? totalServidor : totalCompraActual;
         const documentoCompleto = `${formatearTipoDocumento(datosPasajeroActual.tipoDocumento)} ${datosPasajeroActual.numeroDocumento}`;
 
         ticketNumero.textContent = numeroTiqueteGenerado;
@@ -345,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         confTelefono.textContent = datosPasajeroActual.telefono;
         confPasajeros.textContent = datosBusquedaActual.pasajeros;
 
-        confTotal.textContent = formatearPrecio(totalCompraActual);
+        confTotal.textContent = formatearPrecio(totalMostrar);
         confEmision.textContent = formatearFechaEmision();
     }
 
@@ -376,9 +355,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-     // Inicializa los selects de ciudades
-    llenarCiudades(origenSelect, 'Selecciona ciudad de origen');
-    llenarCiudades(destinoSelect, 'Selecciona ciudad de destino');
+    fetch('api/ciudades.php')
+        .then((r) => (r.ok ? r.json() : Promise.reject()))
+        .then((j) => {
+            if (j && j.ok && Array.isArray(j.data)) {
+                ciudades = j.data.map((c) => c.nombre);
+            }
+        })
+        .catch(() => {})
+        .finally(() => {
+            llenarCiudades(origenSelect, 'Selecciona ciudad de origen');
+            llenarCiudades(destinoSelect, 'Selecciona ciudad de destino');
+        });
+
+    cargarEmpresasDesdeApi().catch(() => {});
 
     // Define que la fecha mínima permitida sea la fecha actual
     const hoy = new Date().toISOString().split('T')[0];
@@ -445,18 +435,35 @@ document.addEventListener('DOMContentLoaded', () => {
             pasajeros
         };
 
-        renderizarResultados(datosBusquedaActual);
+        function mostrarTablaResultados() {
+            renderizarResultados(datosBusquedaActual);
 
-        if (seccionViajes) {
-            seccionViajes.style.display = 'none';
+            if (seccionViajes) {
+                seccionViajes.style.display = 'none';
+            }
+
+            if (seccionResultados) {
+                seccionResultados.classList.remove('resultados--oculto');
+                seccionResultados.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         }
 
-        if (seccionResultados) {
-            seccionResultados.classList.remove('resultados--oculto');
-            seccionResultados.scrollIntoView({
-                behavior: 'smooth'
-            });
+        if (!datosEmpresas.length) {
+            cargarEmpresasDesdeApi()
+                .then(() => {
+                    mostrarTablaResultados();
+                })
+                .catch(() => {
+                    alert(
+                        'No se pudo cargar el catálogo de empresas desde la base de datos. Activa Apache/MySQL, importa database/terminal.sql y abre el sitio vía http://localhost/...'
+                    );
+                });
+            return;
         }
+
+        mostrarTablaResultados();
     });
 
     // Permite volver desde resultados al formulario de búsqueda
@@ -540,20 +547,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Confirma la compra si el usuario acepta los términos
     if (botonConfirmarPago) {
-        botonConfirmarPago.addEventListener('click', () => {
+        botonConfirmarPago.addEventListener('click', async () => {
             if (!aceptaTerminos.checked) {
                 alert('Debes aceptar los términos y condiciones para continuar.');
                 return;
             }
 
-            llenarConfirmacion();
+            if (!datosBusquedaActual || !viajeSeleccionadoActual || !datosPasajeroActual) {
+                return;
+            }
 
-            seccionResumen.classList.add('resumen--oculto');
-            seccionConfirmacion.classList.remove('confirmacion--oculto');
+            const body = {
+                origen: datosBusquedaActual.origen,
+                destino: datosBusquedaActual.destino,
+                fecha_viaje: datosBusquedaActual.fecha,
+                servicio: datosBusquedaActual.servicio,
+                pasajeros: Number(datosBusquedaActual.pasajeros),
+                empresa: viajeSeleccionadoActual.empresa,
+                horario: viajeSeleccionadoActual.horario,
+                precio_unitario: viajeSeleccionadoActual.precio,
+                nombre_pasajero: datosPasajeroActual.nombre,
+                tipo_documento: datosPasajeroActual.tipoDocumento,
+                numero_documento: datosPasajeroActual.numeroDocumento,
+                correo: datosPasajeroActual.correo,
+                telefono: datosPasajeroActual.telefono,
+                direccion: datosPasajeroActual.direccion || ''
+            };
 
-            seccionConfirmacion.scrollIntoView({
-                behavior: 'smooth'
-            });
+            try {
+                const res = await fetch('api/pedidos.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const j = await res.json();
+                if (!j.ok) {
+                    throw new Error(j.error || 'No se pudo registrar el pedido');
+                }
+                totalCompraActual = Number(j.total);
+                llenarConfirmacion(j.numero_tiquete, totalCompraActual);
+
+                seccionResumen.classList.add('resumen--oculto');
+                seccionConfirmacion.classList.remove('confirmacion--oculto');
+
+                seccionConfirmacion.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            } catch (err) {
+                alert(
+                    (err && err.message ? err.message : 'Error') +
+                        '\nComprueba Apache, MySQL, api/config.php y que exista la base `terminal`.'
+                );
+            }
         });
     }
 

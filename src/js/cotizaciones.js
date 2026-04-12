@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
       multiplicador: 1.15
     },
     {
-      nombre: 'Taxis verdes',
+      nombre: 'Taxis Verdes',
       tipo: 'Buseta',
       duracion: '7h 00min',
       amenidades: ['Asientos extra amplios', 'Wifi a bordo', 'Toma de corriente', 'Snacks incluidos', 'Aire acondicionado', 'Baño'],
@@ -72,8 +72,10 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
       '<p class="cotizaciones__resultado-texto">Completa los datos y haz clic en <strong>Cotizar ahora</strong> para ver un valor estimado de tu viaje.</p>';
   }
 
-  //Trae los select de origen y destino con las ciudades del JSON
+  //Trae los select de origen y destino (MySQL vía PHP o respaldo JSON)
   function poblarCiudades(ciudades) {
+    selectOrigen.innerHTML = '<option value="">Selecciona ciudad de origen</option>';
+    selectDestino.innerHTML = '<option value="">Selecciona ciudad de destino</option>';
     ciudades.forEach((ciudad) => {
       const optionOrigen = document.createElement('option');
       optionOrigen.value = ciudad.id;
@@ -156,11 +158,76 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     }).join('');
   }
 
-  //Carga las ciudades disponibles
-  fetch('src/data/ciudades-colombia.json')
-    .then((response) => response.json())
-    .then((ciudades) => poblarCiudades(ciudades))
-    .catch(() => {});
+  async function guardarCotizacionEnApi() {
+    const origen = formulario.querySelector('#origen').value;
+    const destino = formulario.querySelector('#destino').value;
+    const pasajeros = parseInt(formulario.querySelector('#pasajeros').value, 10) || 0;
+    const servicio = formulario.querySelector('#servicio').value;
+    const fechaIda = fechaIdaInput.value;
+    const fechaRegresoInput = document.getElementById('fecha-regreso');
+    const fechaRegreso = fechaRegresoInput && fechaRegresoInput.value ? fechaRegresoInput.value : null;
+    const origenTexto = formulario.querySelector('#origen option:checked')?.textContent?.trim() || '';
+    const destinoTexto = formulario.querySelector('#destino option:checked')?.textContent?.trim() || '';
+
+    if (!origen || !destino || !servicio || pasajeros <= 0 || !fechaIda) {
+      window.alert('Completa el formulario antes de guardar la cotización.');
+      return;
+    }
+
+    const body = {
+      origen: origenTexto || origen,
+      destino: destinoTexto || destino,
+      fecha_ida: fechaIda,
+      fecha_regreso: fechaRegreso,
+      pasajeros,
+      servicio
+    };
+
+    try {
+      const res = await fetch('api/cotizaciones.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const j = await res.json();
+      if (!j.ok) {
+        throw new Error(j.error || 'No se pudo guardar');
+      }
+      window.alert(
+        `Cotización registrada en la base de datos (id ${j.id}). Total calculado en servidor: $ ${Number(j.calculo.total).toLocaleString('es-CO')}`
+      );
+    } catch (e) {
+      window.alert(
+        'No se pudo conectar con el servidor PHP/MySQL. Verifica XAMPP, la base `terminal` y api/config.php.\n' +
+          (e && e.message ? e.message : '')
+      );
+    }
+  }
+
+  // Ciudades: API MySQL primero; si falla, JSON local
+  fetch('api/ciudades.php')
+    .then((response) => (response.ok ? response.json() : Promise.reject()))
+    .then((payload) => {
+      if (payload && payload.ok && Array.isArray(payload.data)) {
+        poblarCiudades(payload.data);
+      } else {
+        throw new Error('payload');
+      }
+    })
+    .catch(() => {
+      fetch('src/data/ciudades-colombia.json')
+        .then((response) => response.json())
+        .then((ciudades) => poblarCiudades(ciudades))
+        .catch(() => {});
+    });
+
+  resultadoContenedor.addEventListener('click', (e) => {
+    const btn = e.target.closest('#guardarCotizacionApi');
+    if (btn) {
+      e.preventDefault();
+      guardarCotizacionEnApi();
+    }
+  });
 
     //Evento que se ejecuta al hacer clic en el botón de cotizar
   botonCalcular.addEventListener('click', function () {
@@ -229,6 +296,10 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
         ${generarTarjetas(origenTexto, destinoTexto, fechaTexto, pasajeros, servicio)}
       </div>
 
+      <p class="cotizaciones__resultado-texto" style="margin-top:1rem;">
+        <button type="button" class="cotizaciones__boton" id="guardarCotizacionApi">Guardar cotización en base de datos</button>
+      </p>
+
       <div class="cotizaciones__info-grid">
         <div class="cotizaciones__info-box cotizaciones__info-box--verde">
           <h4 class="cotizaciones__info-titulo">¿Por qué Cotizar con Nosotros?</h4>
@@ -245,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
           <ul class="cotizaciones__info-lista">
             <li>Los precios pueden variar según disponibilidad</li>
             <li>Se recomienda reservar con anticipación</li>
-            <li>Descuentos disponibles para estudiantes y adultos mayores</li>
+            <li>Reserva con anticipación para mejores tarifas</li>
             <li>Políticas de cambio y cancelación varían por empresa</li>
           </ul>
         </div>

@@ -2,8 +2,6 @@
 @use 'base/mixins' as m;
 
 
-
-
 .vehiculo{
     @include m.tablet { 
         &__grid{

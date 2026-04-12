@@ -1,0 +1,15 @@
+[
+  {"id": 1, "destino": "Neiva", "hora_salida": "06:00", "hora_llegada": "10:15", "empresa": "Cootranshuila", "plataforma": "A12", "estado": "A tiempo"},
+  {"id": 2, "destino": "Cali", "hora_salida": "07:15", "hora_llegada": "13:40", "empresa": "Coomotor Huila", "plataforma": "B05", "estado": "A tiempo"},
+  {"id": 3, "destino": "Medellín", "hora_salida": "08:00", "hora_llegada": "14:45", "empresa": "Taxis Verdes", "plataforma": "C08", "estado": "A tiempo"},
+  {"id": 4, "destino": "Bogotá", "hora_salida": "09:30", "hora_llegada": "15:50", "empresa": "Express Bolivariano", "plataforma": "A15", "estado": "Retrasado 15 min"},
+  {"id": 5, "destino": "Pereira", "hora_salida": "11:00", "hora_llegada": "17:20", "empresa": "Expreso Palmira", "plataforma": "D02", "estado": "A tiempo"},
+  {"id": 6, "destino": "Barranquilla", "hora_salida": "13:30", "hora_llegada": "21:10", "empresa": "Velotax", "plataforma": "E01", "estado": "A tiempo"},
+  {"id": 7, "destino": "Cartagena", "hora_salida": "10:00", "hora_llegada": "18:30", "empresa": "Cootranshuila", "plataforma": "B11", "estado": "A tiempo"},
+  {"id": 8, "destino": "Bucaramanga", "hora_salida": "05:45", "hora_llegada": "12:10", "empresa": "Coomotor Huila", "plataforma": "C03", "estado": "A tiempo"},
+  {"id": 9, "destino": "Manizales", "hora_salida": "14:15", "hora_llegada": "20:00", "empresa": "Velotax", "plataforma": "A08", "estado": "A tiempo"},
+  {"id": 10, "destino": "Pasto", "hora_salida": "07:00", "hora_llegada": "15:30", "empresa": "Expreso Palmira", "plataforma": "D07", "estado": "A tiempo"},
+  {"id": 11, "destino": "Ibagué", "hora_salida": "12:45", "hora_llegada": "18:20", "empresa": "Empresa Bolivariano", "plataforma": "E04", "estado": "A tiempo"},
+  {"id": 12, "destino": "Santa Marta", "hora_salida": "16:00", "hora_llegada": "23:45", "empresa": "Velotax", "plataforma": "F02", "estado": "Retrasado 10 min"},
+  {"id": 13, "destino": "Villavicencio", "hora_salida": "08:30", "hora_llegada": "14:00", "empresa": "Cootranshuila", "plataforma": "B09", "estado": "A tiempo"}
+]
