@@ -1,7 +1,6 @@
-//Carga todo el contenido HTML antes de que se ejecute el script 
+// Carga todo el contenido HTML antes de que se ejecute el script
 document.addEventListener('DOMContentLoaded', function initCotizaciones() {
-
-  //Elementos del formulario 
+  // Elementos del formulario
   const formulario = document.querySelector('.cotizaciones__formulario');
   const botonCalcular = document.querySelector('.cotizaciones__boton');
   const resultadoContenedor = document.querySelector('.cotizaciones__resultado');
@@ -9,73 +8,135 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
   const selectDestino = document.getElementById('destino');
   const fechaIdaInput = document.getElementById('fecha-ida');
 
-  //si no existe el elemento, detiene la ejecucion para evitar errores 
-  if (!formulario || !botonCalcular || !resultadoContenedor || !selectOrigen || !selectDestino) return;
+  // Si no existe el elemento, detiene la ejecución para evitar errores
+  if (!formulario || !botonCalcular || !resultadoContenedor || !selectOrigen || !selectDestino || !fechaIdaInput) {
+    return;
+  }
 
-  //Empresas disponibles de la terminal
+  // Empresas disponibles de la terminal
   const empresas = [
     {
       nombre: 'Cootranshuila',
       tipo: 'Bus',
+      horario: '06:00 - 12:30',
+      salida: '06:00',
+      llegada: '12:30',
       duracion: '6h 30min',
-      amenidades: ['Asientos extra amplios', 'Wifi a bordo', 'Toma de corriente', 'Snacks incluidos', 'Aire acondicionado', 'Baño'],
-      multiplicador: 1.00
+      amenidades: [
+        'Asientos extra amplios',
+        'Wifi a bordo',
+        'Toma de corriente',
+        'Snacks incluidos',
+        'Aire acondicionado',
+        'Baño'
+      ],
+      multiplicador: 1.0
     },
     {
       nombre: 'Coomotor Huila',
       tipo: 'Bus',
+      horario: '07:00 - 13:15',
+      salida: '07:00',
+      llegada: '13:15',
       duracion: '6h 15min',
-      amenidades: ['Asientos extra amplios', 'Wifi a bordo', 'Toma de corriente', 'Snacks incluidos', 'Aire acondicionado', 'Baño'],
+      amenidades: [
+        'Asientos extra amplios',
+        'Wifi a bordo',
+        'Toma de corriente',
+        'Snacks incluidos',
+        'Aire acondicionado',
+        'Baño'
+      ],
       multiplicador: 1.15
     },
     {
       nombre: 'Taxis Verdes',
       tipo: 'Buseta',
+      horario: '08:00 - 15:00',
+      salida: '08:00',
+      llegada: '15:00',
       duracion: '7h 00min',
-      amenidades: ['Asientos extra amplios', 'Wifi a bordo', 'Toma de corriente', 'Snacks incluidos', 'Aire acondicionado', 'Baño'],
-      multiplicador: 1.10
+      amenidades: [
+        'Asientos extra amplios',
+        'Wifi a bordo',
+        'Toma de corriente',
+        'Snacks incluidos',
+        'Aire acondicionado',
+        'Baño'
+      ],
+      multiplicador: 1.1
     },
     {
       nombre: 'Express Bolivariano',
       tipo: 'Van Express',
+      horario: '05:30 - 11:30',
+      salida: '05:30',
+      llegada: '11:30',
       duracion: '6h 00min',
-      amenidades: ['Asientos extra amplios', 'Wifi a bordo', 'Toma de corriente', 'Snacks incluidos', 'Aire acondicionado', 'Baño'],
-      multiplicador: 1.20
+      amenidades: [
+        'Asientos extra amplios',
+        'Wifi a bordo',
+        'Toma de corriente',
+        'Snacks incluidos',
+        'Aire acondicionado',
+        'Baño'
+      ],
+      multiplicador: 1.2
     },
     {
       nombre: 'Expreso Palmira',
       tipo: 'Bus',
+      horario: '09:00 - 16:15',
+      salida: '09:00',
+      llegada: '16:15',
       duracion: '7h 15min',
-      amenidades: ['Asientos extra amplios', 'Wifi a bordo', 'Toma de corriente', 'Snacks incluidos', 'Aire acondicionado', 'Baño'],
-      multiplicador: 1.00
+      amenidades: [
+        'Asientos extra amplios',
+        'Wifi a bordo',
+        'Toma de corriente',
+        'Snacks incluidos',
+        'Aire acondicionado',
+        'Baño'
+      ],
+      multiplicador: 1.0
     },
-
     {
       nombre: 'Velotax',
       tipo: 'Bus',
+      horario: '10:00 - 17:15',
+      salida: '10:00',
+      llegada: '17:15',
       duracion: '7h 15min',
-      amenidades: ['Asientos extra amplios', 'Wifi a bordo', 'Toma de corriente', 'Snacks incluidos', 'Aire acondicionado', 'Baño'],
-      multiplicador: 1.00
+      amenidades: [
+        'Asientos extra amplios',
+        'Wifi a bordo',
+        'Toma de corriente',
+        'Snacks incluidos',
+        'Aire acondicionado',
+        'Baño'
+      ],
+      multiplicador: 1.0
     }
   ];
 
-  //precio de los servicios
+  // Precio de los servicios
   const preciosPorServicio = {
     economico: 40000,
     ejecutivo: 52000,
     premium: 68000
   };
 
-  //mensaje inicial antes de la cotización
+  // Mensaje inicial antes de la cotización
   function renderMensajeInicial() {
     resultadoContenedor.innerHTML =
       '<p class="cotizaciones__resultado-texto">Completa los datos y haz clic en <strong>Cotizar ahora</strong> para ver un valor estimado de tu viaje.</p>';
   }
 
-  //Trae los select de origen y destino (MySQL vía PHP o respaldo JSON)
+  // Trae los select de origen y destino (MySQL vía PHP o respaldo JSON)
   function poblarCiudades(ciudades) {
     selectOrigen.innerHTML = '<option value="">Selecciona ciudad de origen</option>';
     selectDestino.innerHTML = '<option value="">Selecciona ciudad de destino</option>';
+
     ciudades.forEach((ciudad) => {
       const optionOrigen = document.createElement('option');
       optionOrigen.value = ciudad.id;
@@ -89,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     });
   }
 
-  // Convierte la fecha seleccionada mas legible
+  // Convierte la fecha seleccionada a un formato más legible
   function formatearFecha(fecha) {
     if (!fecha) return 'Sin definir';
 
@@ -102,60 +163,84 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     });
   }
 
-  //Genera el item de cada empresa con sus detalles
-  function generarTarjetas(origenTexto, destinoTexto, fechaTexto, pasajeros, servicio) {
+  // Genera el item de cada empresa con sus detalles
+  function generarTarjetas(origenTexto, destinoTexto, fechaTexto, pasajeros, servicio, fechaIda) {
     const precioBase = preciosPorServicio[servicio];
 
-    return empresas.map((empresa) => {
-      const precioPorPersona = Math.round(precioBase * empresa.multiplicador);
-      const total = precioPorPersona * pasajeros;
+    return empresas
+      .map((empresa, index) => {
+        const precioPorPersona = Math.round(precioBase * empresa.multiplicador);
+        const total = precioPorPersona * pasajeros;
 
-      const amenidadesHTML = empresa.amenidades
-        .map((item) => `<span>ⓘ ${item}</span>`)
-        .join('');
+        const amenidadesHTML = empresa.amenidades
+          .map((item) => `<span>ⓘ ${item}</span>`)
+          .join('');
 
-      //items generados al dar "cotizar"
-      return `
-        <article class="cotizaciones__opcion">
-          <div class="cotizaciones__empresa">
-            <div class="cotizaciones__empresa-top">
-              <h3 class="cotizaciones__empresa-nombre">${empresa.nombre}</h3>
-              <span class="cotizaciones__badge">${empresa.tipo}</span>
+        return `
+          <article class="cotizaciones__opcion">
+            <div class="cotizaciones__empresa">
+              <div class="cotizaciones__empresa-top">
+                <h3 class="cotizaciones__empresa-nombre">${empresa.nombre}</h3>
+                <span class="cotizaciones__badge">${empresa.tipo}</span>
+              </div>
+
+              <div class="cotizaciones__meta">
+                Duración del viaje<br>
+                <strong>${empresa.duracion}</strong>
+              </div>
+
+              <div class="cotizaciones__meta">
+                Horario de salida<br>
+                <strong>${empresa.horario}</strong>
+              </div>
+
+              <div class="cotizaciones__amenidades">
+                ${amenidadesHTML}
+              </div>
             </div>
 
-            <div class="cotizaciones__meta">
-              Duración del viaje<br>
-              <strong>${empresa.duracion}</strong>
+            <div class="cotizaciones__dato">
+              Precio por persona
+              <strong>$ ${precioPorPersona.toLocaleString('es-CO')}</strong>
             </div>
 
-            <div class="cotizaciones__amenidades">
-              ${amenidadesHTML}
+            <div class="cotizaciones__dato">
+              Total ${pasajeros} pasajero${pasajeros > 1 ? 's' : ''}
+              <strong>$ ${total.toLocaleString('es-CO')}</strong>
             </div>
-          </div>
 
-          <div class="cotizaciones__dato">
-            Precio por persona
-            <strong>$ ${precioPorPersona.toLocaleString('es-CO')}</strong>
-          </div>
+            <div class="cotizaciones__precio">
+              <span class="cotizaciones__precio-label">Precio total</span>
+              <span class="cotizaciones__precio-valor">$ ${total.toLocaleString('es-CO')}</span>
+              <span class="cotizaciones__precio-detalle">${pasajeros} pasajero${pasajeros > 1 ? 's' : ''} • Solo ida</span>
 
-          <div class="cotizaciones__dato">
-            Total ${pasajeros} pasajero${pasajeros > 1 ? 's' : ''}
-            <strong>$ ${total.toLocaleString('es-CO')}</strong>
-          </div>
-
-          <div class="cotizaciones__precio">
-            <span class="cotizaciones__precio-label">Precio total</span>
-            <span class="cotizaciones__precio-valor">$ ${total.toLocaleString('es-CO')}</span>
-            <span class="cotizaciones__precio-detalle">${pasajeros} pasajero${pasajeros > 1 ? 's' : ''} • Solo ida</span>
-
-            <div class="cotizaciones__acciones">
-              <button type="button" class="cotizaciones__boton-opcion">Reservar Ahora</button>
-              <a href="#" class="cotizaciones__ver">Ver detalles</a>
+              <div class="cotizaciones__acciones">
+                <button
+                  type="button"
+                  class="cotizaciones__boton-opcion"
+                  data-index="${index}"
+                  data-origen="${origenTexto}"
+                  data-destino="${destinoTexto}"
+                  data-fecha="${fechaIda}"
+                  data-servicio="${servicio}"
+                  data-pasajeros="${pasajeros}"
+                  data-empresa="${empresa.nombre}"
+                  data-horario="${empresa.horario}"
+                  data-salida="${empresa.salida}"
+                  data-llegada="${empresa.llegada}"
+                  data-precio="${precioPorPersona}"
+                  data-tipo="${empresa.tipo}"
+                  data-duracion="${empresa.duracion}"
+                >
+                  Reservar Ahora
+                </button>
+                <a href="#" class="cotizaciones__ver">Ver detalles</a>
+              </div>
             </div>
-          </div>
-        </article>
-      `;
-    }).join('');
+          </article>
+        `;
+      })
+      .join('');
   }
 
   async function guardarCotizacionEnApi() {
@@ -189,19 +274,48 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
+
       const j = await res.json();
+
       if (!j.ok) {
         throw new Error(j.error || 'No se pudo guardar');
       }
+
       window.alert(
         `Cotización registrada en la base de datos (id ${j.id}). Total calculado en servidor: $ ${Number(j.calculo.total).toLocaleString('es-CO')}`
       );
     } catch (e) {
       window.alert(
-        'No se pudo conectar con el servidor PHP/MySQL. Verifica XAMPP, la base `terminal` y api/config.php.\n' +
+        'No se pudo conectar con el servidor PHP/MySQL. Verifica XAMPP, la base \`terminal\` y api/config.php.\n' +
           (e && e.message ? e.message : '')
       );
     }
+  }
+
+  function activarBotonesReserva() {
+    const botonesReservar = resultadoContenedor.querySelectorAll('.cotizaciones__boton-opcion');
+
+    botonesReservar.forEach((boton) => {
+      boton.addEventListener('click', () => {
+        const datosReserva = {
+          origen: boton.dataset.origen,
+          destino: boton.dataset.destino,
+          fecha: boton.dataset.fecha,
+          servicio: boton.dataset.servicio,
+          pasajeros: boton.dataset.pasajeros,
+          empresa: boton.dataset.empresa,
+          horario: boton.dataset.horario,
+          salida: boton.dataset.salida,
+          llegada: boton.dataset.llegada,
+          precio: Number(boton.dataset.precio),
+          tipo: boton.dataset.tipo,
+          duracion: boton.dataset.duracion
+        };
+
+        sessionStorage.setItem('reservaCotizacion', JSON.stringify(datosReserva));
+        window.location.href = 'tiquetes.html';
+      });
+    });
   }
 
   // Ciudades: API MySQL primero; si falla, JSON local
@@ -221,18 +335,17 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
         .catch(() => {});
     });
 
+  // Listener solo para guardar la cotización
   resultadoContenedor.addEventListener('click', (e) => {
-    const btn = e.target.closest('#guardarCotizacionApi');
-    if (btn) {
+    const btnGuardar = e.target.closest('#guardarCotizacionApi');
+    if (btnGuardar) {
       e.preventDefault();
       guardarCotizacionEnApi();
     }
   });
 
-    //Evento que se ejecuta al hacer clic en el botón de cotizar
+  // Evento que se ejecuta al hacer clic en el botón de cotizar
   botonCalcular.addEventListener('click', function () {
-
-    //obtiene los valores utilizados por el usuario
     const origen = formulario.querySelector('#origen').value;
     const destino = formulario.querySelector('#destino').value;
     const pasajerosInput = formulario.querySelector('#pasajeros');
@@ -240,26 +353,29 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
     const servicio = formulario.querySelector('#servicio').value;
     const fechaIda = fechaIdaInput.value;
 
-    //verifica que los campos esten completos
+    // Verifica que los campos estén completos
     if (!origen || !destino || !servicio || pasajeros <= 0 || !fechaIda) {
-      resultadoContenedor.innerHTML = '<p class="cotizaciones__resultado-texto">Por favor completa origen, destino, fecha de salida, tipo de servicio y número de pasajeros para calcular la cotización.</p>';
+      resultadoContenedor.innerHTML =
+        '<p class="cotizaciones__resultado-texto">Por favor completa origen, destino, fecha de salida, tipo de servicio y número de pasajeros para calcular la cotización.</p>';
       return;
     }
 
-    //no permite el ingreso mayor a 30 pasajeros
+    // No permite el ingreso mayor a 30 pasajeros
     if (pasajeros > 30) {
-      resultadoContenedor.innerHTML = '<p class="cotizaciones__resultado-texto">El número máximo permitido es de 30 pasajeros.</p>';
+      resultadoContenedor.innerHTML =
+        '<p class="cotizaciones__resultado-texto">El número máximo permitido es de 30 pasajeros.</p>';
       pasajerosInput.value = 30;
       return;
     }
 
-    //valida que el origen y destino no sean iguales
+    // Valida que el origen y destino no sean iguales
     if (origen === destino) {
-      resultadoContenedor.innerHTML = '<p class="cotizaciones__resultado-texto">El punto de origen y destino deben ser diferentes.</p>';
+      resultadoContenedor.innerHTML =
+        '<p class="cotizaciones__resultado-texto">El punto de origen y destino deben ser diferentes.</p>';
       return;
     }
 
-    //Obtiene el texto visible de las opciones seleccionadas
+    // Obtiene el texto visible de las opciones seleccionadas
     const origenTexto = formulario.querySelector('#origen option:checked').textContent;
     const destinoTexto = formulario.querySelector('#destino option:checked').textContent;
     const fechaTexto = formatearFecha(fechaIda);
@@ -293,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
       <p class="cotizaciones__bloque-texto">Precios solo de ida para ${pasajeros} pasajero${pasajeros > 1 ? 's' : ''}</p>
 
       <div class="cotizaciones__lista">
-        ${generarTarjetas(origenTexto, destinoTexto, fechaTexto, pasajeros, servicio)}
+        ${generarTarjetas(origenTexto, destinoTexto, fechaTexto, pasajeros, servicio, fechaIda)}
       </div>
 
       <p class="cotizaciones__resultado-texto" style="margin-top:1rem;">
@@ -322,6 +438,8 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
         </div>
       </div>
     `;
+
+    activarBotonesReserva();
   });
 
   renderMensajeInicial();

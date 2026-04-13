@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     const ciudadesRespaldo = [
         'Bogotá',
         'Medellín',
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let ciudades = ciudadesRespaldo.slice();
 
-    //Elementos del formulario principal
+    // Elementos del formulario principal
     const formulario = document.getElementById('tiquetesForm');
     const origenSelect = document.getElementById('origen');
     const destinoSelect = document.getElementById('destino');
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const servicioSelect = document.getElementById('servicio');
     const pasajerosInput = document.getElementById('pasajeros');
 
-    //proceso de compra
+    // Proceso de compra
     const seccionViajes = document.querySelector('.viajes');
     const seccionResultados = document.getElementById('resultados');
     const resultadosBody = document.getElementById('resultadosBody');
@@ -44,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const botonImprimirTiquete = document.getElementById('imprimirTiquete');
     const botonNuevaCompra = document.getElementById('nuevaCompra');
 
-    //resumen de la compra
+    // Resumen de la compra
     const resumenEmpresa = document.getElementById('resumenEmpresa');
     const resumenRuta = document.getElementById('resumenRuta');
     const resumenFecha = document.getElementById('resumenFecha');
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resumenClase = document.getElementById('resumenClase');
     const resumenTotal = document.getElementById('resumenTotal');
 
-    //detalle del viaje
+    // Detalle del viaje
     const detalleEmpresa = document.getElementById('detalleEmpresa');
     const detalleRuta = document.getElementById('detalleRuta');
     const detalleFecha = document.getElementById('detalleFecha');
@@ -62,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const detalleDuracion = document.getElementById('detalleDuracion');
     const detalleClase = document.getElementById('detalleClase');
 
-    //detalle pasajero
+    // Detalle pasajero
     const detalleNombre = document.getElementById('detalleNombre');
     const detalleTipoDocumento = document.getElementById('detalleTipoDocumento');
     const detalleNumeroDocumento = document.getElementById('detalleNumeroDocumento');
@@ -71,13 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const detallePasajeros = document.getElementById('detallePasajeros');
     const detalleDireccion = document.getElementById('detalleDireccion');
 
-    //elemento del pago
+    // Elemento del pago
     const pagoPrecioUnitario = document.getElementById('pagoPrecioUnitario');
     const pagoCantidad = document.getElementById('pagoCantidad');
     const pagoSubtotal = document.getElementById('pagoSubtotal');
     const pagoTotal = document.getElementById('pagoTotal');
 
-    //formulario del pasajero
+    // Formulario del pasajero
     const nombreCompleto = document.getElementById('nombreCompleto');
     const tipoDocumento = document.getElementById('tipoDocumento');
     const numeroDocumento = document.getElementById('numeroDocumento');
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const aceptaTerminos = document.getElementById('aceptaTerminos');
 
-    //confirmacion final
+    // Confirmación final
     const ticketNumero = document.getElementById('ticketNumero');
     const ticketNumeroDuplicado = document.getElementById('ticketNumeroDuplicado');
     const confEmpresa = document.getElementById('confEmpresa');
@@ -104,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const confTotal = document.getElementById('confTotal');
     const confEmision = document.getElementById('confEmision');
 
-    //guarda información actual del proceso de compra
+    // Guarda información actual del proceso de compra
     let datosBusquedaActual = null;
     let viajeSeleccionadoActual = null;
     let datosPasajeroActual = null;
@@ -116,9 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
     async function cargarEmpresasDesdeApi() {
         const res = await fetch('api/empresas_viaje.php');
         const j = await res.json();
+
         if (!j.ok || !Array.isArray(j.data)) {
             throw new Error(j.error || 'No se pudieron cargar empresas');
         }
+
         datosEmpresas = j.data.map((e) => ({
             id: e.id,
             empresa: e.nombre,
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }));
     }
 
-    //trae ciudades disponibles
+    // Trae ciudades disponibles
     function llenarCiudades(select, textoDefault) {
         select.innerHTML = '';
 
@@ -141,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         opcionDefault.selected = true;
         select.appendChild(opcionDefault);
 
-        ciudades.forEach(ciudad => {
+        ciudades.forEach((ciudad) => {
             const option = document.createElement('option');
             option.value = ciudad;
             option.textContent = ciudad;
@@ -149,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    //combierte el formato de fecha 
+    // Convierte el formato de fecha
     function formatearFecha(fecha) {
         const [anio, mes, dia] = fecha.split('-');
         return `${dia}/${mes}/${anio}`;
@@ -164,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    //obtiene la fecha actual de emisión del tiquete
+    // Obtiene la fecha actual de emisión del tiquete
     function formatearFechaEmision() {
         return new Date().toLocaleDateString('es-CO', {
             day: 'numeric',
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    //Convierte el valor interno del servicio a un texto más legible
+    // Convierte el valor interno del servicio a un texto más legible
     function formatearServicio(servicio) {
         const servicios = {
             economico: 'Económico',
@@ -204,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `TKT-${aleatorio1}-${aleatorio2}`;
     }
 
-    //Renderiza la tabla de resultados con las empresas disponibles
+    // Renderiza la tabla de resultados con las empresas disponibles
     function renderizarResultados(datos) {
         resultadosBody.innerHTML = '';
 
@@ -236,11 +237,11 @@ document.addEventListener('DOMContentLoaded', () => {
         agregarEventosComprar();
     }
 
-    //Agrega el evento click a cada botón de comprar
+    // Agrega el evento click a cada botón de comprar
     function agregarEventosComprar() {
         const botonesComprar = document.querySelectorAll('.resultados__accion');
 
-        botonesComprar.forEach(boton => {
+        botonesComprar.forEach((boton) => {
             boton.addEventListener('click', () => {
                 const index = boton.dataset.index;
                 viajeSeleccionadoActual = datosEmpresas[index];
@@ -268,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    //Llena el resumen final de compra con la información
+    // Llena el resumen final de compra con la información
     function llenarResumenCompra(datosPasajero) {
         if (!datosBusquedaActual || !viajeSeleccionadoActual) return;
 
@@ -300,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pagoTotal.textContent = formatearPrecio(subtotal);
     }
 
-    //Llena la sección de confirmación final del tiquete
+    // Llena la sección de confirmación final del tiquete
     function llenarConfirmacion(numeroTiqueteServidor, totalServidor) {
         if (!datosBusquedaActual || !viajeSeleccionadoActual || !datosPasajeroActual) return;
 
@@ -355,6 +356,82 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function cargarReservaDesdeCotizacion() {
+        const reservaGuardada = sessionStorage.getItem('reservaCotizacion');
+        if (!reservaGuardada) return;
+
+        try {
+            const reserva = JSON.parse(reservaGuardada);
+
+            if (
+                !reserva.origen ||
+                !reserva.destino ||
+                !reserva.fecha ||
+                !reserva.servicio ||
+                !reserva.pasajeros ||
+                !reserva.empresa
+            ) {
+                sessionStorage.removeItem('reservaCotizacion');
+                return;
+            }
+
+            datosBusquedaActual = {
+                origen: reserva.origen,
+                destino: reserva.destino,
+                fecha: reserva.fecha,
+                servicio: reserva.servicio,
+                pasajeros: Number(reserva.pasajeros)
+            };
+
+            viajeSeleccionadoActual = {
+                empresa: reserva.empresa,
+                horario: reserva.horario || 'Por confirmar',
+                salida: reserva.salida || 'Por confirmar',
+                llegada: reserva.llegada || 'Por confirmar',
+                duracion: reserva.duracion || 'No disponible',
+                precio: Number(reserva.precio) || 0
+            };
+
+            resumenEmpresa.textContent = viajeSeleccionadoActual.empresa;
+            resumenRuta.textContent = `${datosBusquedaActual.origen} → ${datosBusquedaActual.destino}`;
+            resumenFecha.textContent = formatearFechaLarga(datosBusquedaActual.fecha);
+            resumenHorario.textContent = viajeSeleccionadoActual.horario;
+            resumenPasajeros.textContent = datosBusquedaActual.pasajeros;
+            resumenClase.textContent = formatearServicio(datosBusquedaActual.servicio);
+
+            const totalInicial = viajeSeleccionadoActual.precio * Number(datosBusquedaActual.pasajeros);
+            resumenTotal.textContent = formatearPrecio(totalInicial);
+
+            if (seccionViajes) {
+                seccionViajes.style.display = 'none';
+            }
+
+            if (seccionResultados) {
+                seccionResultados.classList.add('resultados--oculto');
+            }
+
+            if (seccionResumen) {
+                seccionResumen.classList.add('resumen--oculto');
+            }
+
+            if (seccionConfirmacion) {
+                seccionConfirmacion.classList.add('confirmacion--oculto');
+            }
+
+            if (seccionPasajero) {
+                seccionPasajero.classList.remove('pasajero--oculto');
+                seccionPasajero.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+
+            sessionStorage.removeItem('reservaCotizacion');
+        } catch (error) {
+            console.error('No se pudo cargar la reserva desde cotizaciones', error);
+            sessionStorage.removeItem('reservaCotizacion');
+        }
+    }
+
     fetch('api/ciudades.php')
         .then((r) => (r.ok ? r.json() : Promise.reject()))
         .then((j) => {
@@ -369,6 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     cargarEmpresasDesdeApi().catch(() => {});
+    cargarReservaDesdeCotizacion();
 
     // Define que la fecha mínima permitida sea la fecha actual
     const hoy = new Date().toISOString().split('T')[0];
@@ -487,11 +565,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (botonVolverResultados) {
         botonVolverResultados.addEventListener('click', () => {
             seccionPasajero.classList.add('pasajero--oculto');
-            seccionResultados.classList.remove('resultados--oculto');
 
-            seccionResultados.scrollIntoView({
-                behavior: 'smooth'
-            });
+            if (resultadosBody && resultadosBody.children.length > 0) {
+                seccionResultados.classList.remove('resultados--oculto');
+                seccionResultados.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            } else {
+                if (seccionViajes) {
+                    seccionViajes.style.display = 'block';
+                }
+
+                formulario.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     }
 
@@ -581,9 +669,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(body)
                 });
                 const j = await res.json();
+
                 if (!j.ok) {
                     throw new Error(j.error || 'No se pudo registrar el pedido');
                 }
+
                 totalCompraActual = Number(j.total);
                 llenarConfirmacion(j.numero_tiquete, totalCompraActual);
 

@@ -48,6 +48,7 @@ try {
         if ($err !== null) {
             json_out(400, ['ok' => false, 'error' => $err]);
         }
+
         $pas = (int) $b['pasajeros'];
         $srv = (string) $b['servicio'];
         $tot = cotizacion_totales($srv, $pas);
@@ -59,13 +60,12 @@ try {
 
         $st = db()->prepare(
             'INSERT INTO cotizaciones (
-                origen, destino, fecha_ida, fecha_regreso, pasajeros, servicio,
-                subtotal_sin_descuento, descuento_porcentaje, total_con_descuento
+                origen, destino, fecha_ida, fecha_regreso, pasajeros, servicio
             ) VALUES (
-                :origen, :destino, :fecha_ida, :fecha_regreso, :pasajeros, :servicio,
-                :subtotal, :desc_pct, :total
+                :origen, :destino, :fecha_ida, :fecha_regreso, :pasajeros, :servicio
             )'
         );
+
         $st->execute([
             'origen' => (string) $b['origen'],
             'destino' => (string) $b['destino'],
@@ -73,10 +73,8 @@ try {
             'fecha_regreso' => $fechaRegreso,
             'pasajeros' => $pas,
             'servicio' => $srv,
-            'subtotal' => $tot['subtotal'],
-            'desc_pct' => $tot['descuento_pct'],
-            'total' => $tot['total'],
         ]);
+
         $newId = (int) db()->lastInsertId();
         json_out(201, ['ok' => true, 'id' => $newId, 'calculo' => $tot]);
     }
@@ -87,10 +85,12 @@ try {
         if ($id <= 0) {
             json_out(400, ['ok' => false, 'error' => 'id inválido']);
         }
+
         $err = validar_cotizacion_payload($b);
         if ($err !== null) {
             json_out(400, ['ok' => false, 'error' => $err]);
         }
+
         $pas = (int) $b['pasajeros'];
         $srv = (string) $b['servicio'];
         $tot = cotizacion_totales($srv, $pas);
@@ -98,10 +98,15 @@ try {
 
         $st = db()->prepare(
             'UPDATE cotizaciones SET
-                origen=:origen, destino=:destino, fecha_ida=:fecha_ida, fecha_regreso=:fecha_regreso,
-                pasajeros=:pasajeros, servicio=:servicio, subtotal_sin_descuento=:subtotal, descuento_porcentaje=:desc_pct, total_con_descuento=:total
+                origen=:origen,
+                destino=:destino,
+                fecha_ida=:fecha_ida,
+                fecha_regreso=:fecha_regreso,
+                pasajeros=:pasajeros,
+                servicio=:servicio
              WHERE id=:id'
         );
+
         $st->execute([
             'id' => $id,
             'origen' => (string) $b['origen'],
@@ -110,10 +115,8 @@ try {
             'fecha_regreso' => $fechaRegreso,
             'pasajeros' => $pas,
             'servicio' => $srv,
-            'subtotal' => $tot['subtotal'],
-            'desc_pct' => $tot['descuento_pct'],
-            'total' => $tot['total'],
         ]);
+
         json_out(200, ['ok' => true, 'afectados' => $st->rowCount(), 'calculo' => $tot]);
     }
 
