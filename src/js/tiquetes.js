@@ -585,41 +585,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Procesa el formulario de datos del pasajero
     if (pasajeroForm) {
-        pasajeroForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+    pasajeroForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-            const datosPasajero = {
-                nombre: nombreCompleto.value.trim(),
-                tipoDocumento: tipoDocumento.value,
-                numeroDocumento: numeroDocumento.value.trim(),
-                correo: correoElectronico.value.trim(),
-                telefono: telefonoCelular.value.trim(),
-                direccion: direccionPasajero.value.trim()
-            };
+        const nombre = nombreCompleto.value.trim();
+        const documento = numeroDocumento.value.trim();
+        const correo = correoElectronico.value.trim();
+        const telefono = telefonoCelular.value.trim();
+        const direccion = direccionPasajero.value.trim();
 
-            if (
-                !datosPasajero.nombre ||
-                !datosPasajero.tipoDocumento ||
-                !datosPasajero.numeroDocumento ||
-                !datosPasajero.correo ||
-                !datosPasajero.telefono
-            ) {
-                alert('Por favor completa todos los campos obligatorios del pasajero.');
-                return;
-            }
+        // VALIDACIÓN NOMBRE
+        if (nombre.length < 10 || nombre.length > 60) {
+            alert('El nombre debe tener entre 10 y 60 caracteres.');
+            return;
+        }
 
-            datosPasajeroActual = datosPasajero;
+        // VALIDACIÓN DOCUMENTO (solo números)
+        if (!/^[0-9]+$/.test(documento)) {
+            alert('El número de documento solo debe contener números.');
+            return;
+        }
 
-            llenarResumenCompra(datosPasajeroActual);
+        // VALIDACIÓN EMAIL
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+            alert('Ingrese un correo electrónico válido.');
+            return;
+        }
 
-            seccionPasajero.classList.add('pasajero--oculto');
-            seccionResumen.classList.remove('resumen--oculto');
+        // VALIDACIÓN TELÉFONO (exactamente 10 números)
+        if (!/^[0-9]{10}$/.test(telefono)) {
+            alert('El teléfono debe tener exactamente 10 números.');
+            return;
+        }
 
-            seccionResumen.scrollIntoView({
-                behavior: 'smooth'
-            });
+        // VALIDACIÓN DIRECCIÓN (obligatoria)
+        if (direccion === '') {
+            alert('La dirección es obligatoria.');
+            return;
+        }
+
+        const datosPasajero = {
+            nombre: nombre,
+            tipoDocumento: tipoDocumento.value,
+            numeroDocumento: documento,
+            correo: correo,
+            telefono: telefono,
+            direccion: direccion
+        };
+
+        datosPasajeroActual = datosPasajero;
+
+        llenarResumenCompra(datosPasajeroActual);
+
+        seccionPasajero.classList.add('pasajero--oculto');
+        seccionResumen.classList.remove('resumen--oculto');
+
+        seccionResumen.scrollIntoView({
+            behavior: 'smooth'
         });
-    }
+    });
+}
 
     // Permite regresar desde el resumen al formulario del pasajero
     if (botonModificarDatos) {
@@ -699,10 +724,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Enviar tiquete por email
+const botonEnviarEmail = document.getElementById('enviarEmail');
+
+if (botonEnviarEmail) {
+    botonEnviarEmail.addEventListener('click', async () => {
+        if (!datosBusquedaActual || !viajeSeleccionadoActual || !datosPasajeroActual) {
+            alert('No hay información del tiquete para enviar.');
+            return;
+        }
+
+        const body = {
+            correo: datosPasajeroActual.correo,
+            nombre: datosPasajeroActual.nombre,
+            numero_tiquete: ticketNumero.textContent,
+            empresa: viajeSeleccionadoActual.empresa,
+            origen: datosBusquedaActual.origen,
+            destino: datosBusquedaActual.destino,
+            fecha: datosBusquedaActual.fecha,
+            salida: viajeSeleccionadoActual.salida,
+            clase: datosBusquedaActual.servicio,
+            pasajeros: datosBusquedaActual.pasajeros,
+            total: totalCompraActual
+        };
+
+        try {
+            const res = await fetch('api/enviar_email.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+
+            const j = await res.json();
+
+            if (!j.ok) {
+                throw new Error(j.error || 'No se pudo enviar el correo');
+            }
+
+            alert('Tiquete enviado correctamente al correo.');
+        } catch (error) {
+            alert('Error al enviar el correo.');
+            console.error(error);
+        }
+    });
+}
+
     // Reinicia todo el proceso para hacer una nueva compra
     if (botonNuevaCompra) {
         botonNuevaCompra.addEventListener('click', () => {
             reiniciarProceso();
         });
     }
+
+    
 });

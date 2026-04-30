@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>Horarios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consulta horarios de salida y llegada de buses, empresas de transporte, destinos y plataformas disponibles en el sistema web Terminal.">
+    <meta name="keywords" content="horarios de buses, terminal de transporte, salidas de buses, llegadas, empresas de transporte, rutas">
+    <meta name="author" content="Liseth Dayana Monroy Briñez">
+    <title>Horarios | Terminal de transporte</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300,400;700&display=swap" rel="stylesheet">
@@ -17,7 +21,7 @@
         <div class="header__contenedor">
           <div class="header__barra">
             <div class="header__logo">
-              <img class="header__img" src="build/img/logo.svg" alt="logo terminal">
+              <img class="header__img" src="build/img/logo.svg" alt="Logo del sistema web Terminal">
               <h1 class="header__titulo">Terminal</h1>
             </div>
             <nav class="navegacion">
@@ -41,7 +45,7 @@
         <div class="horarios__contenedor">
           <h1 class="horarios__heading">Horarios de Salida</h1>
           <p class="horarios__descripcion">
-            Consulta los horarios actualizados de todas nuestras rutas.
+             Consulta horarios actualizados, destinos, empresas de transporte y plataformas disponibles para planificar tu viaje.
           </p>
 
           <div class="horarios__buscador">
@@ -70,7 +74,7 @@
       <section class="horarios__tabla-seccion">
         <div class="horarios__contenedor">
           <div class="horarios__tabla-wrap">
-          <table class="horarios__tabla">
+          <table class="horarios__tabla" aria-label="Tabla de horarios de salida y llegada de buses">
             <thead class="horarios__cabecera">
               <tr class="horarios__fila horarios__fila--cabecera">
                 <th class="horarios__columna">Destino</th>
