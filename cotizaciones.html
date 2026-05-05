@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>Cotizaciones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cotiza viajes de transporte terrestre en Colombia. Compara empresas, precios, rutas y servicios para reservar tu tiquete en Terminal.">
+    <meta name="keywords" content="cotizar viaje, cotizaciones de tiquetes, transporte terrestre, rutas de buses, precios de tiquetes, terminal">
+    <meta name="author" content="Liseth Dayana Monroy Briñez">
+    <title>Cotizar viaje en bus | Terminal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300,400;700&display=swap" rel="stylesheet">
@@ -17,7 +21,7 @@
         <div class="header__contenedor">
           <div class="header__barra">
             <div class="header__logo">
-              <img class="header__img" src="build/img/logo.svg" alt="logo terminal">
+              <img class="header__img" src="build/img/logo.svg" alt="Logo del sistema web Terminal">
               <h1 class="header__titulo">Terminal</h1>
             </div>
             <nav class="navegacion">
@@ -39,8 +43,8 @@
     <main class="cotizaciones">
       <section class="cotizaciones__encabezado">
         <div class="cotizaciones__contenedor">
-          <h1 class="cotizaciones__heading">Cotiza tu Viaje</h1>
-          <p class="cotizaciones__descripcion">Calcula el valor estimado de tu trayecto entre ciudades de Colombia.
+          <h1 class="cotizaciones__heading">Cotiza tu viaje en transporte terrestre</h1>
+          <p class="cotizaciones__descripcion">Calcula el valor estimado de tu trayecto, compara empresas disponibles y reserva tu tiquete de forma rápida y segura.
           </p>
         </div>
       </section>
@@ -50,42 +54,42 @@
           <div class="cotizaciones__tarjeta">
             <h2 class="cotizaciones__subtitulo">Datos del viaje</h2>
             <p class="cotizaciones__texto">
-              Selecciona el punto de origen y destino, la fecha de viaje y el número de pasajeros.
+             Selecciona origen, destino, fecha, número de pasajeros y tipo de servicio para consultar precios estimados entre empresas de transporte.
             </p>
 
             <form class="cotizaciones__formulario">
                 <div class="cotizaciones__campo">
                   <label for="origen" class="cotizaciones__label">Punto de origen</label>
-                  <select id="origen" class="cotizaciones__input cotizaciones__input--select">
+                  <select id="origen" class="cotizaciones__input cotizaciones__input--select" required>
                     <option value="">Selecciona ciudad de origen</option>
                   </select>
                 </div>
 
                 <div class="cotizaciones__campo">
                   <label for="destino" class="cotizaciones__label">Punto de destino</label>
-                  <select id="destino" class="cotizaciones__input cotizaciones__input--select">
+                  <select id="destino" class="cotizaciones__input cotizaciones__input--select" required>
                     <option value="">Selecciona ciudad de destino</option>
                   </select>
                 </div>
 
                 <div class="cotizaciones__campo">
                   <label for="fecha-ida" class="cotizaciones__label">Fecha de salida</label>
-                  <input id="fecha-ida" type="date" class="cotizaciones__input">
+                  <input id="fecha-ida" type="date" class="cotizaciones__input" required>
                 </div>
 
                 <div class="cotizaciones__campo">
                   <label for="fecha-regreso" class="cotizaciones__label">Fecha de regreso (opcional)</label>
-                  <input id="fecha-regreso" type="date" class="cotizaciones__input">
+                  <input id="fecha-regreso" name="fecha_regreso" type="date" class="cotizaciones__input">
                 </div>
 
                 <div class="cotizaciones__campo">
                   <label for="pasajeros" class="cotizaciones__label">Número de pasajeros (máx. 30)</label>
-                  <input id="pasajeros" type="number" min="1" max="30" class="cotizaciones__input" placeholder="Ej: 1">
+                 <input id="pasajeros" name="pasajeros" type="number" min="1" max="30" class="cotizaciones__input" placeholder="Ej: 1" required>
                 </div>
 
                 <div class="cotizaciones__campo">
                   <label for="servicio" class="cotizaciones__label">Tipo de servicio</label>
-                  <select id="servicio" class="cotizaciones__input cotizaciones__input--select">
+                  <select id="servicio" name="servicio" class="cotizaciones__input cotizaciones__input--select" required>
                     <option value="">Selecciona una opción</option>
                     <option value="economico">Económico</option>
                     <option value="ejecutivo">Ejecutivo</option>
@@ -193,7 +197,7 @@
     </footer>
     
     <button class="scroll-top" id="scrollTop" type="button" aria-label="Subir al inicio">↑</button>
-    <script src="src/js/scroll.js"></script>
-    <script src="src/js/cotizaciones.js"></script>
+    <script src="src/js/scroll.js" defer></script>
+    <script src="src/js/cotizaciones.js" defer></script>
   </body>
 </html>

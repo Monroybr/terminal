@@ -18,6 +18,7 @@ body {
 p {
     color: v.$black;
     font-size: 2rem;
+    
 }
 
 img {
@@ -66,6 +67,7 @@ a {
 [class$="__titulo"]{
     text-align: center;
     color: v.$black;
+    font-weight: 700;
 }
 
 [class$="__nota-lista"]{

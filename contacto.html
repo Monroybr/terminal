@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>contacto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contáctanos para recibir soporte sobre horarios, cotizaciones, compra de tiquetes y servicios de la terminal de transporte.">
+    <meta name="keywords" content="contacto terminal, soporte terminal, atención al cliente, compra de tiquetes, transporte terrestre">
+    <meta name="author" content="Liseth Dayana Monroy Briñez">
+    <title>Contacto y soporte | Terminal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300,400;700&display=swap" rel="stylesheet">
@@ -17,11 +21,11 @@
         <div class="header__contenedor">
           <div class="header__barra">
             <div class="header__logo">
-              <img class="header__img" src="build/img/logo.svg" alt="logo terminal">
+              <img class="header__img" src="build/img/logo.svg" alt="Logo del sistema web Terminal">
               <h1 class="header__titulo">Terminal</h1>
             </div>
             <nav class="navegacion">
-              <a href="index.html" class="navegacion__link activo">Inicio</a>
+              <a href="index.html" class="navegacion__link">Inicio</a>
               <a href="horarios.html" class="navegacion__link">Horarios</a>
               <a href="servicios.html" class="navegacion__link ">Servicios</a>
               <a href="vehiculos.html" class="navegacion__link">Vehículos</a>
@@ -39,8 +43,8 @@
     <main class="contacto">
       <section class="contacto__encabezado">
         <div class="contacto__contenedor">
-          <h1 class="contacto__heading">Contacto</h1>
-          <p class="contacto__descripcion">Estamos aquí para ayudarte.</p>
+          <h1 class="contacto__heading">Contacto y atención al cliente</h1>
+          <p class="contacto__descripcion">Comunícate con la terminal para resolver dudas sobre horarios, rutas, cotizaciones, servicios y compra de tiquetes.</p>
         </div>
       </section>
 
@@ -89,7 +93,7 @@
             </ul>
 
             <figure class="contacto__imagen">
-              <img src="build/img/header.jpg" alt="Punto de información">
+              <img src="build/img/header.webp" alt="Punto de información y atención al usuario en la terminal" loading="lazy">
             </figure>
           </div>
 
@@ -110,8 +114,7 @@
 
                 <div class="contacto__campo">
                   <label for="telefono" class="contacto__label">Teléfono *</label>
-                  <input id="telefono" type="number" class="contacto__input" placeholder="+57 300 000 0000" required maxlength="10">
-                </div>
+                  <input id="telefono" type="tel" inputmode="numeric" pattern="[0-9]{10}" class="contacto__input" placeholder="3000000000" required maxlength="10">
 
                 <div class="contacto__campo">
                   <label for="asunto" class="contacto__label">Asunto *</label>
@@ -192,7 +195,7 @@
     </footer>
     
     <button class="scroll-top" id="scrollTop" type="button" aria-label="Subir al inicio">↑</button>
-    <script src="src/js/scroll.js"></script>
-    <script src="src/js/contacto.js"></script>
+    <script src="src/js/scroll.js" defer></script>
+    <script src="src/js/contacto.js" defer></script>
   </body>
 </html>
