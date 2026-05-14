@@ -109,6 +109,33 @@ document.addEventListener('DOMContentLoaded', () => {
     let datosPasajeroActual = null;
     let totalCompraActual = 0;
 
+    if (tipoDocumento && numeroDocumento) {
+        tipoDocumento.addEventListener('change', () => {
+            aplicarReglasCampoDocumento();
+        });
+
+        numeroDocumento.addEventListener('input', () => {
+            const tipo = tipoDocumento.value;
+            const r = reglasTipoDocumento(tipo);
+            if (r.soloDigitos) {
+                numeroDocumento.value = numeroDocumento.value.replace(/\D/g, '').slice(0, r.maxLen);
+            } else {
+                numeroDocumento.value = numeroDocumento.value
+                    .replace(/[^a-zA-Z0-9]/g, '')
+                    .toUpperCase()
+                    .slice(0, r.maxLen);
+            }
+        });
+
+        aplicarReglasCampoDocumento();
+    }
+
+    if (telefonoCelular) {
+        telefonoCelular.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+        });
+    }
+
     /** Catálogo desde MySQL (api/empresas_viaje.php); vacío hasta cargar */
     let datosEmpresas = [];
 
@@ -193,6 +220,84 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         return tipos[tipo] || tipo;
+    }
+
+    function reglasTipoDocumento(tipo) {
+        if (tipo === 'cedula') {
+            return { maxLen: 10, soloDigitos: true, placeholder: 'Solo números, ej: 1075320772' };
+        }
+        if (tipo === 'dni') {
+            return { maxLen: 16, soloDigitos: false, placeholder: 'Letras y números, ej: AB123456' };
+        }
+        return { maxLen: 20, soloDigitos: false, placeholder: 'Letras y números, ej: AA1234567' };
+    }
+
+    function aplicarReglasCampoDocumento() {
+        if (!tipoDocumento || !numeroDocumento) return;
+
+        const tipo = tipoDocumento.value;
+        const r = reglasTipoDocumento(tipo);
+
+        numeroDocumento.maxLength = r.maxLen;
+        numeroDocumento.placeholder = r.placeholder;
+
+        if (r.soloDigitos) {
+            numeroDocumento.inputMode = 'numeric';
+            numeroDocumento.setAttribute('pattern', '[0-9]{6,10}');
+            numeroDocumento.title = 'Cédula: entre 6 y 10 dígitos, solo números';
+        } else {
+            numeroDocumento.inputMode = 'text';
+            numeroDocumento.removeAttribute('pattern');
+            numeroDocumento.title =
+                tipo === 'dni'
+                    ? 'DNI: entre 5 y 16 caracteres, letras o números'
+                    : 'Pasaporte: entre 5 y 20 caracteres, letras o números';
+        }
+
+        let v = numeroDocumento.value;
+        if (r.soloDigitos) {
+            v = v.replace(/\D/g, '');
+        } else {
+            v = v.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+        }
+        numeroDocumento.value = v.slice(0, r.maxLen);
+    }
+
+    function mensajeValidacionDocumento(tipo, doc) {
+        if (!doc) {
+            return 'Ingrese el número de documento.';
+        }
+        if (tipo === 'cedula') {
+            if (!/^\d{6,10}$/.test(doc)) {
+                return 'La cédula debe tener entre 6 y 10 dígitos (solo números).';
+            }
+        } else if (tipo === 'dni') {
+            if (!/^[A-Za-z0-9]{5,16}$/.test(doc)) {
+                return 'El DNI debe tener entre 5 y 16 caracteres (letras y/o números).';
+            }
+        } else if (tipo === 'pasaporte') {
+            if (!/^[A-Za-z0-9]{5,20}$/.test(doc)) {
+                return 'El pasaporte debe tener entre 5 y 20 caracteres (letras y/o números).';
+            }
+        }
+        return '';
+    }
+
+    function mensajeValidacionNombreCompleto(nombre) {
+        if (nombre.length < 10 || nombre.length > 60) {
+            return 'El nombre debe tener entre 10 y 60 caracteres.';
+        }
+        if (/[0-9]/.test(nombre)) {
+            return 'El nombre no puede contener números.';
+        }
+        if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'.-]+$/.test(nombre)) {
+            return 'El nombre solo puede contener letras, espacios y caracteres como el guion o apóstrofo.';
+        }
+        const partes = nombre.split(/\s+/).filter(Boolean);
+        if (partes.length < 2) {
+            return 'Ingrese al menos nombre y apellido.';
+        }
+        return '';
     }
 
     function formatearPrecio(valor) {
@@ -585,66 +690,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Procesa el formulario de datos del pasajero
     if (pasajeroForm) {
-    pasajeroForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+        pasajeroForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        const nombre = nombreCompleto.value.trim();
-        const documento = numeroDocumento.value.trim();
-        const correo = correoElectronico.value.trim();
-        const telefono = telefonoCelular.value.trim();
-        const direccion = direccionPasajero.value.trim();
+            const nombre = nombreCompleto.value.trim();
+            const tipo = tipoDocumento.value;
+            const documento = numeroDocumento.value.trim();
+            const correo = correoElectronico.value.trim();
+            const telefono = telefonoCelular.value.trim();
+            const direccion = direccionPasajero.value.trim();
 
-        // VALIDACIÓN NOMBRE
-        if (nombre.length < 10 || nombre.length > 60) {
-            alert('El nombre debe tener entre 10 y 60 caracteres.');
-            return;
-        }
+            const errNombre = mensajeValidacionNombreCompleto(nombre);
+            if (errNombre) {
+                alert(errNombre);
+                return;
+            }
 
-        // VALIDACIÓN DOCUMENTO (solo números)
-        if (!/^[0-9]+$/.test(documento)) {
-            alert('El número de documento solo debe contener números.');
-            return;
-        }
+            const errDoc = mensajeValidacionDocumento(tipo, documento);
+            if (errDoc) {
+                alert(errDoc);
+                return;
+            }
 
-        // VALIDACIÓN EMAIL
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
-            alert('Ingrese un correo electrónico válido.');
-            return;
-        }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+                alert('Ingrese un correo electrónico válido.');
+                return;
+            }
 
-        // VALIDACIÓN TELÉFONO (exactamente 10 números)
-        if (!/^[0-9]{10}$/.test(telefono)) {
-            alert('El teléfono debe tener exactamente 10 números.');
-            return;
-        }
+            if (!/^[0-9]{10}$/.test(telefono)) {
+                alert('El teléfono debe tener exactamente 10 dígitos (solo números).');
+                return;
+            }
 
-        // VALIDACIÓN DIRECCIÓN (obligatoria)
-        if (direccion === '') {
-            alert('La dirección es obligatoria.');
-            return;
-        }
+            if (direccion.length < 5 || direccion.length > 100) {
+                alert('La dirección debe tener entre 5 y 100 caracteres.');
+                return;
+            }
 
-        const datosPasajero = {
-            nombre: nombre,
-            tipoDocumento: tipoDocumento.value,
-            numeroDocumento: documento,
-            correo: correo,
-            telefono: telefono,
-            direccion: direccion
-        };
+            const datosPasajero = {
+                nombre: nombre,
+                tipoDocumento: tipo,
+                numeroDocumento: documento,
+                correo: correo,
+                telefono: telefono,
+                direccion: direccion
+            };
 
-        datosPasajeroActual = datosPasajero;
+            datosPasajeroActual = datosPasajero;
 
-        llenarResumenCompra(datosPasajeroActual);
+            llenarResumenCompra(datosPasajeroActual);
 
-        seccionPasajero.classList.add('pasajero--oculto');
-        seccionResumen.classList.remove('resumen--oculto');
+            seccionPasajero.classList.add('pasajero--oculto');
+            seccionResumen.classList.remove('resumen--oculto');
 
-        seccionResumen.scrollIntoView({
-            behavior: 'smooth'
+            seccionResumen.scrollIntoView({
+                behavior: 'smooth'
+            });
         });
-    });
-}
+    }
 
     // Permite regresar desde el resumen al formulario del pasajero
     if (botonModificarDatos) {
@@ -724,50 +827,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Enviar tiquete por email
-const botonEnviarEmail = document.getElementById('enviarEmail');
+    // Enviar tiquete por email (adjunto PDF)
+    const botonEnviarEmail = document.getElementById('enviarEmail');
 
-if (botonEnviarEmail) {
-    botonEnviarEmail.addEventListener('click', async () => {
-        if (!datosBusquedaActual || !viajeSeleccionadoActual || !datosPasajeroActual) {
-            alert('No hay información del tiquete para enviar.');
-            return;
-        }
-
-        const body = {
-            correo: datosPasajeroActual.correo,
-            nombre: datosPasajeroActual.nombre,
-            numero_tiquete: ticketNumero.textContent,
-            empresa: viajeSeleccionadoActual.empresa,
-            origen: datosBusquedaActual.origen,
-            destino: datosBusquedaActual.destino,
-            fecha: datosBusquedaActual.fecha,
-            salida: viajeSeleccionadoActual.salida,
-            clase: datosBusquedaActual.servicio,
-            pasajeros: datosBusquedaActual.pasajeros,
-            total: totalCompraActual
-        };
-
-        try {
-            const res = await fetch('api/enviar_email.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-
-            const j = await res.json();
-
-            if (!j.ok) {
-                throw new Error(j.error || 'No se pudo enviar el correo');
+    if (botonEnviarEmail) {
+        botonEnviarEmail.addEventListener('click', async () => {
+            if (!datosBusquedaActual || !viajeSeleccionadoActual || !datosPasajeroActual) {
+                alert('No hay información del tiquete para enviar.');
+                return;
             }
 
-            alert('Tiquete enviado correctamente al correo.');
-        } catch (error) {
-            alert('Error al enviar el correo.');
-            console.error(error);
-        }
-    });
-}
+            const documentoLinea = `${formatearTipoDocumento(datosPasajeroActual.tipoDocumento)} ${datosPasajeroActual.numeroDocumento}`;
+
+            const body = {
+                correo: datosPasajeroActual.correo,
+                nombre: datosPasajeroActual.nombre,
+                numero_tiquete: ticketNumero.textContent.trim(),
+                empresa: confEmpresa.textContent.trim(),
+                origen: confOrigen.textContent.trim(),
+                destino: confDestino.textContent.trim(),
+                fecha: confFecha.textContent.trim(),
+                salida: confSalida.textContent.trim(),
+                clase: confClase.textContent.trim(),
+                pasajeros: confPasajeros.textContent.trim(),
+                total: totalCompraActual,
+                documento: documentoLinea,
+                telefono: datosPasajeroActual.telefono,
+                fecha_emision: confEmision.textContent.trim()
+            };
+
+            const textoOriginal = botonEnviarEmail.textContent;
+            botonEnviarEmail.disabled = true;
+            botonEnviarEmail.textContent = 'Enviando…';
+
+            try {
+                const res = await fetch('api/enviar_email.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const j = await res.json();
+
+                if (!j.ok) {
+                    throw new Error(j.error || 'No se pudo enviar el correo');
+                }
+
+                alert('Se envió el tiquete en PDF al correo indicado.');
+            } catch (error) {
+                alert(
+                    error && error.message
+                        ? error.message
+                        : 'Error al enviar el correo. Comprueba la conexión y la configuración SMTP en el servidor.'
+                );
+                console.error(error);
+            } finally {
+                botonEnviarEmail.disabled = false;
+                botonEnviarEmail.textContent = textoOriginal;
+            }
+        });
+    }
 
     // Reinicia todo el proceso para hacer una nueva compra
     if (botonNuevaCompra) {

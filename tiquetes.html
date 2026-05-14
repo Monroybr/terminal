@@ -107,10 +107,15 @@
                     class="campo__input campo__input--pasajeros"
                     id="pasajeros"
                     name="pasajeros"
-                    type="number"
-                    min="1"
-                    max="30"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    maxlength="2"
+                    minlength="1"
+                    pattern="[0-9]{1,2}"
+                    title="Solo números del 1 al 30"
                     placeholder="Ej: 1"
+                    required
                   >
                 </div>
               </div>
@@ -265,13 +270,13 @@
             <form class="pasajero__formulario" id="pasajeroForm">
               <div class="pasajero__campo pasajero__campo--completo">
                 <label class="pasajero__label" for="nombreCompleto">Nombre Completo *</label>
-                <input class="pasajero__input" id="nombreCompleto" type="text" placeholder="Ingrese su nombre completo" minlength="10" maxlength="60" required>
+                <input class="pasajero__input" id="nombreCompleto" type="text" placeholder="Ingrese su nombre completo" minlength="10" maxlength="60" autocomplete="name" title="Letras y espacios; sin números" required>
               </div>
     
               <div class="pasajero__fila">
                 <div class="pasajero__campo">
                   <label class="pasajero__label" for="tipoDocumento">Tipo de Documento *</label>
-                  <select class="pasajero__input pasajero__input--select" id="tipoDocumento">
+                  <select class="pasajero__input pasajero__input--select" id="tipoDocumento" required>
                     <option value="dni">DNI</option>
                     <option value="cedula">Cédula</option>
                     <option value="pasaporte">Pasaporte</option>
@@ -280,19 +285,19 @@
     
                 <div class="pasajero__campo">
                   <label class="pasajero__label" for="numeroDocumento">Número de Documento *</label>
-                  <input class="pasajero__input" id="numeroDocumento" type="text" inputmode="numeric" pattern="[0-9]+" placeholder="Ingrese su documento" maxlength="10" required>
+                  <input class="pasajero__input" id="numeroDocumento" type="text" autocomplete="off" placeholder="Solo números, ej: 1075320772" maxlength="10" required>
                 </div>
               </div>
     
               <div class="pasajero__fila">
                 <div class="pasajero__campo">
                   <label class="pasajero__label" for="correoElectronico">Correo Electrónico *</label>
-                  <input class="pasajero__input" id="correoElectronico" type="email" placeholder="ejemplo@correo.com" maxlength="100">
+                  <input class="pasajero__input" id="correoElectronico" type="email" placeholder="ejemplo@correo.com" maxlength="100" autocomplete="email" required>
                 </div>
     
                 <div class="pasajero__campo">
                   <label class="pasajero__label" for="telefonoCelular">Teléfono / Celular *</label>
-                  <input class="pasajero__input" id="telefonoCelular" type="tel" inputmode="numeric" pattern="[0-9]{10}" placeholder="3001234567" maxlength="10" required>
+                  <input class="pasajero__input" id="telefonoCelular" type="tel" inputmode="numeric" pattern="[0-9]{10}" placeholder="3001234567" maxlength="10" title="10 dígitos, solo números" autocomplete="tel" required>
                 </div>
               </div>
     

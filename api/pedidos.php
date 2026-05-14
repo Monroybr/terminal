@@ -55,6 +55,16 @@ function validar_pedido(array $b): ?string
     if (strlen($nombre) < 10 || strlen($nombre) > 60) {
         return 'El nombre debe tener entre 10 y 60 caracteres';
     }
+    if (preg_match('/[0-9]/', $nombre)) {
+        return 'El nombre no puede contener números';
+    }
+    if (!preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\'\.-]+$/u', $nombre)) {
+        return 'El nombre solo puede contener letras y espacios';
+    }
+    $partesNombre = preg_split('/\s+/', $nombre, -1, PREG_SPLIT_NO_EMPTY);
+    if ($partesNombre === false || count($partesNombre) < 2) {
+        return 'Ingrese al menos nombre y apellido';
+    }
 
     $telefono = trim((string) $b['telefono']);
     if (!preg_match('/^[0-9]{10}$/', $telefono)) {
@@ -62,16 +72,33 @@ function validar_pedido(array $b): ?string
     }
 
     $direccion = trim((string) $b['direccion']);
-    if ($direccion === '') {
-        return 'La dirección es obligatoria';
+    if (strlen($direccion) < 5 || strlen($direccion) > 100) {
+        return 'La dirección debe tener entre 5 y 100 caracteres';
     }
 
     if (!filter_var((string) $b['correo'], FILTER_VALIDATE_EMAIL)) {
         return 'El correo electrónico no es válido';
     }
 
-    if (!preg_match('/^[0-9]+$/', (string) $b['numero_documento'])) {
-        return 'El número de documento solo debe contener números';
+    $tipoDoc = trim((string) $b['tipo_documento']);
+    $numDoc = trim((string) $b['numero_documento']);
+
+    if (!in_array($tipoDoc, ['dni', 'cedula', 'pasaporte'], true)) {
+        return 'Tipo de documento no válido';
+    }
+
+    if ($tipoDoc === 'cedula') {
+        if (!preg_match('/^\d{6,10}$/', $numDoc)) {
+            return 'La cédula debe tener entre 6 y 10 dígitos (solo números)';
+        }
+    } elseif ($tipoDoc === 'dni') {
+        if (!preg_match('/^[A-Za-z0-9]{5,16}$/', $numDoc)) {
+            return 'El DNI debe tener entre 5 y 16 caracteres (letras y/o números)';
+        }
+    } else {
+        if (!preg_match('/^[A-Za-z0-9]{5,20}$/', $numDoc)) {
+            return 'El pasaporte debe tener entre 5 y 20 caracteres (letras y/o números)';
+        }
     }
 
     return null;
