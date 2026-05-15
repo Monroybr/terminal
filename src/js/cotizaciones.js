@@ -7,10 +7,92 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
   const selectOrigen = document.getElementById('origen');
   const selectDestino = document.getElementById('destino');
   const fechaIdaInput = document.getElementById('fecha-ida');
+  const fechaRegresoInput = document.getElementById('fecha-regreso');
+  const pasajerosInput = document.getElementById('pasajeros');
 
   // Si no existe el elemento, detiene la ejecución para evitar errores
-  if (!formulario || !botonCalcular || !resultadoContenedor || !selectOrigen || !selectDestino || !fechaIdaInput) {
+  if (
+    !formulario ||
+    !botonCalcular ||
+    !resultadoContenedor ||
+    !selectOrigen ||
+    !selectDestino ||
+    !fechaIdaInput ||
+    !pasajerosInput
+  ) {
     return;
+  }
+
+  const hoyIso = new Date().toISOString().split('T')[0];
+  fechaIdaInput.min = hoyIso;
+  if (fechaRegresoInput) {
+    fechaRegresoInput.min = hoyIso;
+  }
+
+  function actualizarMinFechaRegreso() {
+    if (!fechaRegresoInput) return;
+    const minRegreso = fechaIdaInput.value && fechaIdaInput.value >= hoyIso ? fechaIdaInput.value : hoyIso;
+    fechaRegresoInput.min = minRegreso;
+    if (fechaRegresoInput.value && fechaRegresoInput.value < minRegreso) {
+      fechaRegresoInput.value = '';
+    }
+  }
+
+  fechaIdaInput.addEventListener('change', actualizarMinFechaRegreso);
+  actualizarMinFechaRegreso();
+
+  pasajerosInput.addEventListener('input', (e) => {
+    let valor = e.target.value.replace(/\D/g, '');
+    if (valor.length > 2) {
+      valor = valor.slice(0, 2);
+    }
+    if (valor !== '' && Number(valor) > 30) {
+      valor = '30';
+    }
+    e.target.value = valor;
+  });
+
+  pasajerosInput.addEventListener('blur', (e) => {
+    if (e.target.value === '') return;
+    const valor = Number(e.target.value);
+    if (valor < 1) {
+      e.target.value = '1';
+    } else if (valor > 30) {
+      e.target.value = '30';
+    }
+  });
+
+  function mensajeValidacionFormulario() {
+    const origen = selectOrigen.value;
+    const destino = selectDestino.value;
+    const servicio = formulario.querySelector('#servicio').value;
+    const fechaIda = fechaIdaInput.value;
+    const pasajeros = parseInt(pasajerosInput.value, 10);
+
+    if (!origen || !destino || !servicio || !fechaIda || !pasajerosInput.value.trim()) {
+      return 'Por favor completa origen, destino, fecha de salida, tipo de servicio y número de pasajeros.';
+    }
+
+    if (origen === destino) {
+      return 'El punto de origen y destino deben ser diferentes.';
+    }
+
+    if (fechaIda < hoyIso) {
+      return 'La fecha de salida no puede ser anterior a hoy.';
+    }
+
+    if (Number.isNaN(pasajeros) || pasajeros < 1 || pasajeros > 30) {
+      return 'El número de pasajeros debe estar entre 1 y 30.';
+    }
+
+    if (fechaRegresoInput && fechaRegresoInput.value) {
+      const minRegreso = fechaIda >= hoyIso ? fechaIda : hoyIso;
+      if (fechaRegresoInput.value < minRegreso) {
+        return 'La fecha de regreso debe ser igual o posterior a la fecha de salida.';
+      }
+    }
+
+    return '';
   }
 
   // Empresas disponibles de la terminal
@@ -244,20 +326,20 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
   }
 
   async function guardarCotizacionEnApi() {
-    const origen = formulario.querySelector('#origen').value;
-    const destino = formulario.querySelector('#destino').value;
-    const pasajeros = parseInt(formulario.querySelector('#pasajeros').value, 10) || 0;
+    const errForm = mensajeValidacionFormulario();
+    if (errForm) {
+      window.alert(errForm);
+      return;
+    }
+
+    const origen = selectOrigen.value;
+    const destino = selectDestino.value;
+    const pasajeros = parseInt(pasajerosInput.value, 10);
     const servicio = formulario.querySelector('#servicio').value;
     const fechaIda = fechaIdaInput.value;
-    const fechaRegresoInput = document.getElementById('fecha-regreso');
     const fechaRegreso = fechaRegresoInput && fechaRegresoInput.value ? fechaRegresoInput.value : null;
     const origenTexto = formulario.querySelector('#origen option:checked')?.textContent?.trim() || '';
     const destinoTexto = formulario.querySelector('#destino option:checked')?.textContent?.trim() || '';
-
-    if (!origen || !destino || !servicio || pasajeros <= 0 || !fechaIda) {
-      window.alert('Completa el formulario antes de guardar la cotización.');
-      return;
-    }
 
     const body = {
       origen: origenTexto || origen,
@@ -346,34 +428,17 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
 
   // Evento que se ejecuta al hacer clic en el botón de cotizar
   botonCalcular.addEventListener('click', function () {
-    const origen = formulario.querySelector('#origen').value;
-    const destino = formulario.querySelector('#destino').value;
-    const pasajerosInput = formulario.querySelector('#pasajeros');
-    const pasajeros = parseInt(pasajerosInput.value, 10) || 0;
+    const errForm = mensajeValidacionFormulario();
+    if (errForm) {
+      resultadoContenedor.innerHTML = `<p class="cotizaciones__resultado-texto">${errForm}</p>`;
+      return;
+    }
+
+    const origen = selectOrigen.value;
+    const destino = selectDestino.value;
+    const pasajeros = parseInt(pasajerosInput.value, 10);
     const servicio = formulario.querySelector('#servicio').value;
     const fechaIda = fechaIdaInput.value;
-
-    // Verifica que los campos estén completos
-    if (!origen || !destino || !servicio || pasajeros <= 0 || !fechaIda) {
-      resultadoContenedor.innerHTML =
-        '<p class="cotizaciones__resultado-texto">Por favor completa origen, destino, fecha de salida, tipo de servicio y número de pasajeros para calcular la cotización.</p>';
-      return;
-    }
-
-    // No permite el ingreso mayor a 30 pasajeros
-    if (pasajeros > 30) {
-      resultadoContenedor.innerHTML =
-        '<p class="cotizaciones__resultado-texto">El número máximo permitido es de 30 pasajeros.</p>';
-      pasajerosInput.value = 30;
-      return;
-    }
-
-    // Valida que el origen y destino no sean iguales
-    if (origen === destino) {
-      resultadoContenedor.innerHTML =
-        '<p class="cotizaciones__resultado-texto">El punto de origen y destino deben ser diferentes.</p>';
-      return;
-    }
 
     // Obtiene el texto visible de las opciones seleccionadas
     const origenTexto = formulario.querySelector('#origen option:checked').textContent;

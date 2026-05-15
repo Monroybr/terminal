@@ -19,6 +19,28 @@ function validar_cotizacion_payload(array $b): ?string
     if ($pas < 1 || $pas > 30) {
         return 'pasajeros debe estar entre 1 y 30';
     }
+
+    $fechaIda = (string) $b['fecha_ida'];
+    $hoy = (new DateTimeImmutable('today'))->format('Y-m-d');
+    $dtIda = DateTimeImmutable::createFromFormat('Y-m-d', $fechaIda);
+    if ($dtIda === false || $dtIda->format('Y-m-d') !== $fechaIda) {
+        return 'fecha_ida no válida';
+    }
+    if ($fechaIda < $hoy) {
+        return 'La fecha de salida no puede ser anterior a hoy';
+    }
+
+    if (!empty($b['fecha_regreso'])) {
+        $fechaRegreso = (string) $b['fecha_regreso'];
+        $dtRegreso = DateTimeImmutable::createFromFormat('Y-m-d', $fechaRegreso);
+        if ($dtRegreso === false || $dtRegreso->format('Y-m-d') !== $fechaRegreso) {
+            return 'fecha_regreso no válida';
+        }
+        if ($fechaRegreso < $fechaIda) {
+            return 'La fecha de regreso debe ser igual o posterior a la fecha de salida';
+        }
+    }
+
     $srv = (string) $b['servicio'];
     if (!isset(precios_servicio_cotizacion()[$srv])) {
         return 'servicio no válido';

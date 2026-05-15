@@ -74,17 +74,30 @@
 
                 <div class="cotizaciones__campo">
                   <label for="fecha-ida" class="cotizaciones__label">Fecha de salida</label>
-                  <input id="fecha-ida" type="date" class="cotizaciones__input" required>
+                  <input id="fecha-ida" name="fecha_ida" type="date" class="cotizaciones__input" title="No se permiten fechas anteriores a hoy" required>
                 </div>
 
                 <div class="cotizaciones__campo">
                   <label for="fecha-regreso" class="cotizaciones__label">Fecha de regreso (opcional)</label>
-                  <input id="fecha-regreso" name="fecha_regreso" type="date" class="cotizaciones__input">
+                  <input id="fecha-regreso" name="fecha_regreso" type="date" class="cotizaciones__input" title="Debe ser igual o posterior a la fecha de salida">
                 </div>
 
                 <div class="cotizaciones__campo">
                   <label for="pasajeros" class="cotizaciones__label">Número de pasajeros (máx. 30)</label>
-                 <input id="pasajeros" name="pasajeros" type="number" min="1" max="30" class="cotizaciones__input" placeholder="Ej: 1" required>
+                  <input
+                    id="pasajeros"
+                    name="pasajeros"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    maxlength="2"
+                    minlength="1"
+                    pattern="[0-9]{1,2}"
+                    title="Solo números del 1 al 30"
+                    class="cotizaciones__input"
+                    placeholder="Ej: 1"
+                    required
+                  >
                 </div>
 
                 <div class="cotizaciones__campo">
