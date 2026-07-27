@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function initCotizaciones() {
         };
 
         sessionStorage.setItem('reservaCotizacion', JSON.stringify(datosReserva));
-        window.location.href = 'tiquetes.html';
+        window.location.href = 'tiquetes.php';
       });
     });
   }

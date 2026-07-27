@@ -1,7 +1,5 @@
 // Bloque: contacto
 
-//Limita en el campo de telefono el numero de caracteres
-
 document.addEventListener('DOMContentLoaded', function initContacto() {
   const telefonoInput = document.querySelector('.contacto__input#telefono');
   const formulario = document.querySelector('.contacto__formulario');
@@ -18,21 +16,49 @@ document.addEventListener('DOMContentLoaded', function initContacto() {
     telefonoInput.addEventListener('input', limitarTelefono);
   }
 
-  // Mensaje de envío y validación del formulario
   if (formulario) {
-    formulario.addEventListener('submit', function (event) {
+    formulario.addEventListener('submit', async function (event) {
       event.preventDefault();
 
-      // Usa la validación nativa del navegador
       if (!formulario.checkValidity()) {
         formulario.reportValidity();
         return;
       }
 
-      // Envia  los datos a un backend con fetch/AJAX 
-      alert('Tu mensaje ha sido enviado, pronto daremos respuesta a tu solicitud');
-      formulario.reset();
+      const boton = formulario.querySelector('.contacto__boton');
+      const textoOriginal = boton.textContent;
+      boton.disabled = true;
+      boton.textContent = 'Enviando...';
+
+      const datos = {
+        nombre: document.getElementById('nombre').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        telefono: document.getElementById('telefono').value.trim(),
+        asunto: document.getElementById('asunto').value.trim(),
+        mensaje: document.getElementById('mensaje').value.trim(),
+      };
+
+      try {
+        const respuesta = await fetch('api/contacto.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos),
+        });
+
+        const resultado = await respuesta.json();
+
+        if (resultado.ok) {
+          alert('Tu mensaje ha sido enviado, pronto daremos respuesta a tu solicitud.');
+          formulario.reset();
+        } else {
+          alert(resultado.error || 'No se pudo enviar el mensaje. Inténtalo de nuevo.');
+        }
+      } catch (e) {
+        alert('Error de conexión. Verifica tu internet e inténtalo de nuevo.');
+      } finally {
+        boton.disabled = false;
+        boton.textContent = textoOriginal;
+      }
     });
   }
 });
-

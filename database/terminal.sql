@@ -18,7 +18,8 @@ DROP TABLE IF EXISTS ciudades;
 
 CREATE TABLE ciudades (
   id VARCHAR(32) NOT NULL PRIMARY KEY,
-  nombre VARCHAR(120) NOT NULL
+  nombre VARCHAR(120) NOT NULL,
+  KEY idx_ciudades_nombre (nombre)
 ) ENGINE=InnoDB;
 
 /* Catálogo de empresas de transporte que opera la terminal */
@@ -38,7 +39,8 @@ CREATE TABLE horarios_salida (
   plataforma VARCHAR(16) NOT NULL,
   estado VARCHAR(120) NOT NULL DEFAULT 'A tiempo',
   KEY idx_horarios_destino (destino),
-  KEY idx_horarios_empresa (empresa)
+  KEY idx_horarios_empresa (empresa),
+  KEY idx_horarios_estado (estado)
 ) ENGINE=InnoDB;
 
 CREATE TABLE empresas_viaje (
@@ -48,7 +50,8 @@ CREATE TABLE empresas_viaje (
   salida VARCHAR(16) NOT NULL,
   llegada VARCHAR(16) NOT NULL,
   duracion VARCHAR(32) NOT NULL,
-  precio_unitario DECIMAL(12,2) NOT NULL
+  precio_unitario DECIMAL(12,2) NOT NULL,
+  KEY idx_empresas_viaje_nombre (nombre)
 ) ENGINE=InnoDB;
 
 CREATE TABLE cotizaciones (
@@ -62,7 +65,11 @@ CREATE TABLE cotizaciones (
   subtotal_sin_descuento DECIMAL(12,2) NOT NULL,
   descuento_porcentaje DECIMAL(5,2) NOT NULL DEFAULT 0,
   total_con_descuento DECIMAL(12,2) NOT NULL,
-  creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY idx_cotizaciones_origen (origen),
+  KEY idx_cotizaciones_destino (destino),
+  KEY idx_cotizaciones_fecha (fecha_ida),
+  KEY idx_cotizaciones_servicio (servicio)
 ) ENGINE=InnoDB;
 
 CREATE TABLE pedidos (
@@ -85,7 +92,12 @@ CREATE TABLE pedidos (
   telefono VARCHAR(40) NOT NULL,
   direccion VARCHAR(255) NULL,
   creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY uq_numero_tiquete (numero_tiquete)
+  UNIQUE KEY uq_numero_tiquete (numero_tiquete),
+  KEY idx_pedidos_origen (origen),
+  KEY idx_pedidos_destino (destino),
+  KEY idx_pedidos_empresa (empresa),
+  KEY idx_pedidos_fecha (fecha_viaje),
+  KEY idx_pedidos_correo (correo)
 ) ENGINE=InnoDB;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,3 +1,4 @@
+<?php $pagina = 'servicios'; ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -14,30 +15,7 @@
   </head>
 
   <body>
-
-    <!--seccion header-->
-    <header>
-      <div class="header">
-        <div class="header__contenedor">
-          <div class="header__barra">
-            <div class="header__logo">
-              <img class="header__img" src="build/img/logo.svg" alt="Logo del sistema web Terminal">
-              <h1 class="header__titulo">Terminal</h1>
-            </div>
-            <nav class="navegacion">
-              <a href="index.html" class="navegacion__link">Inicio</a>
-              <a href="horarios.html" class="navegacion__link">Horarios</a>
-              <a href="servicios.html" class="navegacion__link activo ">Servicios</a>
-              <a href="vehiculos.html" class="navegacion__link">Vehículos</a>
-              <a href="empresas.html" class="navegacion__link">Empresas</a>
-              <a href="cotizaciones.html" class="navegacion__link">Cotizaciones</a>
-              <a href="tiquetes.html" class="navegacion__link">Tiquetes</a>
-              <a href="contacto.html" class="navegacion__link">Contacto</a>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
+    <?php require __DIR__ . '/includes/header.php'; ?>
 
     <!--seccion servicios-->
     <section class="servicios fondo">
@@ -55,42 +33,42 @@
           <img src="build/img/wifi.svg" class="items__icono" alt="icono wifi">
           <h3 class="items__titulo">WiFi Gratis</h3>
           <p class="items__texto">Conexión a internet de alta velocidad en todas nuestras instalaciones y unidades.</p>
-        </div> <!--Fin item 1-->
+        </div>
         <div class="items">
           <img src="build/img/coffee.svg" class="items__icono" alt="icono coffee">
           <h3 class="items__titulo">Cafetería</h3>
           <p class="items__texto">Cafetería abierta 24/7 con variedad de bebidas calientes, frías y snacks.</p>
-        </div> <!--Fin item 2-->
+        </div>
         <div class="items">
           <img src="build/img/restaurant.svg" class="items__icono" alt="icono restaurant">
           <h3 class="items__titulo">Restaurante</h3>
           <p class="items__texto">Restaurante con menú variado, comida rápida y opciones saludables.</p>
-        </div> <!--Fin item 3-->
+        </div>
         <div class="items">
           <img src="build/img/stores.svg" class="items__icono" alt="icono stores">
           <h3 class="items__titulo">Tiendas</h3>
           <p class="items__texto">Tiendas de conveniencia para tus necesidades de último momento.</p>
-        </div> <!--Fin item 4-->
+        </div>
         <div class="items">
           <img src="build/img/parking.svg" class="items__icono" alt="icono parking">
           <h3 class="items__titulo">Estacionamiento</h3>
           <p class="items__texto">Amplio estacionamiento vigilado disponible las 24 horas.</p>
-        </div> <!--Fin item 5-->
+        </div>
         <div class="items">
           <img src="build/img/cards.svg" class="items__icono" alt="icono cards">
           <h3 class="items__titulo">Cajeros Automáticos</h3>
           <p class="items__texto">Cajeros automáticos disponibles en el terminal.</p>
-        </div> <!--Fin item 6-->
+        </div>
         <div class="items">
           <img src="build/img/babys.svg" class="items__icono" alt="icono babys">
           <h3 class="items__titulo">Sala de Bebés</h3>
           <p class="items__texto">Área especial equipada para el cuidado de bebés y niños pequeños.</p>
-        </div> <!--Fin item 7-->
+        </div>
         <div class="items">
           <img src="build/img/access.svg" class="items__icono" alt="icono access">
           <h3 class="items__titulo">Accesibilidad</h3>
           <p class="items__texto">Instalaciones completamente accesibles para personas con movilidad reducida.</p>
-        </div> <!--Fin item 8-->
+        </div>
       </div>
     </section>
 
@@ -99,7 +77,7 @@
       <div class="contenedor">
           <div class="politicas__header">
               <div class="politicas__icono">
-                  <i class="fa-regular fa-file-lines"></i>
+                  <span>📋</span>
               </div>
               <h2 class="politicas__titulo">Políticas del Terminal</h2>
               <p class="politicas__subtitulo">
@@ -112,9 +90,9 @@
               <article class="politicas__card politicas__card--roja">
                   <div class="politicas__card-header politicas__card-header--rojo">
                       <h3 class="politicas__card-title">
-                          <i class="fa-regular fa-circle-xmark"></i>
-                          Políticas de Cancelación y Reembolsos
-                      </h3>
+                           <span>❌</span>
+                           Políticas de Cancelación y Reembolsos
+                       </h3>
                   </div>
   
                   <div class="politicas__card-body">
@@ -163,9 +141,9 @@
               <article class="politicas__card politicas__card--morado">
                   <div class="politicas__card-header politicas__card-header--morado">
                       <h3 class="politicas__card-title">
-                          <i class="fa-solid fa-children"></i>
-                          Políticas para Menores de Edad
-                      </h3>
+                           <span>👶</span>
+                           Políticas para Menores de Edad
+                       </h3>
                   </div>
   
                   <div class="politicas__card-body">
@@ -208,9 +186,9 @@
               <article class="politicas__card politicas__card--naranja">
                   <div class="politicas__card-header politicas__card-header--naranja">
                       <h3 class="politicas__card-title">
-                          <i class="fa-solid fa-suitcase"></i>
-                          Política Detallada de Equipaje
-                      </h3>
+                           <span>🧳</span>
+                           Política Detallada de Equipaje
+                       </h3>
                   </div>
   
                   <div class="politicas__card-body">
@@ -251,9 +229,9 @@
               <article class="politicas__card politicas__card--verde">
                   <div class="politicas__card-header politicas__card-header--verde">
                       <h3 class="politicas__card-title">
-                          <i class="fa-solid fa-paw"></i>
-                          Política de Transporte de Mascotas
-                      </h3>
+                           <span>🐾</span>
+                           Política de Transporte de Mascotas
+                       </h3>
                   </div>
   
                   <div class="politicas__card-body">
@@ -295,9 +273,9 @@
               <article class="politicas__card politicas__card--azul politicas__card--full">
                   <div class="politicas__card-header politicas__card-header--azul">
                       <h3 class="politicas__card-title">
-                          <i class="fa-regular fa-circle-check"></i>
-                          Normas de Comportamiento y Seguridad
-                      </h3>
+                           <span>✅</span>
+                           Normas de Comportamiento y Seguridad
+                       </h3>
                   </div>
   
                   <div class="politicas__card-body politicas__card-body--doble">
@@ -348,9 +326,9 @@
               <article class="politicas__card politicas__card--violeta politicas__card--full">
                   <div class="politicas__card-header politicas__card-header--violeta">
                       <h3 class="politicas__card-title">
-                          <i class="fa-solid fa-dollar-sign"></i>
-                          Política de Pagos y Reservas
-                      </h3>
+                           <span>💰</span>
+                           Política de Pagos y Reservas
+                       </h3>
                   </div>
   
                   <div class="politicas__card-body">
@@ -399,8 +377,8 @@
   
           <div class="politicas__faq">
               <div class="politicas__faq-icono">
-                  <i class="fa-solid fa-circle-info"></i>
-              </div>
+                   <span>ℹ️</span>
+               </div>
               <h3 class="politicas__faq-titulo">¿Tienes dudas sobre nuestras políticas?</h3>
               <p class="politicas__faq-texto">
                   Nuestro equipo de atención al cliente está disponible para resolver cualquier inquietud
@@ -408,8 +386,8 @@
               </p>
   
               <div class="politicas__faq-botones">
-                  <a href="contacto.html" class="politicas__boton politicas__boton--azul">Enviar Consulta</a>
-                  <a href="+573227861215" class="politicas__boton politicas__boton--verde">Llamar Ahora</a>
+                  <a href="contacto.php" class="politicas__boton politicas__boton--azul">Enviar Consulta</a>
+                    <a href="tel:+573227861215" class="politicas__boton politicas__boton--verde">Llamar Ahora</a>
               </div>
           </div>
       </div>
@@ -435,7 +413,7 @@
               Portaequipajes
             </li>
           </ul>
-        </div> <!--Fin servicio 1-->
+        </div>
 
         <div class="servicio servicio__modificador--rose">
           <h3 class="servicio__texto">Clase Ejecutiva</h3>
@@ -456,7 +434,7 @@
               Snacks y bebida incluida
             </li>
           </ul>
-        </div> <!--Fin servicio 2-->
+        </div>
 
         <div class="servicio">
           <h3 class="servicio__texto">Clase Premium</h3>
@@ -474,67 +452,9 @@
               Portaequipajes
             </li>
           </ul>
-        </div> <!--Fin servicio 3-->
+        </div>
 
       </div>
     </section>
 
-    <!--seccion footer-->
-    <footer class="footer">
-      <div class="footer__contenedor">
-        <div class="footer__grid">
-          <div class="footer__col">
-            <h3 class="footer__heading">Terminal</h3>
-            <p class="footer__texto">
-              Tu terminal de confianza con más de 30 años sirviendo a la comunidad.
-            </p>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Contacto</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">📞</span>
-                <span>+57 322 786 12 15<br>+57 300 123 75 89</span>
-              </li>
-              <li class="footer__item">
-                <span class="footer__icono">✉️</span>
-                <span>contacto@terminal.com.co</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Ubicación</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">📍</span>
-                <span>Avenida Principal 123<br>78001, Colombia</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Horario</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">⏰</span>
-                <span><strong>Abierto 24/7</strong></span>
-              </li>
-              <li class="footer__item">
-                <span class="footer__icono"></span>
-                <span>Atención al cliente:<br>Lun - Dom: 24 / 7</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer__copy">
-          <p class="footer__derechos">Todos los derechos reservados © 2026 Terminal - Liseth Monroy - UNAD</p>
-        </div>
-      </div>
-    </footer>
-    <button class="scroll-top" id="scrollTop" type="button" aria-label="Subir al inicio">↑</button>
-    <script src="src/js/scroll.js" defer></script>
-  </body>
-</html>
+    <?php require __DIR__ . '/includes/footer.php'; ?>

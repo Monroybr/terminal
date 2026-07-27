@@ -18,7 +18,6 @@ body {
 p {
     color: v.$black;
     font-size: 2rem;
-    
 }
 
 img {
@@ -28,7 +27,6 @@ img {
 
 a {
    text-decoration: none;
-    
 }
 
 .contenedor {
@@ -39,16 +37,22 @@ a {
 .separacion{
     margin-top: 5rem;
     margin-bottom: 5rem;
-    
 }
 
-//Fondo azul para el heading
 .fondo{
     background-color: v.$primary;
     color: v.$white;
     padding: 2rem;
 }
-[class$="__descripcion"]{
+
+.bienvenida__descripcion,
+.cotizaciones__descripcion,
+.horarios__descripcion,
+.servicios__descripcion,
+.vehiculos__descripcion,
+.empresas__descripcion,
+.contacto__descripcion,
+.tiquetes__descripcion {
     margin: 1rem;
     font-size: 1.5rem;
     opacity: 0.95;
@@ -60,17 +64,38 @@ a {
     }
 }
 
-[class$="__heading"]{
+.bienvenida__heading,
+.cotizaciones__heading,
+.horarios__heading,
+.servicios__heading,
+.vehiculos__heading,
+.empresas__heading,
+.contacto__heading,
+.tiquetes__heading {
     text-align: center;
     color: v.$white;
 }
-[class$="__titulo"]{
+
+.elegirnos__titulo,
+.destinos__titulo,
+.viajar__titulo,
+.items__titulo,
+.cotizaciones__subtitulo,
+.horarios__nota-titulo,
+.servicios__titulo,
+.politicas__titulo,
+.vehiculo-card__title,
+.empresa-card__title,
+.contacto__subtitulo {
     text-align: center;
     color: v.$darkBlue;
     font-weight: 700;
 }
 
-[class$="__nota-lista"]{
+.servicio__nota-lista,
+.politicas__nota-lista,
+.horarios__nota-lista,
+.viajar__lista {
     margin: 0;
     padding-left: 1.8rem;
     font-size: 1.4rem;
@@ -78,7 +103,9 @@ a {
     line-height: 1.6;
 }
 
-[class$="__nota-titulo"]{
+.servicios__titulo,
+.politicas__faq-titulo,
+.horarios__nota-titulo {
     margin: 0 0 1rem 0;
     font-size: 1.6rem;
     font-weight: 700;

@@ -2,56 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>http://localhost/terminal/index.html</loc>
+    <loc>http://localhost/terminal/index.php</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>http://localhost/terminal/tiquetes.html</loc>
+    <loc>http://localhost/terminal/tiquetes.php</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>http://localhost/terminal/cotizaciones.html</loc>
+    <loc>http://localhost/terminal/cotizaciones.php</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>http://localhost/terminal/horarios.html</loc>
+    <loc>http://localhost/terminal/horarios.php</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>http://localhost/terminal/servicios.html</loc>
+    <loc>http://localhost/terminal/servicios.php</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>http://localhost/terminal/vehiculos.html</loc>
+    <loc>http://localhost/terminal/vehiculos.php</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>http://localhost/terminal/empresas.html</loc>
+    <loc>http://localhost/terminal/empresas.php</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>http://localhost/terminal/contacto.html</loc>
+    <loc>http://localhost/terminal/contacto.php</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>

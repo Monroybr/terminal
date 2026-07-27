@@ -1,12 +1,13 @@
+<?php $pagina = 'tiquetes'; ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Compra tiquetes de transporte terrestre en Colombia. Consulta rutas, horarios, empresas disponibles y genera tu tiquete electrónico en el sistema Terminal.">
-    <meta name="keywords" content="compra de tiquetes, tiquetes de bus, transporte terrestre, terminal de transporte, rutas, horarios, tiquete electrónico">
+    <meta name="description" content="Compra tiquetes de transporte terrestre en línea. Selecciona tu ruta, horario y empresa para viajar de forma cómoda y segura.">
+    <meta name="keywords" content="compra de tiquetes, comprar tiquetes en línea, transporte terrestre, buses, terminal, rutas, horarios">
     <meta name="author" content="Liseth Dayana Monroy Briñez">
-    <title>Compra de tiquetes de bus | Terminal</title>
+    <title>Compra de tiquetes | Terminal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300,400;700&display=swap" rel="stylesheet">
@@ -14,30 +15,7 @@
   </head>
 
   <body>
-
-    <!--seccion header-->
-    <header>
-      <div class="header">
-        <div class="header__contenedor">
-          <div class="header__barra">
-            <div class="header__logo">
-              <img class="header__img" src="build/img/logo.svg" alt="Logo del sistema web Terminal">
-              <h1 class="header__titulo">Terminal</h1>
-            </div>
-            <nav class="navegacion">
-              <a href="index.html" class="navegacion__link">Inicio</a>
-              <a href="horarios.html" class="navegacion__link">Horarios</a>
-              <a href="servicios.html" class="navegacion__link">Servicios</a>
-              <a href="vehiculos.html" class="navegacion__link">Vehículos</a>
-              <a href="empresas.html" class="navegacion__link">Empresas</a>
-              <a href="cotizaciones.html" class="navegacion__link">Cotizaciones</a>
-              <a href="tiquetes.html" class="navegacion__link activo">Tiquetes</a>
-              <a href="contacto.html" class="navegacion__link">Contacto</a>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
+    <?php require __DIR__ . '/includes/header.php'; ?>
 
     <!--seccion tiquetes-->
     <section class="fondo tiquetes">
@@ -285,7 +263,7 @@
     
                 <div class="pasajero__campo">
                   <label class="pasajero__label" for="numeroDocumento">Número de Documento *</label>
-                  <input class="pasajero__input" id="numeroDocumento" type="text" autocomplete="off" placeholder="Solo números, ej: 1075345789" maxlength="10" required>
+                  <input class="pasajero__input" id="numeroDocumento" type="text" autocomplete="off" placeholder="Solo números, ej: 107547829" maxlength="10" required>
                 </div>
               </div>
     
@@ -740,66 +718,6 @@
         </p>
       </div>
     </section>
-    
-    <!--seccion footer-->
-    <footer class="footer">
-      <div class="footer__contenedor">
-        <div class="footer__grid">
-          <div class="footer__col">
-            <h3 class="footer__heading">Terminal</h3>
-            <p class="footer__texto">
-              Tu terminal de confianza con más de 30 años sirviendo a la comunidad.
-            </p>
-          </div>
 
-          <div class="footer__col">
-            <h3 class="footer__heading">Contacto</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">📞</span>
-                <span>+57 322 786 12 15<br>+57 300 123 75 89</span>
-              </li>
-              <li class="footer__item">
-                <span class="footer__icono">✉️</span>
-                <span>contacto@terminal.com.co</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Ubicación</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">📍</span>
-                <span>Avenida Principal 123<br>78001, Colombia</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Horario</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">⏰</span>
-                <span><strong>Abierto 24/7</strong></span>
-              </li>
-              <li class="footer__item">
-                <span class="footer__icono"></span>
-                <span>Atención al cliente:<br>Lun - Dom: 24 / 7</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer__copy">
-          <p class="footer__derechos">Todos los derechos reservados © 2026 Terminal - Liseth Monroy - UNAD</p>
-        </div>
-      </div>
-    </footer>
-
-    <button class="scroll-top" id="scrollTop" type="button" aria-label="Subir al inicio">↑</button>
-
-    <script src="src/js/scroll.js" defer></script>
+    <?php require __DIR__ . '/includes/footer.php'; ?>
     <script src="src/js/tiquetes.js" defer></script>
-  </body>
-</html>

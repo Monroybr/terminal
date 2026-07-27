@@ -82,9 +82,11 @@ try {
 
         $st = db()->prepare(
             'INSERT INTO cotizaciones (
-                origen, destino, fecha_ida, fecha_regreso, pasajeros, servicio
+                origen, destino, fecha_ida, fecha_regreso, pasajeros, servicio,
+                subtotal_sin_descuento, descuento_porcentaje, total_con_descuento
             ) VALUES (
-                :origen, :destino, :fecha_ida, :fecha_regreso, :pasajeros, :servicio
+                :origen, :destino, :fecha_ida, :fecha_regreso, :pasajeros, :servicio,
+                :subtotal, :descuento, :total
             )'
         );
 
@@ -95,6 +97,9 @@ try {
             'fecha_regreso' => $fechaRegreso,
             'pasajeros' => $pas,
             'servicio' => $srv,
+            'subtotal' => $tot['subtotal'],
+            'descuento' => $tot['descuento_pct'],
+            'total' => $tot['total'],
         ]);
 
         $newId = (int) db()->lastInsertId();
@@ -125,7 +130,10 @@ try {
                 fecha_ida=:fecha_ida,
                 fecha_regreso=:fecha_regreso,
                 pasajeros=:pasajeros,
-                servicio=:servicio
+                servicio=:servicio,
+                subtotal_sin_descuento=:subtotal,
+                descuento_porcentaje=:descuento,
+                total_con_descuento=:total
              WHERE id=:id'
         );
 
@@ -137,6 +145,9 @@ try {
             'fecha_regreso' => $fechaRegreso,
             'pasajeros' => $pas,
             'servicio' => $srv,
+            'subtotal' => $tot['subtotal'],
+            'descuento' => $tot['descuento_pct'],
+            'total' => $tot['total'],
         ]);
 
         json_out(200, ['ok' => true, 'afectados' => $st->rowCount(), 'calculo' => $tot]);
@@ -154,5 +165,6 @@ try {
 
     json_out(405, ['ok' => false, 'error' => 'Método no permitido']);
 } catch (Throwable $e) {
+    log_error('Error en cotizaciones', $e);
     json_out(500, ['ok' => false, 'error' => 'Error en el servidor']);
 }

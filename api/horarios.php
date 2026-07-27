@@ -8,8 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     json_out(405, ['ok' => false, 'error' => 'Método no permitido']);
 }
 
-$q = isset($_GET['q']) ? trim((string) $_GET['q']) : '';
-$destino = isset($_GET['destino']) ? trim((string) $_GET['destino']) : '';
+$q = isset($_GET['q']) ? sanitize_input($_GET['q'], 100) : '';
+$destino = isset($_GET['destino']) ? sanitize_input($_GET['destino'], 100) : '';
 
 /** Normaliza para buscar "bogota" y encontrar "Bogotá" */
 function normalizar_busqueda(string $s): string
@@ -48,5 +48,6 @@ try {
 
     json_out(200, ['ok' => true, 'data' => $rows]);
 } catch (Throwable $e) {
+    log_error('Error en horarios', $e);
     json_out(500, ['ok' => false, 'error' => 'Error en el servidor']);
 }

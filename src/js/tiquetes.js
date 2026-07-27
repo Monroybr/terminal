@@ -544,13 +544,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 ciudades = j.data.map((c) => c.nombre);
             }
         })
-        .catch(() => {})
+        .catch((error) => {
+            console.warn('No se pudieron cargar ciudades desde la API:', error.message);
+        })
         .finally(() => {
             llenarCiudades(origenSelect, 'Selecciona ciudad de origen');
             llenarCiudades(destinoSelect, 'Selecciona ciudad de destino');
         });
 
-    cargarEmpresasDesdeApi().catch(() => {});
+    cargarEmpresasDesdeApi().catch((error) => {
+        console.warn('No se pudieron cargar empresas desde la API:', error.message);
+    });
     cargarReservaDesdeCotizacion();
 
     // Define que la fecha mínima permitida sea la fecha actual

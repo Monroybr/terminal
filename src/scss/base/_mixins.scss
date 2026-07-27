@@ -27,7 +27,7 @@
 
 @mixin bgImage($url, $colorDegradado) {
     background-image: linear-gradient($colorDegradado 0%, $colorDegradado 100%), url($url);
-    backgroud-repear: no-repeat;
+    background-repeat: no-repeat;
     background-size:cover;
     background-position: center;
 }

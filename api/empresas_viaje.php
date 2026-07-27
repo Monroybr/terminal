@@ -5,6 +5,7 @@ require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/db.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
+csrf_require();
 
 try {
     if ($method === 'GET') {
@@ -90,5 +91,6 @@ try {
 
     json_out(405, ['ok' => false, 'error' => 'Método no permitido']);
 } catch (Throwable $e) {
+    log_error('Error en empresas_viaje', $e);
     json_out(500, ['ok' => false, 'error' => 'Error en el servidor']);
 }

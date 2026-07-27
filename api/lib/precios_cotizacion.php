@@ -2,7 +2,10 @@
 declare(strict_types=1);
 
 /**
- * precios de cada servicio
+ * Precios de cada servicio y catálogo de empresas.
+ * NOTA: Estos datos están duplicados en src/js/cotizaciones.js (para vista previa en UI).
+ * El servidor es la fuente de verdad para los cálculos.
+ * Endpoint disponible: GET api/precios.php retorna este catálogo en JSON.
  */
 function precios_servicio_cotizacion(): array
 {

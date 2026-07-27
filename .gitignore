@@ -10,7 +10,10 @@ lerna-debug.log*
 node_modules
 vendor
 composer.phar
+api/.env
+api/logs/
 composer-setup.php
+test_mysql*.php
 dist
 dist-ssr
 *.local

@@ -258,5 +258,6 @@ try {
 
     json_out(405, ['ok' => false, 'error' => 'Método no permitido']);
 } catch (Throwable $e) {
+    log_error('Error en pedidos', $e);
     json_out(500, ['ok' => false, 'error' => 'Error en el servidor']);
 }

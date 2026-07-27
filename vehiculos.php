@@ -1,3 +1,4 @@
+<?php $pagina = 'vehiculos'; ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -14,35 +15,12 @@
   </head>
 
   <body>
-
-    <!--seccion header-->
-    <header>
-      <div class="header">
-        <div class="header__contenedor">
-          <div class="header__barra">
-            <div class="header__logo">
-              <img class="header__img" src="build/img/logo.svg" alt="Logo del sistema web Terminal">
-              <h1 class="header__titulo">Terminal</h1>
-            </div>
-            <nav class="navegacion">
-              <a href="index.html" class="navegacion__link">Inicio</a>
-              <a href="horarios.html" class="navegacion__link">Horarios</a>
-              <a href="servicios.html" class="navegacion__link">Servicios</a>
-              <a href="vehiculos.html" class="navegacion__link activo">Vehículos</a>
-              <a href="empresas.html" class="navegacion__link">Empresas</a>
-              <a href="cotizaciones.html" class="navegacion__link">Cotizaciones</a>
-              <a href="tiquetes.html" class="navegacion__link">Tiquetes</a>
-              <a href="contacto.html" class="navegacion__link">Contacto</a>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
+    <?php require __DIR__ . '/includes/header.php'; ?>
 
     <!--seccion vehiculos-->
     <section class="vehiculos fondo">
       <div class="vehiculos__contenedor">
-        <h1 class="vehiculos__heading">Logo del sistema web Terminal</h1>
+        <h1 class="vehiculos__heading">Flota de Vehículos</h1>
         <p class="vehiculos__descripcion">Conoce los buses, busetas, vans, taxis y vehículos de carga disponibles para viajes seguros, cómodos y eficientes.</p>
       </div>
     </section>
@@ -53,22 +31,22 @@
           <img src="build/img/people.svg" class="items__icono" alt="icono people">
           <h3 class="items__titulo">Capacidad Variable</h3>
           <p class="items__texto">Desde 4 hasta 50 pasajeros</p>
-        </div> <!--Fin item 1-->
+        </div>
         <div class="items">
           <img src="build/img/technology.svg" class="items__icono" alt="icono technology">
           <h3 class="items__titulo">Última Tecnología</h3>
           <p class="items__texto">Vehículos modelo 2023-2024</p>
-        </div> <!--Fin item 2-->
+        </div>
         <div class="items">
           <img src="build/img/viajesSeguros.svg" class="items__icono" alt="icono security">
           <h3 class="items__titulo">Máxima Seguridad</h3>
           <p class="items__texto">Mantenimiento preventivo constante</p>
-        </div> <!--Fin item 3-->
+        </div>
         <div class="items">
           <img src="build/img/wifi.svg" class="items__icono" alt="icono wofo">
           <h3 class="items__titulo">Conectividad</h3>
           <p class="items__texto">WiFi disponible en buses</p>
-        </div> <!--Fin item 4-->
+        </div>
       </div>
     </section>
 
@@ -100,7 +78,7 @@
             <li class="vehiculo-card__item">GPS y rastreo satelital</li>
           </ul>
         </div>
-      </div> <!--Fin vehiculo 1-->
+      </div>
 
       <div class="vehiculo-card__container">
         <figure class="vehiculo-card__media">
@@ -128,7 +106,7 @@
             <li class="vehiculo-card__item">Sistema de sonido</li>
           </ul>
         </div>
-      </div> <!--Fin vehiculo 2-->
+      </div>
 
       <div class="vehiculo-card__container">
         <figure class="vehiculo-card__media">
@@ -156,7 +134,7 @@
             <li class="vehiculo-card__item">Salidas de emergencia</li>
           </ul>
         </div>
-      </div> <!--Fin vehiculo 3-->
+      </div>
 
       <div class="vehiculo-card__container">
         <figure class="vehiculo-card__media">
@@ -184,7 +162,7 @@
             <li class="vehiculo-card__item">Baño</li>
           </ul>
         </div>
-      </div> <!--Fin vehiculo 4-->
+      </div>
 
       <div class="vehiculo-card__container">
         <figure class="vehiculo-card__media">
@@ -212,7 +190,7 @@
             <li class="vehiculo-card__item">Servicio personalizado</li>
           </ul>
         </div>
-      </div> <!--Fin vehiculo 5-->
+      </div>
 
       <div class="vehiculo-card__container">
         <figure class="vehiculo-card__media">
@@ -240,65 +218,7 @@
             <li class="vehiculo-card__item">Pago con tarjeta</li>
           </ul>
         </div>
-      </div> <!--Fin vehiculo 6-->
+      </div>
     </section>
 
-    <!--seccion footer-->
-    <footer class="footer">
-      <div class="footer__contenedor">
-        <div class="footer__grid">
-          <div class="footer__col">
-            <h3 class="footer__heading">Terminal</h3>
-            <p class="footer__texto">
-              Tu terminal de confianza con más de 30 años sirviendo a la comunidad.
-            </p>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Contacto</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">📞</span>
-                <span>+57 322 786 12 15<br>+57 300 123 75 89</span>
-              </li>
-              <li class="footer__item">
-                <span class="footer__icono">✉️</span>
-                <span>contacto@terminal.com.co</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Ubicación</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">📍</span>
-                <span>Avenida Principal 123<br>78001, Colombia</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Horario</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">⏰</span>
-                <span><strong>Abierto 24/7</strong></span>
-              </li>
-              <li class="footer__item">
-                <span class="footer__icono"></span>
-                <span>Atención al cliente:<br>Lun - Dom: 24 / 7</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer__copy">
-          <p class="footer__derechos">Todos los derechos reservados © 2026 Terminal - Liseth Monroy - UNAD</p>
-        </div>
-      </div>
-    </footer>
-    <button class="scroll-top" id="scrollTop" type="button" aria-label="Subir al inicio">↑</button>
-    <script src="src/js/scroll.js" defer></script>
-  </body>
-</html>
+    <?php require __DIR__ . '/includes/footer.php'; ?>

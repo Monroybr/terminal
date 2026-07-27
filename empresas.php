@@ -1,3 +1,4 @@
+<?php $pagina = 'empresas'; ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -14,30 +15,7 @@
   </head>
 
   <body>
-
-    <!--seccion header-->
-    <header>
-      <div class="header">
-        <div class="header__contenedor">
-          <div class="header__barra">
-            <div class="header__logo">
-              <img class="header__img" src="build/img/logo.svg" alt="Logo del sistema web Terminal">
-              <h1 class="header__titulo">Terminal</h1>
-            </div>
-            <nav class="navegacion">
-              <a href="index.html" class="navegacion__link">Inicio</a>
-              <a href="horarios.html" class="navegacion__link">Horarios</a>
-              <a href="servicios.html" class="navegacion__link ">Servicios</a>
-              <a href="vehiculos.html" class="navegacion__link">Vehículos</a>
-              <a href="empresas.html" class="navegacion__link activo">Empresas</a>
-              <a href="cotizaciones.html" class="navegacion__link">Cotizaciones</a>
-              <a href="tiquetes.html" class="navegacion__link">Tiquetes</a>
-              <a href="contacto.html" class="navegacion__link">Contacto</a>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
+    <?php require __DIR__ . '/includes/header.php'; ?>
 
     <!--seccion empresas-->
     <section class="empresas">
@@ -101,9 +79,9 @@
             <li class="empresa-card__item">Neiva - Pitalito</li>
           </ul>
   
-          <a class="empresa-card__btn" href="horarios.html" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
+          <a class="empresa-card__btn" href="horarios.php" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
         </div>
-      </article> <!--Fin empresa 1-->
+      </article>
 
       <article class="empresa-card">
         <div class="empresa-card__media">
@@ -135,9 +113,9 @@
             <li class="empresa-card__item">Neiva - Pitalito</li>
           </ul>
   
-          <a class="empresa-card__btn" href="horarios.html" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
+          <a class="empresa-card__btn" href="horarios.php" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
         </div>
-      </article> <!--Fin empresa 2-->
+      </article>
 
       <article class="empresa-card">
         <div class="empresa-card__media">
@@ -169,9 +147,9 @@
             <li class="empresa-card__item">Neiva - Pitalito</li>
           </ul>
   
-          <a class="empresa-card__btn" href="horarios.html" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
+          <a class="empresa-card__btn" href="horarios.php" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
         </div>
-      </article> <!--Fin empresa 3-->
+      </article>
 
       <article class="empresa-card">
         <div class="empresa-card__media">
@@ -203,9 +181,9 @@
             <li class="empresa-card__item">Neiva - Pitalito</li>
           </ul>
   
-          <a class="empresa-card__btn" href="horarios.html" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
+          <a class="empresa-card__btn" href="horarios.php" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
         </div>
-      </article> <!--Fin empresa 4-->
+      </article>
 
       <article class="empresa-card">
         <div class="empresa-card__media">
@@ -237,9 +215,9 @@
             <li class="empresa-card__item">Neiva - Pitalito</li>
           </ul>
   
-          <a class="empresa-card__btn" href="horarios.html" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
+          <a class="empresa-card__btn" href="horarios.php" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
         </div>
-      </article> <!--Fin empresa 5-->
+      </article>
 
       <article class="empresa-card">
         <div class="empresa-card__media">
@@ -271,73 +249,16 @@
             <li class="empresa-card__item">Neiva - Pitalito</li>
           </ul>
   
-          <a class="empresa-card__btn" href="horarios.html" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
+          <a class="empresa-card__btn" href="horarios.php" title="Ver horarios de buses disponibles">Ver horarios de buses</a>
         </div>
-      </article> <!--Fin empresa 6-->
+      </article>
   
     </div>
  
     </section>
 
-    <!--seccion footer-->
-    <footer class="footer">
-      <div class="footer__contenedor">
-        <div class="footer__grid">
-          <div class="footer__col">
-            <h3 class="footer__heading">Terminal</h3>
-            <p class="footer__texto">
-              Tu terminal de confianza con más de 30 años sirviendo a la comunidad.
-            </p>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Contacto</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">📞</span>
-                <span>+57 322 786 12 15<br>+57 300 123 75 89</span>
-              </li>
-              <li class="footer__item">
-                <span class="footer__icono">✉️</span>
-                <span>contacto@terminal.com.co</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Ubicación</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">📍</span>
-                <span>Avenida Principal 123<br>78001, Colombia</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer__col">
-            <h3 class="footer__heading">Horario</h3>
-            <ul class="footer__lista">
-              <li class="footer__item">
-                <span class="footer__icono">⏰</span>
-                <span><strong>Abierto 24/7</strong></span>
-              </li>
-              <li class="footer__item">
-                <span class="footer__icono"></span>
-                <span>Atención al cliente:<br>Lun - Dom: 24 / 7</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer__copy">
-          <p class="footer__derechos">Todos los derechos reservados © 2026 Terminal - Liseth Monroy - UNAD</p>
-        </div>
-      </div>
-    </footer>
-
-    <button class="scroll-top" id="scrollTop" type="button" aria-label="Subir al inicio">↑</button>
-    <script src="src/js/scroll.js" defer></script>
-    <script type="application/ld+json" defer>
+    <?php require __DIR__ . '/includes/footer.php'; ?>
+    <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -347,5 +268,3 @@
         "areaServed": "Colombia"
       }
     </script>
-  </body>
-</html>

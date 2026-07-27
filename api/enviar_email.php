@@ -9,6 +9,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/config.php';
+
+$config = require __DIR__ . '/config.php';
 
 /**
  * HTML del tiquete para convertir a PDF (estilos embebidos; UTF-8 con DejaVu Sans).
@@ -128,34 +131,38 @@ $tmpPdf = null;
 
 try {
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = $config['smtp']['host'];
     $mail->SMTPAuth = true;
 
-    $mail->Username = 'liseth052009@gmail.com';
-    $mail->Password = 'cocy afkt wais ajiq';
+    $mail->Username = $config['smtp']['user'];
+    $mail->Password = $config['smtp']['pass'];
 
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    $mail->Port = $config['smtp']['port'];
     $mail->CharSet = 'UTF-8';
 
-    $mail->setFrom('liseth052009@gmail.com', 'Terminal');
+    $mail->setFrom($config['smtp']['from'], $config['smtp']['from_name']);
     $mail->addAddress($correo, $nombre);
 
     $mail->isHTML(true);
     $mail->Subject = "Tiquete Electrónico - {$numero}";
 
+    $e = static function (string $s): string {
+        return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    };
+
     $mail->Body = "
         <h2>Tiquete Electrónico - Terminal</h2>
-        <p>Hola <strong>{$nombre}</strong>, tu compra fue realizada correctamente.</p>
+        <p>Hola <strong>{$e($nombre)}</strong>, tu compra fue realizada correctamente.</p>
 
         <h3>Información del viaje</h3>
-        <p><strong>Número de tiquete:</strong> {$numero}</p>
-        <p><strong>Empresa:</strong> {$empresa}</p>
-        <p><strong>Ruta:</strong> {$origen} → {$destino}</p>
-        <p><strong>Fecha:</strong> {$fecha}</p>
-        <p><strong>Salida:</strong> {$salida}</p>
-        <p><strong>Clase:</strong> {$clase}</p>
-        <p><strong>Pasajeros:</strong> {$pasajeros}</p>
+        <p><strong>Número de tiquete:</strong> {$e($numero)}</p>
+        <p><strong>Empresa:</strong> {$e($empresa)}</p>
+        <p><strong>Ruta:</strong> {$e($origen)} → {$e($destino)}</p>
+        <p><strong>Fecha:</strong> {$e($fecha)}</p>
+        <p><strong>Salida:</strong> {$e($salida)}</p>
+        <p><strong>Clase:</strong> {$e($clase)}</p>
+        <p><strong>Pasajeros:</strong> {$e($pasajeros)}</p>
         <p><strong>Total pagado:</strong> $ " . number_format($total, 0, ',', '.') . "</p>
 
         <hr>
